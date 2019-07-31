@@ -1,0 +1,140 @@
+<resources>
+    <string name="app_name">Lms</string>
+    <string name="loginHear">Hello! Login Hear</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="remember">Remember me</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="noAccount">Don\'t have account ? </string>
+    <string name="signUp"><u>Sign Up</u></string>
+    <string name="loginwith">Login With</string>
+    <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="largedummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
+
+<!--Login text-->
+    <string name="quit">Are You Sure To Quit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+    <string name="noDataFound">No Data Found</string>
+    <string name="enterpassword">Please Enter Password</string>
+    <string name="validemail">Please Enter Valid Email</string>
+    <string name="enteremail">Please Enter Email</string>
+
+    <string name="enter_username_mobiel_email_msg">Please enter Email</string>
+    <string name="empty_msg">%1$s can\'t be empty.Please enter your %2$s.</string>
+    <string name="invalid_email">Invalid Email.Please enter a valid Email.</string>
+    <string name="invalid_mobile">Invalid Phone Number.Please enter a valid Phone Number.</string>
+    <string name="invalid_password">Invalid Password.Password length must be 6 or greater than %1$d.</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--Drawr Text-->
+    <string name="home">Home</string>
+    <string name="blog">Blog</string>
+    <string name="course">Course</string>
+    <string name="forums">Forums</string>
+    <string name="contactUs">Contact</string>
+    <string name="about">About Us</string>
+    <string name="login">Login</string>
+    <string name="feedback">Feedback</string>
+    <string name="language">Language</string>
+    <string name="faq">Faq</string>
+
+    <!--Home Text-->
+    <string name="latest">Latest</string>
+    <string name="news">News</string>
+    <string name="trending">Trending</string>
+    <string name="courses">Courses</string>
+    <string name="featured">Featured</string>
+    <string name="teacher">Teachers</string>
+    <string name="testimonial">Testimonial</string>
+    <string name="question">Queston</string>
+    <string name="our">Our</string>
+    <string name="asked">Asked</string>
+    <string name="browse">Browse</string>
+    <string name="why">Why</string>
+    <string name="contect">Contact</string>
+    <string name="us">Us</string>
+    <string name="sponser">Sponsors</string>
+    <string name="searchtext">Type what do you want to learn today?</string>
+    <string name="sortby">Sort By</string>
+
+
+    <!--Faq -->
+    <string name="findyour">Find Your</string>
+    <string name="queans">Questions &amp; Answers</string>
+
+    <!--Teacher-->
+    <string name="viewDetail">View Detail</string>
+    <string name="teachers">Teacher</string>
+    <string name="aboutTeacher">About</string>
+    <string name="specialist">Specialist</string>
+
+
+    <!--Blog-->
+    <string name="previousPost">Previous Post</string>
+    <string name="nextPost">Next Post</string>
+    <string name="coursetimeline">Course Timeline : </string>
+
+    <!--shop and cart-->
+    <string name="addtocart">Add to cart</string>
+    <string name="shop">Shop</string>
+    <string name="cart">cart</string>
+
+    <!--Message-->
+    <string name="message">Message</string>
+    <string name="searchUser">Search User</string>
+    <string name="invoice">Invoice</string>
+    <string name="all">ALL</string>
+    <string name="ourstanding">OUTSTANDING</string>
+    <string name="paid">PAID</string>
+
+    <!--Account-->
+    <string name="myaccount">My Account</string>
+    <string name="myorder">MY ORDERS</string>
+    <string name="mydetail">MY DETAIL</string>
+    <string name="mywishlist">MY WISHLIST</string>
+    <string name="price">Price</string>
+    <string name="qty">Qty</string>
+    <string name="saveandcont">Save &amp; Continue</string>
+
+    <!--checkout-->
+
+    <string name="checkout">Checkout</string>
+    <string name="address">Address</string>
+    <string name="shiping">Shipping</string>
+    <string name="payment">Payment</string>
+
+
+
+    <string name="search_no_internet_connection">No Internet Connection</string>
+    <string name="somthingwrong">Somthing Wrong Please Try Again</string>
+    <string name="signcancel">Sign in cancel</string>
+
+
+
+
+
+    <string name="facebook_app_id">426476001491167</string>
+    <string name="fb_login_protocol_scheme">fb426476001491167</string>
+
+    <string-array name="courseSort">
+        <item>None</item>
+        <item>Popular</item>
+        <item>Trending</item>
+        <item>Featured</item>
+    </string-array>
+
+
+    <!--Forgot text-->
+    <string name="resetMyPass">Forgot Password</string>
+    <string name="forgot">Lorem Ipsum is simply dummy text of the \nprinting and typesetting industry.</string>
+    <string name="username">Username</string>
+    <string name="mobiles">Mobile</string>
+    <string name="email">Email</string>
+    <string name="resetPass">Reset Password</string>
+
+
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "814057882635",
+    "firebase_url": "https://neon-lms.firebaseio.com",
+    "project_id": "neon-lms",
+    "storage_bucket": "neon-lms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814057882635:android:b63da1f023d31b82",
+        "android_client_info": {
+          "package_name": "com.neon.lms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814057882635-357ccror8qk9nt81juirsneut6ji5cbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neon.lms",
+            "certificate_hash": "b37eb80a5688a5b7bc63e9bb615118ea0bec5c64"
+          }
+        },
+        {
+          "client_id": "814057882635-uhae0e2a8stuk6630qrg13rbujvmg37p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIf87HDacuSkoUCB7L0TrUhnQvKBT_41A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814057882635-uhae0e2a8stuk6630qrg13rbujvmg37p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
