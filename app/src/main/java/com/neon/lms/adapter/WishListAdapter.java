@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.RowInvoiceItemBinding;
 import com.neon.lms.databinding.RowWishItemBinding;
 import com.neon.lms.model.WishModel;
 import com.neon.lms.util.Constants;

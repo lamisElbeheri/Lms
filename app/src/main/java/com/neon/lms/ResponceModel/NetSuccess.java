@@ -2,6 +2,8 @@ package com.neon.lms.ResponceModel;
 
 public class NetSuccess {
     private String status;
+    private String message;
+
 
     public String getStatus() {
         return this.status;
@@ -9,5 +11,13 @@ public class NetSuccess {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

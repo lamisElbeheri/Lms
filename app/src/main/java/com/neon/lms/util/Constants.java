@@ -26,6 +26,7 @@ public class Constants {
 
     public static String BASE_URL = "https://sample.neonlms.com";
     public static final String API_VERSION = "/api/v1";
+    public static final String DEVELOPER_KEY = "AIzaSyAsgtOvy1dr8jcVSUFqy63wB2X8KW4TFT0";
 
     //Broadcast CustomConstants
     public static final int CONNECTION_TIMEOUT = 30000;
@@ -104,6 +105,7 @@ public class Constants {
     public static final int LOGIN = 7;
     public static final int FEEDBACK = 8;
     public static final int LANGUAGE = 9;
+    public static final int MYPURCHASE = 11;
 
 
     public static final int CATEGORY_TYPE = 1;

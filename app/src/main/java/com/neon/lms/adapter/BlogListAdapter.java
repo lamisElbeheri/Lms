@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowBlogItemBinding;
-import com.neon.lms.databinding.RowCourseItemBinding;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.BlogModel;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;

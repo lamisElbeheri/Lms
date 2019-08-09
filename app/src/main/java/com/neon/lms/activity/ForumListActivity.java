@@ -10,18 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetBlogData;
-import com.neon.lms.ResponceModel.NetBlogDataBlogData;
 import com.neon.lms.ResponceModel.NetForumData;
 import com.neon.lms.ResponceModel.NetForumDataResultDiscussionsData;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.ForumListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityForumlistBinding;
-import com.neon.lms.model.ForumListModel;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.ForumListModel;
 import com.neon.lms.model.ForumModel;
 import com.neon.lms.net.RetrofitClient;
@@ -126,6 +120,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
 
     public void forumListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         model.getArrayList().clear();
         RetrofitClient.getInstance().getRestOkClient().
                 getForumList("",
@@ -135,6 +130,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
 
             NetForumData forumData = (NetForumData) object;
             if (forumData.getStatus().equalsIgnoreCase("success")) {
@@ -142,6 +138,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
 
             } else {
+
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
 
@@ -150,6 +147,8 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };

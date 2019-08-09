@@ -10,11 +10,8 @@ import android.view.ViewGroup;
 
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.RowBlogItemBinding;
 import com.neon.lms.databinding.RowFaqItemBinding;
 import com.neon.lms.model.FaqModel;
-import com.neon.lms.model.FaqModel;
-import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
 

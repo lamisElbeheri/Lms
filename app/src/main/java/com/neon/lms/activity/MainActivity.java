@@ -31,9 +31,6 @@ import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements MainActivityModel.BottomBtnClick,
@@ -147,6 +144,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.home), Constants.HOME, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.blog), Constants.BLOG, R.drawable.draw_blog, R.drawable.draw_blog, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.course), Constants.COURSE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.myPurchase), Constants.MYPURCHASE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
@@ -202,8 +200,28 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 setSelection(position);
                 break;
 
+            case Constants.MYPURCHASE:
+                openMyPurchase();
+                setSelection(position);
+                break;
+
             case Constants.FORUMS:
                 openForumList();
+                setSelection(position);
+                break;
+
+            case Constants.CONTACT:
+                openContactUs();
+                setSelection(position);
+                break;
+            case Constants.FEEDBACK:
+                openContactUs();
+                setSelection(position);
+                break;
+
+            case Constants.LANGUAGE:
+                BaseAppClass.changeLang(MainActivity.this, "ar");
+                recreate();
                 setSelection(position);
                 break;
 
@@ -229,13 +247,24 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     }
 
+    private void openMyPurchase() {
+        startActivity(new Intent(this, MyPurchaseListActivity.class));
+        overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
+    private void openContactUs() {
+        startActivity(new Intent(this, ContactUsActivity.class));
+        overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
     private void openAccount() {
         startActivity(new Intent(this, AccountActivity.class));
         overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
     private void openCourseList() {
-        startActivity(new Intent(this, CourseListActivity.class));
+        startActivity(new Intent(this, CourseListActivity.class)
+                .putExtra(CourseListActivity.VALUE, "none"));
         overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
@@ -303,6 +332,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 AlertDialogAndIntents.closeDialog(MainActivity.this, new TwoButtonListener() {
                     @Override
                     public void positiveClick() {
+                        finish();
 
                     }
 

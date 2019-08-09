@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowCartItemBinding;
-import com.neon.lms.databinding.RowShopItemBinding;
 import com.neon.lms.model.CartModel;
 import com.neon.lms.util.Constants;
 

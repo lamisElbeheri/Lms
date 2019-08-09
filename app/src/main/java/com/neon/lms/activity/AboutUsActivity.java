@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetAboutData;
-import com.neon.lms.ResponceModel.NetForgot;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.databinding.ActivityAboutusBinding;
 import com.neon.lms.model.AbouUsModel;
@@ -55,6 +54,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
 
     //     Login Api Codeall
     public void aboutDataAPI() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getAboutUs("about-us",
                         forgotcallback);
@@ -64,6 +64,8 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void success(Object object, Response response) {
             NetAboutData netAboutData = (NetAboutData) object;
+            binding.progressBar.setVisibility(View.GONE);
+
             if (netAboutData != null) {
                 binding.txtTitle.setText(netAboutData.getResult().getTitle());
                 binding.txtDes.setText(netAboutData.getResult().getContent());
@@ -76,6 +78,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
 
         @Override
         public void failure(RetrofitError error) {
+            binding.progressBar.setVisibility(View.GONE);
             Toast.makeText(AboutUsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
         }

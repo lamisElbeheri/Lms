@@ -10,20 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetCourseData;
-import com.neon.lms.ResponceModel.NetCourseDataResultData;
 import com.neon.lms.ResponceModel.NetTeacherData;
-import com.neon.lms.ResponceModel.NetTeacherDataResult;
 import com.neon.lms.ResponceModel.NetTeacherDataResultData;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.TeacherListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityTeacherlistBinding;
-import com.neon.lms.model.CourseModel;
-import com.neon.lms.model.TeacheListModel;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.TeacheListModel;
 import com.neon.lms.model.TeacherModel;
 import com.neon.lms.net.RetrofitClient;
@@ -105,6 +97,7 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onClick(int position, int type) {
                 Intent intent = new Intent(TeacherListActivity.this,TeacherDetailActivity.class);
+                intent.putExtra(TeacherDetailActivity.TEACHER_ID,model.getArrayList().get(position).getId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 

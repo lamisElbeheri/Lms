@@ -51,6 +51,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     String courseId;
 
 
+    boolean isPurchase;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +119,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onClick(int position, int type) {
                 Intent intent = new Intent(CourseDetailActivity.this, LessionListActivity.class);
+                intent.putExtra(LessionListActivity.LESSION_ID, model.getArrayList().get(position).getId() + "  ");
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 
@@ -167,9 +170,10 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     public void AddtocartApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
-                addtocartApi("bundle",
-                        courseId,
+                addtocartApi("course",
+                        "10",
                         callback);
     }
 
@@ -177,6 +181,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void success(Object object, Response response) {
             NetSuccess netSuccess = (NetSuccess) object;
+            binding.progressBar.setVisibility(View.GONE);
+
             if (netSuccess.getStatus().equalsIgnoreCase("success")) {
                 Toast.makeText(CourseDetailActivity.this, "Item Add Into Cart", Toast.LENGTH_SHORT).show();
             } else {
@@ -189,6 +195,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public void failure(RetrofitError error) {
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };
@@ -235,6 +243,11 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 binding.title.setText(netSingleCourseData.getResult().getCourse().getTitle());
                 binding.descriptiom.setText(netSingleCourseData.getResult().getCourse().getDescription());
                 binding.price.setText(netSingleCourseData.getResult().getCourse().getPrice().toString());
+
+                isPurchase = netSingleCourseData.getResult().getPurchased_course();
+
+                if (isPurchase)
+                    binding.addTocart.setVisibility(View.GONE);
                 fillArrayList(netSingleCourseData.getResult().getCourse_timeline());
 
 

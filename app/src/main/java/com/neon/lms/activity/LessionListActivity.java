@@ -1,6 +1,7 @@
 package com.neon.lms.activity;
 
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,20 +9,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.neon.lms.R;
-import com.neon.lms.adapter.CourseDetailAdapter;
+import com.neon.lms.ResponceModel.NetSingleLession;
 import com.neon.lms.adapter.LessionListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityCoursedetailBinding;
 import com.neon.lms.databinding.ActivityLessionlistBinding;
-import com.neon.lms.model.CourseDetailListModel;
-import com.neon.lms.model.CourseDetailModel;
 import com.neon.lms.model.LessionListModel;
 import com.neon.lms.model.LessionModel;
+import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
 import java.util.ArrayList;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LessionListActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,8 +40,10 @@ public class LessionListActivity extends BaseActivity implements View.OnClickLis
     public static final String VALUE = "value";
     private LessionListModel model;
     private ActivityLessionlistBinding binding;
+    SimpleExoPlayer player;
+    public static final String LESSION_ID ="lessionId";
 
-
+String lessionId;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +85,18 @@ public class LessionListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initViews() {
+         lessionId =getIntent().getStringExtra(LESSION_ID);
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
         binding.included.imgBack.setOnClickListener(this);
 
         initRecycler();
+        singleLessionDetail();
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector();
+        player = ExoPlayerFactory.newSimpleInstance(LessionListActivity.this, trackSelector);
+        binding.player.setPlayer(player);
+
+
+
 
     }
 
@@ -114,72 +135,60 @@ public class LessionListActivity extends BaseActivity implements View.OnClickLis
         });
 
     }
+    public void singleLessionDetail() {
+        RetrofitClient.getInstance().getRestOkClient().
+                getSingleLession(lessionId,
+                        courseCallback);
+    }
+
+    private final retrofit.Callback courseCallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            NetSingleLession netSingleLession = (NetSingleLession) object;
+            if (netSingleLession.getStatus().equalsIgnoreCase("success")) {
+                binding.txtTitle.setText(netSingleLession.getResult().getLesson().getTitle());
+                binding.txtDes.setText(netSingleLession.getResult().getLesson().getFull_text());
+//                fillArrayList(netSingleLession.getResult().getLesson());
+
+                // Produces DataSource instances through which media data is loaded.
+
+                if (netSingleLession.getResult().getLesson().getMedia_video() !=null){
+//                if (netSingleLession.getResult().getLesson().getMedia_video().getType().equalsIgnoreCase("youtube")) {
 //
-//
-//    public void courseApi() {
-//        RetrofitClient.getInstance().getRestOkClient().
-//                getCourseListApi("popular",
-//                        callback);
-//    }
-//
-//    private final retrofit.Callback callback = new retrofit.Callback() {
-//        @Override
-//        public void success(Object object, Response response) {
-//            NetCourseData netCourseData = (NetCourseData) object;
-//            if (netCourseData.getStatus().equalsIgnoreCase("success")) {
-//                fillArrayList(netCourseData.getResult().getData());
-//
-//
-//            } else {
-////                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        }
-//
-//        @Override
-//        public void failure(RetrofitError error) {
-//            model.setApiCallActive(false);
-//
-//        }
-//    };
-//
-//    /*set language list*/
-//
-//    private void fillArrayList(List<NetCourseDataResultData> items) {
-//        model.getArrayList().clear();
-//        binding.progressBar.setVisibility(View.GONE);
-//
-//
-//        CourseModel itemModel;
-//
-//
-//        for (int i = 0; i < items.size(); i++) {
-//            itemModel = new CourseModel();
-//            itemModel.setCategory_id(items.get(i).getCategory_id());
-//            itemModel.setId(items.get(i).getId());
-//            itemModel.setTrending(items.get(i).getTrending());
-//            itemModel.setTitle(items.get(i).getTitle());
-//            itemModel.setMeta_title(items.get(i).getMeta_title());
-//            itemModel.setMeta_description(items.get(i).getMeta_description());
-//            itemModel.setMeta_keywords(items.get(i).getMeta_keywords());
-//            itemModel.setCourse_image(items.get(i).getCourse_image());
-//            itemModel.setCreated_at(items.get(i).getCreated_at());
-//            itemModel.setDeleted_at(items.get(i).getDeleted_at());
-//            itemModel.setStart_date(items.get(i).getStart_date());
-//            itemModel.setSlug(items.get(i).getSlug());
-//            itemModel.setPopular(items.get(i).getPopular());
-//            itemModel.setPrice(items.get(i).getPrice());
-//            itemModel.setPublished(items.get(i).getPublished());
-//            itemModel.setFeatured(items.get(i).getFeatured());
-//            itemModel.setImage(items.get(i).getImage());
-//            model.getArrayList().add(itemModel);
-//
-//
-//        }
-//        binding.recyclerView.getAdapter().notifyDataSetChanged();
-//
-//
-//    }
+//                }
+//                else {
+                    DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(LessionListActivity.this,
+                            Util.getUserAgent(LessionListActivity.this, getResources().getString(R.string.app_name)));
+                    // This is the MediaSource representing the media to be played.
+                    MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                            .createMediaSource(Uri.parse("https://vimeo.com/218815513.mp4"));
+                    // Prepare the player with the source.
+                    player.prepare(videoSource);
+                    player.setPlayWhenReady(true);
+                    player.addListener(new Player.DefaultEventListener() {
+                        @Override
+                        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                            if (playWhenReady) {
+//                    progressBar.setVisibility(View.GONE);
+                            }
+                            super.onPlayerStateChanged(playWhenReady, playbackState);
+                        }
+                    });
+                }
+            } else {
+//                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            model.setApiCallActive(false);
+
+        }
+    };
+
+
 
 
     @Override
@@ -200,6 +209,33 @@ public class LessionListActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (player != null) {
+            player.setPlayWhenReady(false);
+            player.stop();
+            player.release();
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        if (player != null) {
+            player.setPlayWhenReady(false);
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (player != null) {
+            player.setPlayWhenReady(false);
+            player.stop();
+            player.release();
+        }
+        super.onDestroy();
+    }
 
 
 

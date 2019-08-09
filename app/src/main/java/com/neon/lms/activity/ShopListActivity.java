@@ -1,8 +1,6 @@
 package com.neon.lms.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,14 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.ShopListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityShoplistBinding;
-import com.neon.lms.model.ShopListModel;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.ShopListModel;
 import com.neon.lms.model.ShopModel;
 import com.neon.lms.util.AppConstant;

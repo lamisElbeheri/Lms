@@ -14,11 +14,18 @@ import android.view.ViewGroup;
 import com.neon.lms.R;
 import com.neon.lms.activity.CartListActivity;
 import com.neon.lms.activity.CheckoutActivity;
+import com.neon.lms.activity.ContactUsActivity;
+import com.neon.lms.activity.CourseDetailActivity;
+import com.neon.lms.activity.CourseListActivity;
 import com.neon.lms.activity.FaqListActivity;
 import com.neon.lms.activity.InvoiceActivity;
 import com.neon.lms.activity.MassageListActivity;
+import com.neon.lms.activity.NewsListActivity;
 import com.neon.lms.activity.ShopListActivity;
+import com.neon.lms.activity.SponserListActivity;
 import com.neon.lms.activity.TeacherListActivity;
+import com.neon.lms.activity.TestimonialListActivity;
+import com.neon.lms.activity.WhyusListActivity;
 import com.neon.lms.adapter.HomeAdapter;
 import com.neon.lms.basecomponent.BaseFragment;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -34,6 +41,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     public static final String TAG = "Shop";
     public HomeListModel model;
     private FragmentHomeBinding binding;
+
 
 
     @Override
@@ -85,13 +93,17 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                     case Constants.ROW_CLICK:
                         switch (position) {
                             case 0:
-                                openCartList();
+                                openNewsList();
                                 break;
                             case 1:
-                                openShopList();
+                                openCourseTypeList("trending");
                                 break;
                             case 2:
-                                openCheckout();
+//                                openCourseTypeList("featured");
+                                openCartList();
+                                break;
+                            case 3:
+                                openTestimonialList();
                                 break;
                             case 4:
                                 openTeacherList();
@@ -99,11 +111,18 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                             case 5:
                                 openFaqList();
                                 break;
-                            case 3:
-                                openMessageListList();
-                                break;
+
                             case 6:
                                 openInvoiceListList();
+                                break;
+                            case 7:
+                                openWhyusList();
+                                break;
+                            case 8:
+                                openSponsorList();
+                                break;
+                            case 9:
+                                openContactUs();
                                 break;
                         }
 
@@ -115,14 +134,41 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
 
     }
 
+    private void openNewsList() {
+        startActivity(new Intent(getContext(), NewsListActivity.class));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
+    private void openWhyusList() {
+        startActivity(new Intent(getContext(), WhyusListActivity.class));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
+    private void openContactUs() {
+        startActivity(new Intent(getContext(), ContactUsActivity.class));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
 
     private void openCartList() {
         startActivity(new Intent(getContext(), CartListActivity.class));
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+
+
     }
 
-    private void openShopList() {
-        startActivity(new Intent(getContext(), ShopListActivity.class));
+    private void openTestimonialList() {
+        startActivity(new Intent(getContext(), TestimonialListActivity.class));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
+    private void openSponsorList() {
+        startActivity(new Intent(getContext(), SponserListActivity.class));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
+
+    private void openCourseTypeList(String value) {
+        startActivity(new Intent(getContext(), CourseListActivity.class)
+                .putExtra(CourseListActivity.VALUE, value));
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 

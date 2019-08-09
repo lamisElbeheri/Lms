@@ -10,13 +10,10 @@ import android.view.View;
 import com.neon.lms.R;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
-import com.neon.lms.databinding.ActivityAccountBinding;
 import com.neon.lms.databinding.ActivityCheckoutBinding;
-import com.neon.lms.fragment.AccountFragment;
 import com.neon.lms.fragment.AddressFragment;
 import com.neon.lms.fragment.OrderListFragment;
 import com.neon.lms.fragment.WishListFragment;
-import com.neon.lms.model.AcountMainModel;
 import com.neon.lms.model.CheckoutModel;
 
 import java.util.ArrayList;

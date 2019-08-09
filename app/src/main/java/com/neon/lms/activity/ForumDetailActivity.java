@@ -11,13 +11,9 @@ import android.view.View;
 
 import com.neon.lms.R;
 import com.neon.lms.adapter.ForumDetailAdapter;
-import com.neon.lms.adapter.TeacherSpecialistAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBlogdetailBinding;
 import com.neon.lms.databinding.ActivityForumdetailBinding;
-import com.neon.lms.model.BlogDetailModel;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.ForumDetailListModel;
 import com.neon.lms.model.ForumDetailModel;
 

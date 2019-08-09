@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.RowBlogItemBinding;
-import com.neon.lms.databinding.RowFaqItemBinding;
 import com.neon.lms.databinding.RowForumItemBinding;
-import com.neon.lms.model.ForumModel;
 import com.neon.lms.model.ForumModel;
 import com.neon.lms.util.Constants;
 import com.squareup.picasso.Picasso;

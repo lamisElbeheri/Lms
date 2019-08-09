@@ -10,18 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetCartList;
-import com.neon.lms.ResponceModel.NetCartListResultCourses;
 import com.neon.lms.ResponceModel.NetMessageData;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.MessageListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityMessagelistBinding;
-import com.neon.lms.model.CartModel;
-import com.neon.lms.model.MessageListModel;
 import com.neon.lms.model.MessageListModel;
 import com.neon.lms.model.MessageModel;
 import com.neon.lms.net.RetrofitClient;

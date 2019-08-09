@@ -8,23 +8,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.ResponceModel.NetTeacherDetailData;
-import com.neon.lms.adapter.TeacherListAdapter;
 import com.neon.lms.adapter.TeacherSpecialistAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityTeacherDetailBinding;
-import com.neon.lms.databinding.ActivityTeacherlistBinding;
-import com.neon.lms.model.TeacherSpeciaListModel;
-import com.neon.lms.model.TeacherModel;
 import com.neon.lms.model.TeacherSpeciaListModel;
 import com.neon.lms.model.TeacherSpecialModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,6 +32,9 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
     public static final String VALUE = "value";
     private TeacherSpeciaListModel model;
     private ActivityTeacherDetailBinding binding;
+
+    public static final String TEACHER_ID ="id";
+    String teacherId;
 
 
     @Override
@@ -81,13 +79,13 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initViews() {
+        teacherId =getIntent().getStringExtra(TEACHER_ID);
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
         binding.included.imgBack.setOnClickListener(this);
         initRecycler();
+        getTeacherDetailApi();
 
     }
-
-
 
 
     /*
@@ -98,7 +96,7 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
         binding.recyclerView.setNestedScrollingEnabled(false);
 
 
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.recyclerView.setAdapter(new TeacherSpecialistAdapter(TeacherDetailActivity.this,
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
@@ -116,7 +114,7 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
                         + ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition())
                         >= recyclerView.getLayoutManager().getItemCount()) {
 
-                        if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
+                    if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
 
                     }
                 }
@@ -124,7 +122,6 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
         });
 
     }
-
 
 
     public void getTeacherDetailApi() {
@@ -139,9 +136,14 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
         public void success(Object object, Response response) {
             NetTeacherDetailData netTeacherDetailData = (NetTeacherDetailData) object;
             if (netTeacherDetailData.getStatus().equalsIgnoreCase("success")) {
-                Toast.makeText(TeacherDetailActivity.this, "Item Add Into Cart", Toast.LENGTH_SHORT).show();
+                binding.fullName.setText(netTeacherDetailData.getResult().getTeacher().getFull_name());
+                binding.txtAddress.setText(netTeacherDetailData.getResult().getTeacher().getAddress());
+                binding.txtNum.setText(netTeacherDetailData.getResult().getTeacher().getPhone());
+                binding.txtEmail.setText(netTeacherDetailData.getResult().getTeacher().getEmail());
+                Picasso.with(TeacherDetailActivity.this)
+                        .load(netTeacherDetailData.getResult().getTeacher().getImage())
+                        .into(binding.teacherImage);
             } else {
-                Toast.makeText(TeacherDetailActivity.this, "Somthing Wrong Please Try Again", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -153,6 +155,7 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
 
         }
     };
+
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);
@@ -170,9 +173,6 @@ public class TeacherDetailActivity extends BaseActivity implements View.OnClickL
 
         }
     }
-
-
-
 
 
 }

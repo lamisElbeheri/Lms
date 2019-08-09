@@ -9,14 +9,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetSuccess;
+import com.neon.lms.ResponceModel.TokenModel;
+import com.neon.lms.activity.SignInActivity;
 import com.neon.lms.callBack.TwoButtonListener;
+import com.neon.lms.net.RetrofitClient;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class AlertDialogAndIntents {
@@ -149,6 +158,66 @@ public class AlertDialogAndIntents {
 
         alertPopup.show();
     }
+
+    public static void subscribeNow(final Context context, TwoButtonListener btnListener) {
+        final TwoButtonListener listener = btnListener;
+        final Dialog alertPopup = new Dialog(context);
+        alertPopup.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        alertPopup.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertPopup.setContentView(R.layout.subscribe_popup);
+        alertPopup.getWindow().setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        final EditText email = (EditText) alertPopup.findViewById(R.id.email);
+        LinearLayout llSubScribe = (LinearLayout) alertPopup.findViewById(R.id.llSubScribe);
+        llSubScribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != listener)
+                    if (Validation.isEmailValid(email.getText().toString()))
+                    subscibeAPi(email.getText().toString(),context);
+                    else
+                        Toast.makeText(context, "Please Enter Valid Email", Toast.LENGTH_SHORT).show();
+                    listener.positiveClick();
+                alertPopup.dismiss();
+            }
+        });
+
+
+        alertPopup.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
+
+        alertPopup.show();
+    }
+
+
+    //     Login Api Codeall
+    public static void subscibeAPi(String email,Context context) {
+        RetrofitClient.getInstance().getRestOkClient().
+                getSubscribe(email,
+
+                        callback);
+    }
+
+    private static final retrofit.Callback callback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            NetSuccess netSuccess = (NetSuccess) object;
+            if (netSuccess != null) {
+
+            } else {
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+
+        }
+    };
+
 
 
 }

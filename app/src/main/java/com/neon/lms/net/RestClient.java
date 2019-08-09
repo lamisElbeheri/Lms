@@ -2,19 +2,25 @@ package com.neon.lms.net;
 
 import com.neon.lms.ResponceModel.NetAboutData;
 import com.neon.lms.ResponceModel.NetBlogData;
-import com.neon.lms.ResponceModel.NetBlogDataBlog;
+import com.neon.lms.ResponceModel.NetBlogDetailData;
 import com.neon.lms.ResponceModel.NetCartList;
 import com.neon.lms.ResponceModel.NetCourseData;
 import com.neon.lms.ResponceModel.NetFaqData;
 import com.neon.lms.ResponceModel.NetForgot;
 import com.neon.lms.ResponceModel.NetForumData;
 import com.neon.lms.ResponceModel.NetMessageData;
+import com.neon.lms.ResponceModel.NetMyPurchaseData;
+import com.neon.lms.ResponceModel.NetNewsData;
+import com.neon.lms.ResponceModel.NetOfferData;
 import com.neon.lms.ResponceModel.NetSingleCourseData;
+import com.neon.lms.ResponceModel.NetSingleLession;
+import com.neon.lms.ResponceModel.NetSponserData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.ResponceModel.NetTeacherData;
 import com.neon.lms.ResponceModel.NetTeacherDetailData;
+import com.neon.lms.ResponceModel.NetTestimonialData;
+import com.neon.lms.ResponceModel.NetWhyusData;
 import com.neon.lms.ResponceModel.TokenModel;
-import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 
 import retrofit.Callback;
@@ -62,6 +68,12 @@ public interface RestClient {
     void getSingleCourse(
             @Field("course_id") String course_id,
             Callback<NetSingleCourseData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/single-lesson")
+    void getSingleLession(
+            @Field("lesson_id") String lesson_id,
+            Callback<NetSingleLession> callback);
 
 
     @FormUrlEncoded
@@ -119,6 +131,12 @@ public interface RestClient {
     void getBlogList(@Field("blog_id") String blog_id,
                      Callback<NetBlogData> callback);
 
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/get-blog")
+    void getBlogDetailList(@Field("blog_id") String blog_id,
+                           Callback<NetBlogDetailData> callback);
+
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/forum")
     void getForumList(@Field("type") String type,
@@ -129,6 +147,78 @@ public interface RestClient {
     void getAboutUs(
             @Field("page") String page,
             Callback<NetAboutData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/subscribe-newsletter")
+    void getSubscribe(
+            @Field("email") String email,
+            Callback<NetSuccess> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/sponsors")
+    void getSponserList(
+            @Field("type") String type,
+            Callback<NetSponserData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/testimonials")
+    void getTestimonialList(
+            @Field("type") String type,
+            Callback<NetTestimonialData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/why-us")
+    void getWhyUsList(
+            @Field("type") String type,
+            Callback<NetWhyusData> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/my-purchases")
+    void getMyPurchase(
+            @Field("type") String type,
+            Callback<NetMyPurchaseData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/latest-news")
+    void getNewsList(
+            @Field("type") String type,
+            Callback<NetNewsData> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/contact-us")
+    void getContactUs(
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("number") String number,
+            @Field("message") String message,
+            Callback<NetSuccess> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/contact-us")
+    void signUp(
+            @Field("first_name") String name,
+            @Field("last_name") String email,
+            @Field("dob") String number,
+            @Field("phone") String phone,
+            @Field("gender") String gender,
+            @Field("address") String address,
+            @Field("city") String city,
+            @Field("pincode") String pincode,
+            @Field("state") String state,
+            @Field("country") String country,
+            @Field("avatar_type") String avatar_type,
+//            @Field("avatar_location") String avatar_location,
+            Callback<NetSuccess> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/offers")
+    void getOfferList(
+            @Field("type") String type,
+            Callback<NetOfferData> callback);
 
 
 }

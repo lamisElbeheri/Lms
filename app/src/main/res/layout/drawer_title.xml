@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
 
         <import type="android.view.View" />
@@ -45,9 +43,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
-            android:layout_marginBottom="@dimen/_8sdp"
             android:layout_marginLeft="@dimen/_8sdp"
             android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:alpha="0.6"
             android:background="@color/white" />
 

@@ -12,7 +12,6 @@ import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
 import com.neon.lms.databinding.ActivityAccountBinding;
 import com.neon.lms.fragment.AccountFragment;
-import com.neon.lms.fragment.InvoiceFragment;
 import com.neon.lms.fragment.OrderListFragment;
 import com.neon.lms.fragment.WishListFragment;
 import com.neon.lms.model.AcountMainModel;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class  AccountActivity extends BaseActivity implements View.OnClickListener, OpenFragment {
+public class AccountActivity extends BaseActivity implements View.OnClickListener, OpenFragment {
 
 
     private AcountMainModel model;

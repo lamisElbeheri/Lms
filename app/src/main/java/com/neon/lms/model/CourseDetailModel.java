@@ -7,7 +7,7 @@ import android.os.Parcelable;
 
 public class CourseDetailModel extends BaseObservable implements Parcelable {
     private String description;
-    private int id;
+    private String id;
     private boolean completed;
     private String title;
     private String type;
@@ -18,7 +18,7 @@ public class CourseDetailModel extends BaseObservable implements Parcelable {
 
     protected CourseDetailModel(Parcel in) {
         description = in.readString();
-        id = in.readInt();
+        id = in.readString();
         completed = in.readByte() != 0;
         title = in.readString();
         type = in.readString();
@@ -27,7 +27,7 @@ public class CourseDetailModel extends BaseObservable implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(description);
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeByte((byte) (completed ? 1 : 0));
         dest.writeString(title);
         dest.writeString(type);
@@ -58,11 +58,11 @@ public class CourseDetailModel extends BaseObservable implements Parcelable {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -40,7 +40,7 @@ public class Validation {
     }
 
 
-    public boolean isEmailValid(String strEmail) {
+    public static boolean isEmailValid(String strEmail) {
         if (null != strEmail && !isStringEmpty(strEmail) && checkEmail(strEmail)) {
             return true;
         } else
@@ -140,7 +140,7 @@ public class Validation {
 //    }
 //
     //Email Format Validation
-    public boolean checkEmail(String strEmail) {
+    public static boolean checkEmail(String strEmail) {
         return Patterns.EMAIL_ADDRESS.matcher(strEmail).matches();
     }
 

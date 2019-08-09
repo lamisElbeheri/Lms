@@ -137,6 +137,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
 
 
     public void cartListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         model.getArrayList().clear();
         RetrofitClient.getInstance().getRestOkClient().
                 getCartList("",
@@ -146,6 +147,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
 
             NetCartList cartList = (NetCartList) object;
             if (cartList.getStatus().equalsIgnoreCase("success")) {
@@ -159,9 +161,12 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
 
         }
 
+
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.VISIBLE);
+
 
         }
     };
@@ -169,15 +174,13 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
     /*set language list*/
 
     private void fillArrayList(List<NetCartListResultCourses> items) {
-        binding.progressBar.setVisibility(View.GONE);
-
 
         CartModel itemModel;
 
 
         for (int i = 0; i < items.size(); i++) {
             itemModel = new CartModel();
-            itemModel.setId(items.get(i).getId()+"");
+            itemModel.setId(items.get(i).getId() + "");
             itemModel.setCategory_id(items.get(i).getCategory_id());
             itemModel.setCourse_image(items.get(i).getCourse_image());
             itemModel.setImage(items.get(i).getImage());
@@ -214,7 +217,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
 
         for (int i = 0; i < items.size(); i++) {
             itemModel = new CartModel();
-            itemModel.setId(items.get(i).getId()+"");
+            itemModel.setId(items.get(i).getId() + "");
             itemModel.setCategory_id(items.get(i).getCategory_id());
             itemModel.setUser_id(items.get(i).getUser_id());
             itemModel.setCourse_image(items.get(i).getCourse_image());

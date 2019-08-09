@@ -34,6 +34,7 @@
     <string name="home">Home</string>
     <string name="blog">Blog</string>
     <string name="course">Course</string>
+    <string name="myPurchase">My Purchase</string>
     <string name="forums">Forums</string>
     <string name="contactUs">Contact</string>
     <string name="about">About Us</string>
@@ -135,6 +136,23 @@
     <string name="mobiles">Mobile</string>
     <string name="email">Email</string>
     <string name="resetPass">Reset Password</string>
+    <string name="subscribe">Subscribe for latest updates</string>
+    <string name="subscribeNow">Subscribe Now</string>
+    <string name="subscribeNote">Signup for our newsletter and get notified when we publish new articles for free!</string>
 
+    <string name="sendMsg">Send Us A Message.</string>
+    <string name="yourname">Your Name</string>
+    <string name="youremail">Your Email</string>
+    <string name="yourphone">Your Phone</string>
+    <string name="yourmsg">Message</string>
+    <string name="submit">Submit</string>
+
+
+    <string name="addComment">Please Enter Your Comment</string>
+    <string name="addEmail">Please Enter Email</string>
+    <string name="addName">Please Enter Name</string>
+    <string name="addPhone">Please Enter Number</string>
+
+    <string name="offer">Offerr</string>
 
 </resources>

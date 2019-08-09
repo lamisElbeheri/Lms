@@ -37,6 +37,7 @@
 
 
             <TextView
+                android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_6sdp"
@@ -49,6 +50,7 @@
 
 
             <TextView
+                android:id="@+id/txtDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_4sdp"
@@ -60,9 +62,10 @@
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="normal" />
 
-            <VideoView
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/player"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp" />
+                android:layout_height="@dimen/_160sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

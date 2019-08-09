@@ -8,8 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCourseData;
@@ -78,15 +78,39 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initViews() {
+        if (getIntent().getStringExtra(VALUE).equalsIgnoreCase("trending")){
+            binding.llFilter.setVisibility(View.GONE);
+        }
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
         binding.included.imgBack.setOnClickListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.courseSort, R.layout.simple_spiner);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown);
         binding.spinner.setAdapter(adapter);
-        courseApi();
+        courseApi("");
         initRecycler();
 
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position==1)
+                    courseApi("popular");
+                else if (position==2)
+                    courseApi("trending");
+                else if (position==3)
+                    courseApi("featured");
+                else
+                    courseApi("");
+
+                // your code here
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 
 
@@ -131,21 +155,26 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     }
 
 
-    public void courseApi() {
+    public void courseApi(String type) {
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         RetrofitClient.getInstance().getRestOkClient().
-                getCourseListApi("popular",
+                getCourseListApi(type,
                         callback);
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
+
             NetCourseData netCourseData = (NetCourseData) object;
             if (netCourseData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netCourseData.getResult().getData());
 
 
             } else {
+
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
 
@@ -154,6 +183,8 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };

@@ -1,32 +1,34 @@
 package com.neon.lms.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.adapter.TeacherSpecialistAdapter;
+import com.neon.lms.ResponceModel.NetBlogDetailData;
 import com.neon.lms.basecomponent.BaseActivity;
-import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityBlogdetailBinding;
-import com.neon.lms.databinding.ActivityTeacherDetailBinding;
 import com.neon.lms.model.BlogDetailModel;
-import com.neon.lms.model.TeacherSpecialModel;
+import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class BlogDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
-    public static final String VALUE = "value";
+    public static final String BLOG_ID = "blogId";
     private BlogDetailModel model;
     private ActivityBlogdetailBinding binding;
+
+    String id;
+    String next;
+    String  privious;
 
 
     @Override
@@ -57,7 +59,6 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -72,12 +73,49 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initViews() {
-        binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
+        id = getIntent().getStringExtra(BLOG_ID);
         binding.included.imgBack.setOnClickListener(this);
+        binding.next.setOnClickListener(this);
+        binding.privious.setOnClickListener(this);
+
+        blogDetailApi();
 
     }
 
+    public void blogDetailApi() {
+        RetrofitClient.getInstance().getRestOkClient().
+                getBlogDetailList(id,
+                        callback);
+    }
 
+    private final retrofit.Callback callback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+
+            NetBlogDetailData netBlogDetailData = (NetBlogDetailData) object;
+            if (netBlogDetailData.getStatus().equalsIgnoreCase("success")) {
+                binding.blogTitle.setText(netBlogDetailData.getBlog().getTitle());
+                binding.blogDes.setText(netBlogDetailData.getBlog().getContent());
+                Picasso.with(BlogDetailActivity.this)
+                        .load(netBlogDetailData.getBlog().getImage())
+                        .into(binding.blogImg);
+                binding.blogdate.setText(AppConstant.getDate(netBlogDetailData.getBlog().getCreated_at(), AppConstant.sdfFormateDate));
+                binding.author.setText(netBlogDetailData.getBlog().getAuthor().getFirst_name());
+                next = String.valueOf(netBlogDetailData.getNext());
+                privious = String.valueOf(netBlogDetailData.getPrevious());
+
+
+            } else {
+//                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+
+        }
+    };
 
 
     @Override
@@ -94,11 +132,29 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
                 closeActivity();
                 break;
 
+            case R.id.next:
+                if (!next.equalsIgnoreCase(null)) {
+                    Intent intent = new Intent(BlogDetailActivity.this, BlogDetailActivity.class);
+                    intent.putExtra(BlogDetailActivity.BLOG_ID, next + "");
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.animation, R.anim.animation2);
+                    finish();
+                }
+
+                break;
+            case R.id.privious:
+                if (!privious.equalsIgnoreCase(null)) {
+                    Intent preintent = new Intent(BlogDetailActivity.this, BlogDetailActivity.class);
+                    preintent.putExtra(BlogDetailActivity.BLOG_ID, privious + "");
+                    startActivity(preintent);
+                    overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                    finish();
+
+                }
+                break;
+
         }
     }
-
-
-
 
 
 }

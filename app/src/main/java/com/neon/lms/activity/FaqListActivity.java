@@ -11,19 +11,12 @@ import android.view.View;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetFaqData;
 import com.neon.lms.ResponceModel.NetFaqDataResultData;
-import com.neon.lms.ResponceModel.NetTeacherData;
-import com.neon.lms.ResponceModel.NetTeacherDataResultData;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.FaqListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityFaqlistBinding;
 import com.neon.lms.model.FaqListModel;
-import com.neon.lms.model.BlogModel;
-import com.neon.lms.model.FaqListModel;
 import com.neon.lms.model.FaqModel;
-import com.neon.lms.model.TeacherModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
@@ -121,6 +114,8 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
     }
 
     public void faqListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         RetrofitClient.getInstance().getRestOkClient().
                 getFaqListApi("",
                         callback);
@@ -130,6 +125,8 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void success(Object object, Response response) {
             NetFaqData faqData = (NetFaqData) object;
+            binding.progressBar.setVisibility(View.GONE);
+
             if (faqData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(faqData.getResult().getData());
 
@@ -143,6 +140,8 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };
@@ -175,6 +174,7 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
 
 
     }
+
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);

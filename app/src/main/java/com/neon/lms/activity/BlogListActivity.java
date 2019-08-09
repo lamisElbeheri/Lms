@@ -12,19 +12,12 @@ import android.view.View;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetBlogData;
 import com.neon.lms.ResponceModel.NetBlogDataBlogData;
-import com.neon.lms.ResponceModel.NetMessageData;
-import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.adapter.BlogListAdapter;
-import com.neon.lms.adapter.CourseListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityBloglistBinding;
-import com.neon.lms.databinding.ActivityCourselistBinding;
-import com.neon.lms.model.BlogListModel;
 import com.neon.lms.model.BlogListModel;
 import com.neon.lms.model.BlogModel;
-import com.neon.lms.model.CourseModel;
-import com.neon.lms.model.MessageModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
@@ -103,6 +96,7 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(int position, int type) {
                 Intent intent = new Intent(BlogListActivity.this, BlogDetailActivity.class);
+                intent.putExtra(BlogDetailActivity.BLOG_ID,model.getArrayList().get(position).getId()+"");
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 
@@ -129,6 +123,8 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
 
 
     public void blogListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         model.getArrayList().clear();
         RetrofitClient.getInstance().getRestOkClient().
                 getBlogList("",
@@ -138,6 +134,7 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
 
             NetBlogData messageData = (NetBlogData) object;
             if (messageData.getStatus().equalsIgnoreCase("success")) {
@@ -145,6 +142,7 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
 
 
             } else {
+
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
 
@@ -153,6 +151,8 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };

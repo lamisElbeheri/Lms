@@ -1,6 +1,5 @@
 package com.neon.lms.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.MessageDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityMessageDetailBinding;
-import com.neon.lms.databinding.ActivityMessagelistBinding;
 import com.neon.lms.model.MessageDetailListModel;
-import com.neon.lms.model.BlogModel;
-import com.neon.lms.model.MessageDetailListModel;
+
 import com.neon.lms.model.MessageDetailModel;
 import com.neon.lms.util.AppConstant;
 

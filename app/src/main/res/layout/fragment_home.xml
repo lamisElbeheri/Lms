@@ -26,13 +26,13 @@
             android:orientation="vertical">
 
 
-            <TextView
+            <android.support.v7.widget.SearchView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_6sdp"
                 android:background="@color/white"
                 android:padding="@dimen/_4sdp"
-                android:text="@string/searchtext"
+                android:queryHint="@string/searchtext"
                 android:textColor="@color/hintColor"
                 android:textSize="@dimen/_14sdp" />
 
@@ -59,8 +59,8 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="347dp"
+                        android:layout_height="149dp"
                         android:background="@drawable/home_rough" />
 
                     <TextView
