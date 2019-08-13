@@ -26,6 +26,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
 
     }
 
+
     @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_aboutus);
