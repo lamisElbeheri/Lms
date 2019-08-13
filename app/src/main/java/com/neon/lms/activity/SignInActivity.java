@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -37,6 +39,7 @@ import com.neon.lms.model.SignInModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
 import com.neon.lms.util.Validation;
 
@@ -59,6 +62,9 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     private static final String AUTH_TYPE = "rerequest";
 
     private CallbackManager mCallbackManager;
+
+    boolean isShow;
+    CustomProgressDialog dialog ;
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -85,6 +91,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     @Override
     public void initViews() {
+        dialog= new CustomProgressDialog(Constants.PROGRESS_IMAGE, SignInActivity.this).createProgressBar();
 
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -106,6 +113,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
             }
         });
         binding.btnSignin.setOnClickListener(this);
+        binding.showPassword.setOnClickListener(this);
+        binding.btnSignUp.setOnClickListener(this);
         binding.forgot.setOnClickListener(this);
         binding.loginGoogle.setOnClickListener(this);
         binding.demoFb.setOnClickListener(this);
@@ -159,32 +168,44 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
             case R.id.btnSignin:
                 if (validateInput())
                     loginApi();
-
                 break;
+
+            case R.id.btnSignUp:
+                gotSignUp();
+                break;
+
+            case R.id.showPassword:
+                if (isShow)
+                    binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                else
+                    binding.etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                break;
+
             case R.id.loginGoogle:
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent, RC_SIGN_IN);
                 break;
+
             case R.id.demoFb:
                 binding.loginButton.performClick();
                 break;
+
             case R.id.forgot:
-                    AlertDialogAndIntents.forgotDialog(SignInActivity.this, new TwoButtonListener() {
-                        @Override
-                        public void positiveClick() {
-                            forgotApi();
-                        }
+                AlertDialogAndIntents.forgotDialog(SignInActivity.this, new TwoButtonListener() {
+                    @Override
+                    public void positiveClick() {
+                        forgotApi();
+                    }
 
-                        @Override
-                        public void negativeClick() {
+                    @Override
+                    public void negativeClick() {
 
-                        }
-                    });
+                    }
+                });
                 break;
 
         }
     }
-
 
 
     private boolean validateInput() {
@@ -231,6 +252,11 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     private void gotoProfile(String token) {
         socialLogin("google", token);
         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void gotSignUp() {
+        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 
@@ -284,6 +310,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     //     Login Api Codeall
     public void loginApi() {
+        dialog.setCancelable(false);
+        dialog.show();
         RetrofitClient.getInstance().getRestOkClient().
                 passwordLogin("password",
                         Constants.CLIENT_ID,
@@ -296,6 +324,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     //     Login Api Codeall
     public void socialLogin(String provider, String token) {
+        dialog.setCancelable(false);
+        dialog.show();
         RetrofitClient.getInstance().getRestOkClient().
                 socialLogin("social",
                         Constants.CLIENT_ID,
@@ -310,6 +340,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            dialog.hide();
             TokenModel tokenModel = (TokenModel) object;
             if (tokenModel != null) {
                 BaseAppClass.getPreferences().saveToken(tokenModel.getAccess_token());
@@ -324,6 +355,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
         @Override
         public void failure(RetrofitError error) {
+            dialog.hide();
             Toast.makeText(SignInActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
@@ -332,6 +364,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     //     Login Api Codeall
     public void forgotApi() {
+        dialog.setCancelable(false);
+        dialog.show();
         RetrofitClient.getInstance().getRestOkClient().
                 forgotPassword(binding.etEmailorMobile.getText().toString(),
                         forgotcallback);
@@ -340,6 +374,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     private final retrofit.Callback forgotcallback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            dialog.hide();
             NetForgot netForgot = (NetForgot) object;
             if (netForgot != null) {
 
@@ -351,6 +386,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
         @Override
         public void failure(RetrofitError error) {
+            dialog.hide();
             Toast.makeText(SignInActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
         }

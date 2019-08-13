@@ -12,13 +12,16 @@ import android.view.View;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetBlogData;
 import com.neon.lms.ResponceModel.NetBlogDataBlogData;
+import com.neon.lms.ResponceModel.NetCartListResultCourses;
 import com.neon.lms.ResponceModel.NetOfferData;
+import com.neon.lms.ResponceModel.NetOfferDataCoupons;
 import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.OfferListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityOfferlistBinding;
+import com.neon.lms.model.CartModel;
 import com.neon.lms.model.OfferListModel;
 import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.OfferListModel;
@@ -124,6 +127,8 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
 
 
     public void blogListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         model.getArrayList().clear();
         RetrofitClient.getInstance().getRestOkClient().
                 getOfferList("",
@@ -133,10 +138,11 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
 
             NetOfferData netOfferData = (NetOfferData) object;
             if (netOfferData.getStatus().equalsIgnoreCase("success")) {
-
+                fillArrayList(netOfferData.getCoupons());
 
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
@@ -147,12 +153,42 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };
 
     /*set language list*/
+    private void fillArrayList(List<NetOfferDataCoupons> items) {
 
+        OfferModel itemModel;
+
+
+        for (int i = 0; i < items.size(); i++) {
+            itemModel = new OfferModel();
+            itemModel.setId(items.get(i).getId() + "");
+            itemModel.setAmount(items.get(i).getAmount());
+            itemModel.setCode(items.get(i).getCode());
+            itemModel.setDescription(items.get(i).getDescription());
+            itemModel.setMin_price(items.get(i).getMin_price());
+            itemModel.setDescription(items.get(i).getDescription());
+            itemModel.setName(items.get(i).getName());
+            itemModel.setType(items.get(i).getType());
+            itemModel.setPer_user_limit(items.get(i).getPer_user_limit());
+            itemModel.setStatus(items.get(i).getStatus());
+            itemModel.setExpires_at(items.get(i).getExpires_at());
+            itemModel.setUpdated_at(items.get(i).getUpdated_at());
+            itemModel.setCreated_at(items.get(i).getCreated_at());
+
+            model.getArrayList().add(itemModel);
+
+
+        }
+        binding.recyclerView.getAdapter().notifyDataSetChanged();
+
+
+    }
 
 
     @Override

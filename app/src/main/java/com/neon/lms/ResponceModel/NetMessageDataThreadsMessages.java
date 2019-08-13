@@ -1,18 +1,56 @@
 package com.neon.lms.ResponceModel;
 
-public class NetMessageDataThreadsMessages {
-    private int thread_id;
+import android.databinding.BaseObservable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NetMessageDataThreadsMessages extends BaseObservable implements Parcelable{
+    private String thread_id;
     private NetMessageDataThreadsMessagesSender sender;
     private String created_at;
-    private int id;
+    private String id;
     private String body;
-    private int sender_id;
+    private String sender_id;
 
-    public int getThread_id() {
+    protected NetMessageDataThreadsMessages(Parcel in) {
+        thread_id = in.readString();
+        created_at = in.readString();
+        id = in.readString();
+        body = in.readString();
+        sender_id = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(thread_id);
+        dest.writeString(created_at);
+        dest.writeString(id);
+        dest.writeString(body);
+        dest.writeString(sender_id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<NetMessageDataThreadsMessages> CREATOR = new Creator<NetMessageDataThreadsMessages>() {
+        @Override
+        public NetMessageDataThreadsMessages createFromParcel(Parcel in) {
+            return new NetMessageDataThreadsMessages(in);
+        }
+
+        @Override
+        public NetMessageDataThreadsMessages[] newArray(int size) {
+            return new NetMessageDataThreadsMessages[size];
+        }
+    };
+
+    public String getThread_id() {
         return this.thread_id;
     }
 
-    public void setThread_id(int thread_id) {
+    public void setThread_id(String thread_id) {
         this.thread_id = thread_id;
     }
 
@@ -32,11 +70,11 @@ public class NetMessageDataThreadsMessages {
         this.created_at = created_at;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -48,11 +86,11 @@ public class NetMessageDataThreadsMessages {
         this.body = body;
     }
 
-    public int getSender_id() {
+    public String getSender_id() {
         return this.sender_id;
     }
 
-    public void setSender_id(int sender_id) {
+    public void setSender_id(String sender_id) {
         this.sender_id = sender_id;
     }
 }

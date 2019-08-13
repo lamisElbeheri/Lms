@@ -125,6 +125,7 @@ public class NewsListActivity extends BaseActivity implements View.OnClickListen
 
 
     public void newsApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getNewsList("",
                         callback);
@@ -133,6 +134,8 @@ public class NewsListActivity extends BaseActivity implements View.OnClickListen
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
+
             NetNewsData netNewsData = (NetNewsData) object;
             if (netNewsData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netNewsData.getResult().getData());
@@ -146,6 +149,8 @@ public class NewsListActivity extends BaseActivity implements View.OnClickListen
 
         @Override
         public void failure(RetrofitError error) {
+            binding.progressBar.setVisibility(View.GONE);
+
             model.setApiCallActive(false);
 
         }

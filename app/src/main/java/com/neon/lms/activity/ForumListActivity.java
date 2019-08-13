@@ -8,10 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetForumData;
 import com.neon.lms.ResponceModel.NetForumDataResultDiscussionsData;
+import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.ForumListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -20,6 +22,8 @@ import com.neon.lms.model.ForumListModel;
 import com.neon.lms.model.ForumModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     private ForumListModel model;
     private ActivityForumlistBinding binding;
 
+    CustomProgressDialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +81,10 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initViews() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, ForumListActivity.this).createProgressBar();
+
         binding.included.imgBack.setOnClickListener(this);
+        binding.addforum.setOnClickListener(this);
         initRecycler();
         forumListApi();
 
@@ -93,9 +101,16 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(ForumListActivity.this, ForumDetailActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.animation, R.anim.animation2);
+                switch (type) {
+                    case Constants.ROW_CLICK:
+                        Intent intent = new Intent(ForumListActivity.this, ForumDetailActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.animation, R.anim.animation2);
+                        break;
+                    case Constants.DELETE:
+                        deleteForum(model.getArrayList().get(position).getId() + "");
+                        break;
+                }
 
 
             }
@@ -191,6 +206,39 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
     }
 
+
+    //    Delete forum
+    public void deleteForum(String id) {
+        dialog.setCancelable(false);
+        dialog.show();
+        RetrofitClient.getInstance().getRestOkClient().
+                deleteForum(id,
+                        deletecallback);
+    }
+
+    private final retrofit.Callback deletecallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            dialog.hide();
+            NetSuccess netSuccess = (NetSuccess) object;
+
+            if (netSuccess != null) {
+                Toast.makeText(ForumListActivity.this, getString(R.string.deletSuccessFul), Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(ForumListActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
+            Toast.makeText(ForumListActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);
@@ -204,6 +252,11 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.imgBack:
                 closeActivity();
+                break;
+            case R.id.addforum:
+                Intent intent = new Intent(ForumListActivity.this, AddDiscussionActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.animation, R.anim.animation2);
                 break;
 
         }

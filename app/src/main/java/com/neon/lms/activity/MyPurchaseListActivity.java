@@ -128,6 +128,7 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
 
 
     public void myPurchaseApi(String type) {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getMyPurchase("",
                         callback);
@@ -136,6 +137,8 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
+
             NetMyPurchaseData netMyPurchaseData = (NetMyPurchaseData) object;
             if (netMyPurchaseData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netMyPurchaseData.getResult().getBundles());
@@ -151,6 +154,8 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };

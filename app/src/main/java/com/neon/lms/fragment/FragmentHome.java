@@ -100,7 +100,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                                 break;
                             case 2:
 //                                openCourseTypeList("featured");
-                                openCartList();
+                                openMessageListList();
                                 break;
                             case 3:
                                 openTestimonialList();

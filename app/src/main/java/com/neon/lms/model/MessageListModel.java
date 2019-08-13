@@ -15,6 +15,9 @@ public class MessageListModel extends BaseObservable {
     private boolean isAddTo;
     private String searchTxt;
     private Drawable noDataImage;
+    private String user_id;
+    private String thread_id;
+    private String last_read;
 
     public Drawable getNoDataImage() {
         return noDataImage;
@@ -107,4 +110,27 @@ public class MessageListModel extends BaseObservable {
     }
 
 
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getThread_id() {
+        return thread_id;
+    }
+
+    public void setThread_id(String thread_id) {
+        this.thread_id = thread_id;
+    }
+
+    public String getLast_read() {
+        return last_read;
+    }
+
+    public void setLast_read(String last_read) {
+        this.last_read = last_read;
+    }
 }

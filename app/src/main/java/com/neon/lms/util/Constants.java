@@ -33,6 +33,9 @@ public class Constants {
     public static final String CLIENT_SECRET = "o03D6ITBzOgk9TK0j4sUTsmEDPgQLnFEVs1ZZOgZ";
     public static final String CLIENT_ID = "4";
 
+    public static final int PROGRESS_IMAGE = 1;
+    public static final int PROGRESS_TEXT = 2;
+
     public enum SignInSignUpErrorType {
         EMPTY_FNAME,
         EMPTY_NAME,
@@ -106,6 +109,7 @@ public class Constants {
     public static final int FEEDBACK = 8;
     public static final int LANGUAGE = 9;
     public static final int MYPURCHASE = 11;
+    public static final int LOGOUT = 12;
 
 
     public static final int CATEGORY_TYPE = 1;

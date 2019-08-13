@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class NetMessageDataThreads {
     private NetMessageDataThreadsPivot pivot;
     private ArrayList<NetMessageDataThreadsMessages> messages;
-    private int id;
+    private String id;
 
     public NetMessageDataThreadsPivot getPivot() {
         return this.pivot;
@@ -23,11 +23,11 @@ public class NetMessageDataThreads {
         this.messages = messages;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="MessageDetailModel"
-            type="com.neon.lms.model.MessageDetailModel" />
+            name="NetMessageDataThreadsMessages"
+            type="com.neon.lms.ResponceModel.NetMessageDataThreadsMessages" />
 
     </data>
 

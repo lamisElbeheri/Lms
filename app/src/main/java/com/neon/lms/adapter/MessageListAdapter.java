@@ -45,12 +45,12 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
-        h.binding.name.setText(arrayList.get(position).getSender().getFull_name());
-        h.binding.msg.setText(arrayList.get(position).getBody());
-        h.binding.date.setText(AppConstant.getDate(arrayList.get(position).getCreated_at(), AppConstant.dd_MMM));
-        Picasso.with(context)
-                .load(arrayList.get(position).getSender().getImage())
-                .into(h.binding.img);
+        h.binding.name.setText(arrayList.get(position).getMessages().get(0).getSender().getFull_name());
+        h.binding.msg.setText(arrayList.get(position).getMessages().get(0).getBody());
+//        h.binding.date.setText(AppConstant.getDate(arrayList.get(position).getCreated_at(), AppConstant.dd_MMM));
+//        Picasso.with(context)
+//                .load(arrayList.get(position).getSender().getImage())
+//                .into(h.binding.img);
         h.binding.setMessageModel(arrayList.get(position));
         h.binding.executePendingBindings();
 

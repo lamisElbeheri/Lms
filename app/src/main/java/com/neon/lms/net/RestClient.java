@@ -12,6 +12,7 @@ import com.neon.lms.ResponceModel.NetMessageData;
 import com.neon.lms.ResponceModel.NetMyPurchaseData;
 import com.neon.lms.ResponceModel.NetNewsData;
 import com.neon.lms.ResponceModel.NetOfferData;
+import com.neon.lms.ResponceModel.NetSignUpData;
 import com.neon.lms.ResponceModel.NetSingleCourseData;
 import com.neon.lms.ResponceModel.NetSingleLession;
 import com.neon.lms.ResponceModel.NetSponserData;
@@ -50,6 +51,12 @@ public interface RestClient {
                      @Field("provider") String provider,
                      @Field("access_token") String access_token,
                      Callback<TokenModel> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/oauth/token/logout")
+    void logout(
+            @Field("type") String type,
+            Callback<NetOfferData> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/send-reset-link")
@@ -125,6 +132,11 @@ public interface RestClient {
     @POST(Constants.API_VERSION + "/messages")
     void getMessageList(@Field("thread") String thread,
                         Callback<NetMessageData> callback);
+ @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/reply-message")
+    void replayMassage(@Field("thread_id") String thread_id,
+                       @Field("message") String message,
+                        Callback<NetSuccess> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/get-blog")
@@ -141,6 +153,18 @@ public interface RestClient {
     @POST(Constants.API_VERSION + "/forum")
     void getForumList(@Field("type") String type,
                       Callback<NetForumData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/create-discussion")
+    void addDiscussion(@Field("title") String title,
+                       @Field("body") String body,
+                       @Field("chatter_category_id") String chatter_category_id,
+                       Callback<NetSuccess> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/delete-response")
+    void deleteForum(@Field("post_id") String post_id,
+                     Callback<NetSuccess> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/get-page")
@@ -197,22 +221,30 @@ public interface RestClient {
 
 
     @FormUrlEncoded
-    @POST(Constants.API_VERSION + "/contact-us")
+    @POST(Constants.API_VERSION + "/signup-save")
     void signUp(
             @Field("first_name") String name,
-            @Field("last_name") String email,
-            @Field("dob") String number,
-            @Field("phone") String phone,
-            @Field("gender") String gender,
-            @Field("address") String address,
+            @Field("last_name") String last_name,
+            @Field("email") String email,
+            @Field("password") String password,
             @Field("city") String city,
-            @Field("pincode") String pincode,
-            @Field("state") String state,
-            @Field("country") String country,
-            @Field("avatar_type") String avatar_type,
+//            @Field("phone") String phone,
+//            @Field("gender") String gender,
+//            @Field("address") String address,
+//            @Field("city") String city,
+//            @Field("pincode") String pincode,
+//            @Field("state") String state,
+//            @Field("country") String country,
+//            @Field("avatar_type") String avatar_type,
 //            @Field("avatar_location") String avatar_location,
             Callback<NetSuccess> callback);
 
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/signup-form")
+    void getSignupForm(
+            @Field("type") String type,
+            Callback<NetSignUpData> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/offers")

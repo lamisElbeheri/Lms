@@ -96,7 +96,7 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
      */
     private void initRecycler() {
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         binding.recyclerView.setAdapter(new TestimonialListAdapter(TestimonialListActivity.this,
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override

@@ -154,5 +154,25 @@
     <string name="addPhone">Please Enter Number</string>
 
     <string name="offer">Offerr</string>
+    <string name="coupenuse">Usage : Per User </string>
+    <string name="minAmount">Minimum Order Amount </string>
+    <string name="enterFname">Please Enter First Name</string>
+    <string name="enterLname">Please Enter Last Name</string>
+    <string name="enterNumber">Please Enter Last Phone Number</string>
+    <string name="signUpSuccess">SignUp Successfull. Please Login first</string>
+    <string name="logout">Logout</string>
+    <string name="addForum">New Discussion</string>
+    <string name="add">Add</string>
+    <string name="title">Title</string>
+    <string name="discussion">Add New Discussion</string>
+    <string name="enterTitle">Please Enter Title</string>
+    <string name="enterDiscussion">Please Enter Discussion</string>
+    <string name="addSuccessFul">Discussion Added</string>
+    <string name="deletSuccessFul">Discussion Delete Successful</string>
+
+
+    <string name="detail">detail</string>
+    <string name="id">id</string>
+
 
 </resources>

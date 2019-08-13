@@ -52,7 +52,7 @@
                     android:paddingTop="@dimen/_4sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingBottom="@dimen/_2sdp"
-                    android:text="Denaial Jhon"
+                    android:text="@{OfferModel.name}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
@@ -67,7 +67,7 @@
                     android:paddingTop="@dimen/_2sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingBottom="@dimen/_4sdp"
-                    android:text="App Developer"
+                    android:text="@{OfferModel.description}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp" />
 
@@ -81,7 +81,7 @@
                     android:paddingTop="@dimen/_2sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingBottom="@dimen/_4sdp"
-                    android:text="App Developer"
+                    android:text="@{`Usage : Per User ` +OfferModel.per_user_limit}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp" />
 
@@ -95,7 +95,7 @@
                     android:paddingTop="@dimen/_2sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingBottom="@dimen/_4sdp"
-                    android:text="App Developer"
+                    android:text="@{`Minimum Order Amount ` +OfferModel.min_price}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp" />
 

@@ -17,7 +17,8 @@ public class AppPreference {
     public static String isRatting = "isRatting";
     public static String tokenDate = "tokenDate";
 
-
+    private static String INTRO_PREF = "Intro";
+    public static String isIntroScreen = "isIntroScreen";
     private Context context;
 
 
@@ -29,7 +30,14 @@ public class AppPreference {
     public AppPreference(Context context) {
         this.context = context;
     }
+    public boolean getIsIntro() {
+        return context.getSharedPreferences(INTRO_PREF, Context.MODE_PRIVATE).getBoolean(isIntroScreen, true);
+    }
 
+    public void saveIsIntro(boolean isIntro) {
+        (context.getSharedPreferences(INTRO_PREF, Context.MODE_PRIVATE)).edit().putBoolean(isIntroScreen, isIntro).commit();
+
+    }
     public void saveUserData(String userData) {
         context.getSharedPreferences(SAVE_USER_DATA, Context.MODE_PRIVATE).edit().putString(USER_DATA, userData).commit();
     }

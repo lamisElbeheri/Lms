@@ -70,6 +70,7 @@ public class ForumListAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llMain.setOnClickListener(this);
+            binding.delete.setOnClickListener(this);
 
 
         }
@@ -79,6 +80,8 @@ public class ForumListAdapter extends RecyclerView.Adapter {
             switch (view.getId()) {
                 case R.id.llMain:
                     onItemClick.onClick(getLayoutPosition(), Constants.ROW_CLICK);
+                    break; case R.id.delete:
+                    onItemClick.onClick(getLayoutPosition(), Constants.DELETE);
                     break;
 
             }

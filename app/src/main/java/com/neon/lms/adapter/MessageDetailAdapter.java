@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowMessagedetailItemBinding;
-import com.neon.lms.model.MessageDetailModel;
 import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 public class MessageDetailAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private ArrayList<MessageDetailModel> arrayList;
+    private ArrayList<NetMessageDataThreadsMessages> arrayList;
     OnRecyclerItemClick onItemClick;
 
     int px4, px2;
     CardView.LayoutParams layoutParams = new CardView.LayoutParams(
             CardView.LayoutParams.MATCH_PARENT, CardView.LayoutParams.WRAP_CONTENT);
 
-    public MessageDetailAdapter(Context context, ArrayList<MessageDetailModel> arrayList, OnRecyclerItemClick onItemClick) {
+    public MessageDetailAdapter(Context context, ArrayList<NetMessageDataThreadsMessages> arrayList, OnRecyclerItemClick onItemClick) {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
@@ -43,7 +43,8 @@ public class MessageDetailAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
-//        h.binding.setBlogModel(arrayList.get(position));
+        h.binding.txtMessage.setText(arrayList.get(position).getBody());
+        h.binding.setNetMessageDataThreadsMessages(arrayList.get(position));
         h.binding.executePendingBindings();
 
 

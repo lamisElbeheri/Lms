@@ -4,100 +4,48 @@ import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessagesSender;
+import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
+
+import java.util.ArrayList;
 
 
-public class MessageModel extends BaseObservable implements Parcelable {
+public class MessageModel extends BaseObservable {
 
 
     public MessageModel() {
     }
-    private int thread_id;
-    private NetMessageDataThreadsMessagesSender sender;
-    private String created_at;
-    private int id;
-    private String body;
-    private int sender_id;
+    private NetMessageDataThreadsPivot pivot;
+    private ArrayList<NetMessageDataThreadsMessages> messages;
+    private String id;
 
     protected MessageModel(Parcel in) {
-        thread_id = in.readInt();
-        created_at = in.readString();
-        id = in.readInt();
-        body = in.readString();
-        sender_id = in.readInt();
+        id = in.readString();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(thread_id);
-        dest.writeString(created_at);
-        dest.writeInt(id);
-        dest.writeString(body);
-        dest.writeInt(sender_id);
+
+    public NetMessageDataThreadsPivot getPivot() {
+        return this.pivot;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setPivot(NetMessageDataThreadsPivot pivot) {
+        this.pivot = pivot;
     }
 
-    public static final Creator<MessageModel> CREATOR = new Creator<MessageModel>() {
-        @Override
-        public MessageModel createFromParcel(Parcel in) {
-            return new MessageModel(in);
-        }
-
-        @Override
-        public MessageModel[] newArray(int size) {
-            return new MessageModel[size];
-        }
-    };
-
-    public int getThread_id() {
-        return this.thread_id;
+    public ArrayList<NetMessageDataThreadsMessages> getMessages() {
+        return this.messages;
     }
 
-    public void setThread_id(int thread_id) {
-        this.thread_id = thread_id;
+    public void setMessages(ArrayList<NetMessageDataThreadsMessages> messages) {
+        this.messages = messages;
     }
 
-    public NetMessageDataThreadsMessagesSender getSender() {
-        return this.sender;
-    }
-
-    public void setSender(NetMessageDataThreadsMessagesSender sender) {
-        this.sender = sender;
-    }
-
-    public String getCreated_at() {
-        return this.created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getBody() {
-        return this.body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public int getSender_id() {
-        return this.sender_id;
-    }
-
-    public void setSender_id(int sender_id) {
-        this.sender_id = sender_id;
     }
 }

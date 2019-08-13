@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="MessageDetailListModel"
-            type="com.neon.lms.model.MessageDetailListModel" />
+            name="MessageModel"
+            type="com.neon.lms.model.MessageModel" />
 
     </data>
 
@@ -25,6 +25,8 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/linButtonContainer"
             android:layout_below="@+id/mainToolbar"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:paddingBottom="4dp" />

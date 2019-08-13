@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetMessageData;
+import com.neon.lms.ResponceModel.NetMessageDataThreads;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.adapter.MessageListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
@@ -19,7 +20,6 @@ import com.neon.lms.databinding.ActivityMessagelistBinding;
 import com.neon.lms.model.MessageListModel;
 import com.neon.lms.model.MessageModel;
 import com.neon.lms.net.RetrofitClient;
-import com.neon.lms.util.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +98,8 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onClick(int position, int type) {
                 Intent intent = new Intent(MassageListActivity.this,MessageDetailActivity.class);
+                intent.putExtra(getString(R.string.id),model.getArrayList().get(position).getPivot().getThread_id());
+                intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList().get(position).getMessages());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 
@@ -125,6 +127,8 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void messageListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+
         model.getArrayList().clear();
         RetrofitClient.getInstance().getRestOkClient().
                 getMessageList("",
@@ -134,11 +138,13 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
 
             NetMessageData messageData = (NetMessageData) object;
             if (messageData.getStatus().equalsIgnoreCase("success")) {
                 for (int i = 0; i <messageData.getThreads().size() ; i++) {
-                    fillArrayList(messageData.getThreads().get(i).getMessages());
+                    model.setThread_id(messageData.getThreads().get(i).getId());
+                    fillArrayList(messageData.getThreads());
 
                 }
 
@@ -152,13 +158,15 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };
 
     /*set language list*/
 
-    private void fillArrayList(List<NetMessageDataThreadsMessages> items) {
+    private void fillArrayList(List<NetMessageDataThreads> items) {
         binding.progressBar.setVisibility(View.GONE);
 
 
@@ -168,11 +176,8 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         for (int i = 0; i < items.size(); i++) {
             itemModel = new MessageModel();
             itemModel.setId(items.get(i).getId());
-            itemModel.setBody(items.get(i).getBody());
-            itemModel.setSender(items.get(i).getSender());
-            itemModel.setSender_id(items.get(i).getSender_id());
-            itemModel.setThread_id(items.get(i).getThread_id());
-            itemModel.setCreated_at(items.get(i).getCreated_at());
+            itemModel.setMessages(items.get(i).getMessages());
+            itemModel.setPivot(items.get(i).getPivot());
 
             model.getArrayList().add(itemModel);
 
@@ -187,7 +192,6 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void closeActivity() {
-        AppConstant.hideKeyboard(this, binding.recyclerView);
         finish();
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
     }

@@ -1,0 +1,134 @@
+package com.neon.lms.activity;
+
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetAboutData;
+import com.neon.lms.ResponceModel.NetSuccess;
+import com.neon.lms.basecomponent.BaseActivity;
+import com.neon.lms.databinding.ActivityAboutusBinding;
+import com.neon.lms.databinding.ActivityAddDiscussionBinding;
+import com.neon.lms.model.AddForumModel;
+import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
+import com.neon.lms.util.Utility;
+import com.neon.lms.util.Validation;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public class AddDiscussionActivity extends BaseActivity implements View.OnClickListener {
+    private AddForumModel model;
+    private ActivityAddDiscussionBinding binding;
+    CustomProgressDialog dialog;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void setModelAndBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_discussion);
+        model = new AddForumModel();
+
+    }
+
+    @Override
+    public void setToolBar() {
+        binding.included.txtTitle.setText(getString(R.string.about));
+        binding.included.imgBack.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void initViews() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, AddDiscussionActivity.this).createProgressBar();
+        binding.addDiscussion.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+    }
+
+
+    //     Login Api Codeall
+    public void addforumDiscussion() {
+        dialog.setCancelable(false);
+        dialog.show();
+        RetrofitClient.getInstance().getRestOkClient().
+                addDiscussion(binding.edttitle.getText().toString(),
+                        binding.edtDiscussion.getText().toString(),
+                        "1",
+                        callback);
+    }
+
+    private final retrofit.Callback callback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            dialog.hide();
+            NetSuccess netSuccess = (NetSuccess) object;
+
+            if (netSuccess != null) {
+                Toast.makeText(AddDiscussionActivity.this, getString(R.string.addSuccessFul), Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(AddDiscussionActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
+            Toast.makeText(AddDiscussionActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgBack:
+                closeActivity();
+                break;
+
+            case R.id.addDiscussion:
+                if (validateInput())
+                    addforumDiscussion();
+                break;
+
+        }
+    }
+
+    private boolean validateInput() {
+        if (!Validation.isStringEmpty(binding.edttitle.getText().toString())) {
+
+            if (!Validation.isStringEmpty(binding.edtDiscussion.getText().toString())) {
+                return true;
+            } else
+                Toast.makeText(this, getString(R.string.enterDiscussion), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(this, getString(R.string.enterTitle), Toast.LENGTH_SHORT).show();
+
+
+        return false;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        closeActivity();
+    }
+
+
+}

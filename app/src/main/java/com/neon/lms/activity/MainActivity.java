@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetOfferData;
+import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.DrawerAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -27,11 +29,16 @@ import com.neon.lms.databinding.ActivityMainBinding;
 import com.neon.lms.fragment.FragmentHome;
 import com.neon.lms.model.Drawer;
 import com.neon.lms.model.MainActivityModel;
+import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 
 import java.util.ArrayList;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends BaseActivity implements MainActivityModel.BottomBtnClick,
         OpenFragment, View.OnClickListener {
@@ -45,6 +52,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     private RelativeLayout.LayoutParams menuParam;
 
     String language;
+    CustomProgressDialog dialog ;
 
     public static boolean isOpened = false;
     ActionBarDrawerToggle mDrawerToggle;
@@ -119,7 +127,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     @Override
     public void initViews() {
-
+        dialog= new CustomProgressDialog(Constants.PROGRESS_IMAGE, MainActivity.this).createProgressBar();
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, binding.drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         binding.drawerLayout.addDrawerListener(mDrawerToggle);
@@ -148,7 +156,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.login), Constants.LOGIN, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.language), Constants.LANGUAGE, R.drawable.contact, R.drawable.contact, DrawerAdapter.TYPE_ITEM, true, false));
 
@@ -225,6 +233,11 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 setSelection(position);
                 break;
 
+                case Constants.LOGOUT:
+                    logOutApi();
+                setSelection(position);
+                break;
+
 
         }
 
@@ -273,9 +286,8 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
-    private void openAboutus() {
-        startActivity(new Intent(this, AboutUsActivity.class));
-        overridePendingTransition(R.anim.animation, R.anim.animation2);
+    private void openAboutus()
+    {
     }
 
     private void openFaqList() {
@@ -462,4 +474,33 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
+
+
+    public void logOutApi() {
+        dialog.setCancelable(false);
+        dialog.show();
+        RetrofitClient.getInstance().getRestOkClient().
+                logout("",
+                        callback);
+    }
+
+    private final retrofit.Callback callback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            dialog.hide();
+            NetSuccess netSuccess = (NetSuccess) object;
+            BaseAppClass.getPreferences().clearUserData();
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finish();
+            overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
+
+
+        }
+    };
 }
