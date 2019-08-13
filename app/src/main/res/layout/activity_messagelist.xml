@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -34,18 +35,21 @@
                 android:layout_marginTop="@dimen/_48sdp"
                 android:orientation="vertical">
 
-                <TextView
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_6sdp"
                     android:background="@color/white"
                     android:padding="@dimen/_4sdp"
-                    android:text="@string/searchUser"
-                    android:drawableLeft="@drawable/search"
-                    android:drawablePadding="@dimen/_8sdp"
-                    android:gravity="center_vertical"
                     android:textColor="@color/hintColor"
-                    android:textSize="@dimen/_14sdp" />
+                    android:textSize="@dimen/_14sdp"
+                    app:queryHint="@string/searchUser"
+                    app:theme="@style/blueThemeToolbar" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/hintColor" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -63,6 +67,7 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
+
             android:visibility="gone" />
     </FrameLayout>
 </layout>

@@ -85,8 +85,6 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-
-
     /*
      *  initialize Reacycler view
      */
@@ -97,13 +95,11 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(MassageListActivity.this,MessageDetailActivity.class);
-                intent.putExtra(getString(R.string.id),model.getArrayList().get(position).getPivot().getThread_id());
+                Intent intent = new Intent(MassageListActivity.this, MessageDetailActivity.class);
+                intent.putExtra(getString(R.string.id), model.getArrayList().get(position).getPivot().getThread_id() + "");
                 intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList().get(position).getMessages());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
-
-
 
 
             }
@@ -117,7 +113,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                         + ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition())
                         >= recyclerView.getLayoutManager().getItemCount()) {
 
-                        if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
+                    if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
 
                     }
                 }
@@ -142,7 +138,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
             NetMessageData messageData = (NetMessageData) object;
             if (messageData.getStatus().equalsIgnoreCase("success")) {
-                for (int i = 0; i <messageData.getThreads().size() ; i++) {
+                for (int i = 0; i < messageData.getThreads().size(); i++) {
                     model.setThread_id(messageData.getThreads().get(i).getId());
                     fillArrayList(messageData.getThreads());
 
@@ -168,7 +164,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
     private void fillArrayList(List<NetMessageDataThreads> items) {
         binding.progressBar.setVisibility(View.GONE);
-
+        model.getArrayList().clear();
 
         MessageModel itemModel;
 
@@ -189,7 +185,6 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-
     @Override
     public void closeActivity() {
         finish();
@@ -206,9 +201,6 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
         }
     }
-
-
-
 
 
 }

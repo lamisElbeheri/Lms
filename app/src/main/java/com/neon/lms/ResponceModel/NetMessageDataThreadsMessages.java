@@ -12,6 +12,10 @@ public class NetMessageDataThreadsMessages extends BaseObservable implements Par
     private String body;
     private String sender_id;
 
+    public NetMessageDataThreadsMessages (){
+
+    }
+
     protected NetMessageDataThreadsMessages(Parcel in) {
         thread_id = in.readString();
         created_at = in.readString();

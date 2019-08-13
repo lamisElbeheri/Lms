@@ -151,6 +151,13 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
         public void success(Object object, Response response) {
             NetSuccess netAboutData = (NetSuccess) object;
             if (netAboutData != null) {
+                NetMessageDataThreadsMessages itemModel = new NetMessageDataThreadsMessages();
+                itemModel.setBody(binding.etChatMessage.getText().toString());
+                model.getMessages().add(itemModel);
+                binding.recyclerView.getAdapter().notifyDataSetChanged();
+
+                binding.etChatMessage.setText("");
+
 
             } else {
                 Toast.makeText(MessageDetailActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();

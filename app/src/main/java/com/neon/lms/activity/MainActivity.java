@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     private RelativeLayout.LayoutParams menuParam;
 
     String language;
-    CustomProgressDialog dialog ;
+    CustomProgressDialog dialog;
 
     public static boolean isOpened = false;
     ActionBarDrawerToggle mDrawerToggle;
@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     @Override
     public void initViews() {
-        dialog= new CustomProgressDialog(Constants.PROGRESS_IMAGE, MainActivity.this).createProgressBar();
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, MainActivity.this).createProgressBar();
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, binding.drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         binding.drawerLayout.addDrawerListener(mDrawerToggle);
@@ -233,8 +233,8 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 setSelection(position);
                 break;
 
-                case Constants.LOGOUT:
-                    logOutApi();
+            case Constants.LOGOUT:
+                logOutApi();
                 setSelection(position);
                 break;
 
@@ -286,8 +286,11 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
-    private void openAboutus()
-    {
+    private void openAboutus() {
+
+        startActivity(new Intent(this, AboutUsActivity.class));
+        overridePendingTransition(R.anim.animation, R.anim.animation2);
+
     }
 
     private void openFaqList() {

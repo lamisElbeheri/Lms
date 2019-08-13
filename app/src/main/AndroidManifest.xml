@@ -82,7 +82,7 @@
         <activity
             android:name=".activity.MessageDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/FeedbackTheme" />
         <activity
             android:name=".activity.InvoiceActivity"
             android:screenOrientation="portrait"
@@ -138,7 +138,7 @@
         <activity
             android:name=".activity.ContactUsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/FeedbackTheme" />
 
         <activity
             android:name=".activity.SignUpActivity"

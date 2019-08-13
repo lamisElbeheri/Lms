@@ -53,9 +53,8 @@ public interface RestClient {
                      Callback<TokenModel> callback);
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/auth/logout")
-    void logout(
-            @Field("type") String type,
-            Callback<NetOfferData> callback);
+    void logout(@Field("type") String type,
+            Callback<NetSuccess> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/send-reset-link")

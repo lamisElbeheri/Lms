@@ -119,6 +119,7 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
 
 
     public void courseApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getWhyUsList("",
                         callback);
@@ -127,6 +128,8 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
+
             NetWhyusData netWhyusData = (NetWhyusData) object;
             if (netWhyusData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netWhyusData.getResult().getData());
@@ -141,6 +144,8 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.VISIBLE);
+
 
         }
     };
@@ -149,7 +154,6 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
 
     private void fillArrayList(List<NetWhyusDataResultData> items) {
         model.getArrayList().clear();
-        binding.progressBar.setVisibility(View.GONE);
 
 
         WhyusModel itemModel;
