@@ -50,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:background="@null"
                 android:hint="@string/yourname"
                 android:textColorHint="@color/black"
                 android:padding="@dimen/_4sdp">
@@ -60,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:padding="10dp"
+                    android:padding="@dimen/_4sdp"
                     android:singleLine="true"
                     android:text="@={ContactUsModel.name}"
                     android:textSize="18sp" />
@@ -70,7 +69,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:background="@null"
                 android:hint="@string/youremail"
                 android:textColorHint="@color/black"
                 android:padding="@dimen/_4sdp">
@@ -92,7 +90,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:background="@null"
                 android:hint="@string/yourphone"
                 android:textColorHint="@color/black"
                 android:padding="@dimen/_4sdp">
@@ -115,7 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:background="@null"
                 android:hint="@string/yourmsg"
                 android:textColorHint="@color/black"
                 android:padding="@dimen/_4sdp">

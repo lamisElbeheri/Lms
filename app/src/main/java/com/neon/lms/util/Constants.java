@@ -112,6 +112,21 @@ public class Constants {
     public static final int LOGOUT = 12;
 
 
+
+    /*Home Page Constant*/
+    public static final String NEWS = "1";
+    public static final String TRANDING_COURSE = "2";
+    public static final String FEATURED_COURSE = "3";
+    public static final String TESTIMONIAL = "4";
+    public static final String TEACHER = "5";
+    public static final String QUESTION = "6";
+    public static final String FAQ_QUESTION = "7";
+    public static final String BROWSE_COURSE = "8";
+    public static final String WHY_US = "9";
+    public static final String SPONSORS = "10";
+    public static final String CONTACT_US = "11";
+
+
     public static final int CATEGORY_TYPE = 1;
     public static final int PRODUCT_TYPE = 2;
     public static final int UOM_TYPE = 3;

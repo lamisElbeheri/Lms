@@ -156,8 +156,8 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.language), Constants.LANGUAGE, R.drawable.contact, R.drawable.contact, DrawerAdapter.TYPE_ITEM, true, false));
 
 

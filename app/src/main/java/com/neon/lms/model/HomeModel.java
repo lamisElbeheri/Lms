@@ -10,14 +10,17 @@ public class HomeModel extends BaseObservable implements Parcelable {
 
     private String fName, lName;
     private int image;
+    private String  id;
 
     public HomeModel() {
     }
+
 
     protected HomeModel(Parcel in) {
         fName = in.readString();
         lName = in.readString();
         image = in.readInt();
+        id = in.readString();
     }
 
     @Override
@@ -25,6 +28,7 @@ public class HomeModel extends BaseObservable implements Parcelable {
         dest.writeString(fName);
         dest.writeString(lName);
         dest.writeInt(image);
+        dest.writeString(id);
     }
 
     @Override
@@ -43,6 +47,14 @@ public class HomeModel extends BaseObservable implements Parcelable {
             return new HomeModel[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getfName() {
         return fName;

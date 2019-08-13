@@ -51,9 +51,8 @@ public interface RestClient {
                      @Field("provider") String provider,
                      @Field("access_token") String access_token,
                      Callback<TokenModel> callback);
-
     @FormUrlEncoded
-    @POST(Constants.API_VERSION + "/oauth/token/logout")
+    @POST(Constants.API_VERSION + "/auth/logout")
     void logout(
             @Field("type") String type,
             Callback<NetOfferData> callback);

@@ -91,37 +91,37 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
             public void onClick(int position, int type) {
                 switch (type) {
                     case Constants.ROW_CLICK:
-                        switch (position) {
-                            case 0:
+                        switch (model.getArrayList().get(position).getId()) {
+                            case Constants.NEWS:
                                 openNewsList();
                                 break;
-                            case 1:
+                            case Constants.TRANDING_COURSE:
                                 openCourseTypeList("trending");
                                 break;
-                            case 2:
+                            case Constants.FEATURED_COURSE:
 //                                openCourseTypeList("featured");
                                 openMessageListList();
                                 break;
-                            case 3:
+                            case Constants.TESTIMONIAL:
                                 openTestimonialList();
                                 break;
-                            case 4:
+                            case Constants.TEACHER:
                                 openTeacherList();
                                 break;
-                            case 5:
+                            case Constants.FAQ_QUESTION:
                                 openFaqList();
                                 break;
 
-                            case 6:
+                            case Constants.BROWSE_COURSE:
                                 openInvoiceListList();
                                 break;
-                            case 7:
+                            case Constants.WHY_US:
                                 openWhyusList();
                                 break;
-                            case 8:
+                            case Constants.SPONSORS:
                                 openSponsorList();
                                 break;
-                            case 9:
+                            case Constants.CONTACT_US:
                                 openContactUs();
                                 break;
                         }
@@ -211,6 +211,20 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 getString(R.string.contect),
 
         };
+
+        String[]  id ={
+                 Constants.NEWS,
+                 Constants.TRANDING_COURSE,
+                 Constants.FEATURED_COURSE,
+                 Constants.TESTIMONIAL,
+                 Constants.TEACHER,
+                 Constants.QUESTION,
+                 Constants.FAQ_QUESTION,
+                 Constants.BROWSE_COURSE,
+                 Constants.WHY_US,
+                 Constants.SPONSORS,
+                 Constants.CONTACT_US,
+         };
         String[] lname = {getString(R.string.news),
                 getString(R.string.courses),
                 getString(R.string.course),
@@ -243,6 +257,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
             itemModel.setfName(fName[i]);
             itemModel.setlName(lname[i]);
             itemModel.setImage(image[i]);
+            itemModel.setId(id[i]);
             model.getArrayList().add(itemModel);
 
         }

@@ -52,8 +52,7 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
     @Override
     public void setToolBar() {
         if (binding.included.toolbar != null) {
-            binding.included.txtTitle.setText(getString(R.string.blog));
-
+            binding.included.txtTitle.setText(getString(R.string.testimonial));
             binding.included.toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(binding.included.toolbar);
             binding.included.imgBack.setVisibility(View.VISIBLE);
@@ -82,7 +81,6 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initViews() {
-        binding.included.txtTitle.setText(getIntent().getStringExtra(getString(R.string.sponser)));
         binding.included.imgBack.setOnClickListener(this);
         initRecycler();
         sponsorListApi();
