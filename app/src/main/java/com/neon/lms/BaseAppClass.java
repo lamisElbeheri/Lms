@@ -12,10 +12,12 @@ import android.util.Base64;
 import android.util.Log;
 
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.AppPreference;
 
+import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
@@ -56,6 +58,7 @@ public class BaseAppClass extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());

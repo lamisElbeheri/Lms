@@ -218,7 +218,6 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                  Constants.FEATURED_COURSE,
                  Constants.TESTIMONIAL,
                  Constants.TEACHER,
-                 Constants.QUESTION,
                  Constants.FAQ_QUESTION,
                  Constants.BROWSE_COURSE,
                  Constants.WHY_US,

@@ -126,6 +126,7 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
 
 
     public void sponsorListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getSponserList("",
                         callback);
@@ -134,6 +135,8 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
+
             NetSponserData netSponserData = (NetSponserData) object;
             if (netSponserData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netSponserData.getResult().getData());
@@ -148,6 +151,8 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };
@@ -156,10 +161,7 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
 
     private void fillArrayList(List<NetSponserDataResultData> items) {
         model.getArrayList().clear();
-
-
         SponserModel itemModel;
-
 
         for (int i = 0; i < items.size(); i++) {
             itemModel = new SponserModel();
