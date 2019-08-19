@@ -22,10 +22,8 @@ import java.util.List;
 
 public class AccountActivity extends BaseActivity implements View.OnClickListener, OpenFragment {
 
-
     private AcountMainModel model;
     private ActivityAccountBinding binding;
-
 
     @Override
     public void setModelAndBinding() {

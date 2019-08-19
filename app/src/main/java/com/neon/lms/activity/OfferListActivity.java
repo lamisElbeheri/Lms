@@ -1,6 +1,5 @@
 package com.neon.lms.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,20 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetBlogData;
-import com.neon.lms.ResponceModel.NetBlogDataBlogData;
-import com.neon.lms.ResponceModel.NetCartListResultCourses;
 import com.neon.lms.ResponceModel.NetOfferData;
 import com.neon.lms.ResponceModel.NetOfferDataCoupons;
-import com.neon.lms.adapter.BlogListAdapter;
 import com.neon.lms.adapter.OfferListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityBloglistBinding;
 import com.neon.lms.databinding.ActivityOfferlistBinding;
-import com.neon.lms.model.CartModel;
-import com.neon.lms.model.OfferListModel;
-import com.neon.lms.model.BlogModel;
 import com.neon.lms.model.OfferListModel;
 import com.neon.lms.model.OfferModel;
 import com.neon.lms.net.RetrofitClient;

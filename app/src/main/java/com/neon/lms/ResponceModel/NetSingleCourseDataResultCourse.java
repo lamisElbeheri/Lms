@@ -2,29 +2,30 @@ package com.neon.lms.ResponceModel;
 
 public class NetSingleCourseDataResultCourse {
     private int trending;
-    private String image;
     private int featured;
-    private NetSingleCourseDataResultCoursePublished_lessons[] published_lessons;
-    private Object meta_title;
     private String description;
     private String created_at;
-    private int published;
     private String title;
     private Object meta_keywords;
     private String course_image;
-    private Object deleted_at;
-    private Object meta_description;
-    private NetSingleCourseDataResultCourseCourse_timeline[] course_timeline;
     private int category_id;
     private String updated_at;
     private String price;
     private NetSingleCourseDataResultCourseTeachers[] teachers;
+    private NetSingleCourseDataResultCourseMedia_video media_video;
     private int id;
     private int free;
-    private NetSingleCourseDataResultCourseCategory category;
     private int popular;
     private String slug;
     private String start_date;
+    private String image;
+    private NetSingleCourseDataResultCoursePublished_lessons[] published_lessons;
+    private Object meta_title;
+    private int published;
+    private Object deleted_at;
+    private Object meta_description;
+    private NetSingleCourseDataResultCourseCourse_timeline[] course_timeline;
+    private NetSingleCourseDataResultCourseCategory category;
 
     public int getTrending() {
         return this.trending;
@@ -34,36 +35,12 @@ public class NetSingleCourseDataResultCourse {
         this.trending = trending;
     }
 
-    public String getImage() {
-        return this.image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public int getFeatured() {
         return this.featured;
     }
 
     public void setFeatured(int featured) {
         this.featured = featured;
-    }
-
-    public NetSingleCourseDataResultCoursePublished_lessons[] getPublished_lessons() {
-        return this.published_lessons;
-    }
-
-    public void setPublished_lessons(NetSingleCourseDataResultCoursePublished_lessons[] published_lessons) {
-        this.published_lessons = published_lessons;
-    }
-
-    public Object getMeta_title() {
-        return this.meta_title;
-    }
-
-    public void setMeta_title(Object meta_title) {
-        this.meta_title = meta_title;
     }
 
     public String getDescription() {
@@ -80,14 +57,6 @@ public class NetSingleCourseDataResultCourse {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
-    }
-
-    public int getPublished() {
-        return this.published;
-    }
-
-    public void setPublished(int published) {
-        this.published = published;
     }
 
     public String getTitle() {
@@ -112,30 +81,6 @@ public class NetSingleCourseDataResultCourse {
 
     public void setCourse_image(String course_image) {
         this.course_image = course_image;
-    }
-
-    public Object getDeleted_at() {
-        return this.deleted_at;
-    }
-
-    public void setDeleted_at(Object deleted_at) {
-        this.deleted_at = deleted_at;
-    }
-
-    public Object getMeta_description() {
-        return this.meta_description;
-    }
-
-    public void setMeta_description(Object meta_description) {
-        this.meta_description = meta_description;
-    }
-
-    public NetSingleCourseDataResultCourseCourse_timeline[] getCourse_timeline() {
-        return this.course_timeline;
-    }
-
-    public void setCourse_timeline(NetSingleCourseDataResultCourseCourse_timeline[] course_timeline) {
-        this.course_timeline = course_timeline;
     }
 
     public int getCategory_id() {
@@ -170,6 +115,14 @@ public class NetSingleCourseDataResultCourse {
         this.teachers = teachers;
     }
 
+    public NetSingleCourseDataResultCourseMedia_video getMedia_video() {
+        return this.media_video;
+    }
+
+    public void setMedia_video(NetSingleCourseDataResultCourseMedia_video media_video) {
+        this.media_video = media_video;
+    }
+
     public int getId() {
         return this.id;
     }
@@ -184,14 +137,6 @@ public class NetSingleCourseDataResultCourse {
 
     public void setFree(int free) {
         this.free = free;
-    }
-
-    public NetSingleCourseDataResultCourseCategory getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(NetSingleCourseDataResultCourseCategory category) {
-        this.category = category;
     }
 
     public int getPopular() {
@@ -216,5 +161,69 @@ public class NetSingleCourseDataResultCourse {
 
     public void setStart_date(String start_date) {
         this.start_date = start_date;
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public NetSingleCourseDataResultCoursePublished_lessons[] getPublished_lessons() {
+        return this.published_lessons;
+    }
+
+    public void setPublished_lessons(NetSingleCourseDataResultCoursePublished_lessons[] published_lessons) {
+        this.published_lessons = published_lessons;
+    }
+
+    public Object getMeta_title() {
+        return this.meta_title;
+    }
+
+    public void setMeta_title(Object meta_title) {
+        this.meta_title = meta_title;
+    }
+
+    public int getPublished() {
+        return this.published;
+    }
+
+    public void setPublished(int published) {
+        this.published = published;
+    }
+
+    public Object getDeleted_at() {
+        return this.deleted_at;
+    }
+
+    public void setDeleted_at(Object deleted_at) {
+        this.deleted_at = deleted_at;
+    }
+
+    public Object getMeta_description() {
+        return this.meta_description;
+    }
+
+    public void setMeta_description(Object meta_description) {
+        this.meta_description = meta_description;
+    }
+
+    public NetSingleCourseDataResultCourseCourse_timeline[] getCourse_timeline() {
+        return this.course_timeline;
+    }
+
+    public void setCourse_timeline(NetSingleCourseDataResultCourseCourse_timeline[] course_timeline) {
+        this.course_timeline = course_timeline;
+    }
+
+    public NetSingleCourseDataResultCourseCategory getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(NetSingleCourseDataResultCourseCategory category) {
+        this.category = category;
     }
 }

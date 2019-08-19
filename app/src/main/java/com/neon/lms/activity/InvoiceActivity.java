@@ -20,7 +20,6 @@ import java.util.List;
 
 public class InvoiceActivity extends BaseActivity implements View.OnClickListener , OpenFragment {
 
-
     private InvoiceMainModel model;
     private ActivityInvoiceBinding binding;
 

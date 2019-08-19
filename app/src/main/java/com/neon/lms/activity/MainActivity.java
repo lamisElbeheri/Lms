@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetOfferData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.DrawerAdapter;
 import com.neon.lms.basecomponent.BaseActivity;

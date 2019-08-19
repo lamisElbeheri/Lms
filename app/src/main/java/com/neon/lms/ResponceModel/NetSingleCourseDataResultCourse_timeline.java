@@ -2,7 +2,7 @@ package com.neon.lms.ResponceModel;
 
 public class NetSingleCourseDataResultCourse_timeline {
     private String description;
-    private String id;
+    private int id;
     private boolean completed;
     private String title;
     private String type;
@@ -15,11 +15,11 @@ public class NetSingleCourseDataResultCourse_timeline {
         this.description = description;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

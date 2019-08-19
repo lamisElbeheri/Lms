@@ -6,16 +6,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetAboutData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.basecomponent.BaseActivity;
-import com.neon.lms.databinding.ActivityAboutusBinding;
 import com.neon.lms.databinding.ActivityAddDiscussionBinding;
 import com.neon.lms.model.AddForumModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
-import com.neon.lms.util.Utility;
 import com.neon.lms.util.Validation;
 
 import retrofit.RetrofitError;
@@ -25,7 +22,6 @@ public class AddDiscussionActivity extends BaseActivity implements View.OnClickL
     private AddForumModel model;
     private ActivityAddDiscussionBinding binding;
     CustomProgressDialog dialog;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

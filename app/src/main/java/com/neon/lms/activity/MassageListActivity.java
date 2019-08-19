@@ -12,7 +12,6 @@ import android.view.View;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetMessageData;
 import com.neon.lms.ResponceModel.NetMessageDataThreads;
-import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.adapter.MessageListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;

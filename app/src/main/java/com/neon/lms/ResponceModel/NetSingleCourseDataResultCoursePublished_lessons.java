@@ -3,15 +3,15 @@ package com.neon.lms.ResponceModel;
 public class NetSingleCourseDataResultCoursePublished_lessons {
     private int course_id;
     private int free_lesson;
-    private String image;
+    private Object image;
     private String short_text;
     private String created_at;
     private int published;
     private String title;
-    private String deleted_at;
+    private Object deleted_at;
     private String updated_at;
     private String full_text;
-    private String lesson_image;
+    private Object lesson_image;
     private int lesson_readtime;
     private int id;
     private int position;
@@ -33,11 +33,11 @@ public class NetSingleCourseDataResultCoursePublished_lessons {
         this.free_lesson = free_lesson;
     }
 
-    public String getImage() {
+    public Object getImage() {
         return this.image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Object image) {
         this.image = image;
     }
 
@@ -73,11 +73,11 @@ public class NetSingleCourseDataResultCoursePublished_lessons {
         this.title = title;
     }
 
-    public String getDeleted_at() {
+    public Object getDeleted_at() {
         return this.deleted_at;
     }
 
-    public void setDeleted_at(String deleted_at) {
+    public void setDeleted_at(Object deleted_at) {
         this.deleted_at = deleted_at;
     }
 
@@ -97,11 +97,11 @@ public class NetSingleCourseDataResultCoursePublished_lessons {
         this.full_text = full_text;
     }
 
-    public String getLesson_image() {
+    public Object getLesson_image() {
         return this.lesson_image;
     }
 
-    public void setLesson_image(String lesson_image) {
+    public void setLesson_image(Object lesson_image) {
         this.lesson_image = lesson_image;
     }
 

@@ -224,6 +224,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                  Constants.SPONSORS,
                  Constants.CONTACT_US,
          };
+
         String[] lname = {getString(R.string.news),
                 getString(R.string.courses),
                 getString(R.string.course),

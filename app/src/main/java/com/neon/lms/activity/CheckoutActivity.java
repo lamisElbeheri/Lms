@@ -22,7 +22,6 @@ import java.util.List;
 
 public class CheckoutActivity extends BaseActivity implements View.OnClickListener, OpenFragment {
 
-
     private CheckoutModel model;
     private ActivityCheckoutBinding binding;
 

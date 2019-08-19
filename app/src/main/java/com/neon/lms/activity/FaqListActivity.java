@@ -28,7 +28,6 @@ import retrofit.client.Response;
 
 public class FaqListActivity extends BaseActivity implements View.OnClickListener {
 
-
     private FaqListModel model;
     private ActivityFaqlistBinding binding;
 

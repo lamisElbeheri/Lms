@@ -1,56 +1,56 @@
 package com.neon.lms.ResponceModel;
 
 public class NetSingleCourseDataResultCourseTeachers {
-    private String country;
-    private String last_login_at;
-    private String gender;
+    private Object country;
+    private Object last_login_at;
+    private Object gender;
     private String confirmation_code;
-    private String city;
-    private String timezone;
-    private String avatar_location;
+    private Object city;
+    private Object timezone;
+    private Object avatar_location;
     private String created_at;
     private String uuid;
     private boolean confirmed;
     private String avatar_type;
     private String updated_at;
-    private String last_login_ip;
+    private Object last_login_ip;
     private NetSingleCourseDataResultCourseTeachersPivot pivot;
     private int id;
-    private String state;
+    private Object state;
     private String first_name;
     private String email;
-    private String pincode;
+    private Object pincode;
     private String image;
-    private String password_changed_at;
-    private String address;
+    private Object password_changed_at;
+    private Object address;
     private String last_name;
     private boolean active;
-    private String deleted_at;
+    private Object deleted_at;
     private String full_name;
-    private String phone;
-    private String dob;
+    private Object phone;
+    private Object dob;
 
-    public String getCountry() {
+    public Object getCountry() {
         return this.country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Object country) {
         this.country = country;
     }
 
-    public String getLast_login_at() {
+    public Object getLast_login_at() {
         return this.last_login_at;
     }
 
-    public void setLast_login_at(String last_login_at) {
+    public void setLast_login_at(Object last_login_at) {
         this.last_login_at = last_login_at;
     }
 
-    public String getGender() {
+    public Object getGender() {
         return this.gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Object gender) {
         this.gender = gender;
     }
 
@@ -62,27 +62,27 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.confirmation_code = confirmation_code;
     }
 
-    public String getCity() {
+    public Object getCity() {
         return this.city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Object city) {
         this.city = city;
     }
 
-    public String getTimezone() {
+    public Object getTimezone() {
         return this.timezone;
     }
 
-    public void setTimezone(String timezone) {
+    public void setTimezone(Object timezone) {
         this.timezone = timezone;
     }
 
-    public String getAvatar_location() {
+    public Object getAvatar_location() {
         return this.avatar_location;
     }
 
-    public void setAvatar_location(String avatar_location) {
+    public void setAvatar_location(Object avatar_location) {
         this.avatar_location = avatar_location;
     }
 
@@ -126,11 +126,11 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.updated_at = updated_at;
     }
 
-    public String getLast_login_ip() {
+    public Object getLast_login_ip() {
         return this.last_login_ip;
     }
 
-    public void setLast_login_ip(String last_login_ip) {
+    public void setLast_login_ip(Object last_login_ip) {
         this.last_login_ip = last_login_ip;
     }
 
@@ -150,11 +150,11 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.id = id;
     }
 
-    public String getState() {
+    public Object getState() {
         return this.state;
     }
 
-    public void setState(String state) {
+    public void setState(Object state) {
         this.state = state;
     }
 
@@ -174,11 +174,11 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.email = email;
     }
 
-    public String getPincode() {
+    public Object getPincode() {
         return this.pincode;
     }
 
-    public void setPincode(String pincode) {
+    public void setPincode(Object pincode) {
         this.pincode = pincode;
     }
 
@@ -190,19 +190,19 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.image = image;
     }
 
-    public String getPassword_changed_at() {
+    public Object getPassword_changed_at() {
         return this.password_changed_at;
     }
 
-    public void setPassword_changed_at(String password_changed_at) {
+    public void setPassword_changed_at(Object password_changed_at) {
         this.password_changed_at = password_changed_at;
     }
 
-    public String getAddress() {
+    public Object getAddress() {
         return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Object address) {
         this.address = address;
     }
 
@@ -222,11 +222,11 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.active = active;
     }
 
-    public String getDeleted_at() {
+    public Object getDeleted_at() {
         return this.deleted_at;
     }
 
-    public void setDeleted_at(String deleted_at) {
+    public void setDeleted_at(Object deleted_at) {
         this.deleted_at = deleted_at;
     }
 
@@ -238,19 +238,19 @@ public class NetSingleCourseDataResultCourseTeachers {
         this.full_name = full_name;
     }
 
-    public String getPhone() {
+    public Object getPhone() {
         return this.phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Object phone) {
         this.phone = phone;
     }
 
-    public String getDob() {
+    public Object getDob() {
         return this.dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Object dob) {
         this.dob = dob;
     }
 }

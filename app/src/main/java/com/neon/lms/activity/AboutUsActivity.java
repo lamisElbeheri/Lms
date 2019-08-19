@@ -19,7 +19,6 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
     private AbouUsModel model;
     private ActivityAboutusBinding binding;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

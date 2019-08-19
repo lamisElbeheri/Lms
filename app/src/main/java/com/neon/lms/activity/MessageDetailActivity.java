@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
-import com.neon.lms.ResponceModel.NetSignUpData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.MessageDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
@@ -19,7 +18,6 @@ import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityMessageDetailBinding;
 import com.neon.lms.model.MessageModel;
 
-import com.neon.lms.model.MessageDetailModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 

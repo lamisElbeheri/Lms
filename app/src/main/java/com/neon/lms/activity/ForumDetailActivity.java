@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class ForumDetailActivity extends BaseActivity implements View.OnClickListener {
 
-
     public static final String VALUE = "value";
     private ForumDetailListModel model;
     private ActivityForumdetailBinding binding;

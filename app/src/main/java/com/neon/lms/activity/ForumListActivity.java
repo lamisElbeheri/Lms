@@ -33,7 +33,6 @@ import retrofit.client.Response;
 
 public class ForumListActivity extends BaseActivity implements View.OnClickListener {
 
-
     private ForumListModel model;
     private ActivityForumlistBinding binding;
 

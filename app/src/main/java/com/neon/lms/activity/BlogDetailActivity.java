@@ -21,7 +21,6 @@ import retrofit.client.Response;
 
 public class BlogDetailActivity extends BaseActivity implements View.OnClickListener {
 
-
     public static final String BLOG_ID = "blogId";
     private BlogDetailModel model;
     private ActivityBlogdetailBinding binding;

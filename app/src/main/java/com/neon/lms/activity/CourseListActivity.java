@@ -31,7 +31,6 @@ import retrofit.client.Response;
 
 public class CourseListActivity extends BaseActivity implements View.OnClickListener {
 
-
     public static final String VALUE = "value";
     private CourseListModel model;
     private ActivityCourselistBinding binding;

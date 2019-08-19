@@ -8,29 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetCourseData;
-import com.neon.lms.ResponceModel.NetCourseDataResultData;
-import com.neon.lms.ResponceModel.NetSingleCourseData;
-import com.neon.lms.ResponceModel.NetSingleCourseDataResultCourseCourse_timeline;
-import com.neon.lms.ResponceModel.NetSingleCourseDataResultCourse_timeline;
 import com.neon.lms.ResponceModel.NetSuccess;
-import com.neon.lms.ResponceModel.NetTeacherData;
-import com.neon.lms.ResponceModel.NetTeacherDataResultData;
 import com.neon.lms.adapter.CourseDetailAdapter;
-import com.neon.lms.adapter.CourseListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityCoursedetailBinding;
-import com.neon.lms.databinding.ActivityCourselistBinding;
 import com.neon.lms.model.CourseDetailListModel;
 import com.neon.lms.model.CourseDetailModel;
-import com.neon.lms.model.CourseListModel;
-import com.neon.lms.model.CourseModel;
-import com.neon.lms.model.TeacherModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
@@ -66,6 +53,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         binding.setCourseDetailListModel(model);
 
     }
+
+
 
     @Override
     public void setToolBar() {

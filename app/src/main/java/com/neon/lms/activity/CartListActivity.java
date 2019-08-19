@@ -1,6 +1,5 @@
 package com.neon.lms.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,23 +11,15 @@ import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCartList;
-import com.neon.lms.ResponceModel.NetCartListResult;
 import com.neon.lms.ResponceModel.NetCartListResultBundles;
 import com.neon.lms.ResponceModel.NetCartListResultCourses;
-import com.neon.lms.ResponceModel.NetFaqData;
-import com.neon.lms.ResponceModel.NetFaqDataResultData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.CartListAdapter;
-import com.neon.lms.adapter.ShopListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityCartlistBinding;
-import com.neon.lms.databinding.ActivityShoplistBinding;
-import com.neon.lms.model.CartListModel;
 import com.neon.lms.model.CartListModel;
 import com.neon.lms.model.CartModel;
-import com.neon.lms.model.FaqModel;
-import com.neon.lms.model.ShopModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;

@@ -155,6 +155,7 @@ String lessionId;
                 if (netSingleLession.getResult().getLesson().getMedia_video() !=null){
 //                if (netSingleLession.getResult().getLesson().getMedia_video().getType().equalsIgnoreCase("youtube")) {
 //
+
 //                }
 //                else {
                     DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(LessionListActivity.this,

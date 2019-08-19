@@ -1,17 +1,16 @@
 package com.neon.lms.ResponceModel;
 
-import java.util.ArrayList;
-
 public class NetSingleCourseDataResult {
     private int total_ratings;
     private boolean is_reviewed;
-    private ArrayList<NetSingleCourseDataResultCourse_timeline> course_timeline;
+    private NetSingleCourseDataResultCourse_timeline[] course_timeline;
     private boolean is_certified;
     private boolean purchased_course;
     private int course_rating;
+    private NetSingleCourseDataResultCourse_video course_video;
     private NetSingleCourseDataResultCourse course;
     private int course_process;
-    private ArrayList<NetSingleCourseDataResultLessons> lessons;
+    private NetSingleCourseDataResultLessons[] lessons;
     private NetSingleCourseDataResultContinue_course continue_course;
 
     public int getTotal_ratings() {
@@ -30,11 +29,11 @@ public class NetSingleCourseDataResult {
         this.is_reviewed = is_reviewed;
     }
 
-    public ArrayList<NetSingleCourseDataResultCourse_timeline> getCourse_timeline() {
+    public NetSingleCourseDataResultCourse_timeline[] getCourse_timeline() {
         return this.course_timeline;
     }
 
-    public void setCourse_timeline(ArrayList<NetSingleCourseDataResultCourse_timeline> course_timeline) {
+    public void setCourse_timeline(NetSingleCourseDataResultCourse_timeline[] course_timeline) {
         this.course_timeline = course_timeline;
     }
 
@@ -62,6 +61,14 @@ public class NetSingleCourseDataResult {
         this.course_rating = course_rating;
     }
 
+    public NetSingleCourseDataResultCourse_video getCourse_video() {
+        return this.course_video;
+    }
+
+    public void setCourse_video(NetSingleCourseDataResultCourse_video course_video) {
+        this.course_video = course_video;
+    }
+
     public NetSingleCourseDataResultCourse getCourse() {
         return this.course;
     }
@@ -78,11 +85,11 @@ public class NetSingleCourseDataResult {
         this.course_process = course_process;
     }
 
-    public ArrayList<NetSingleCourseDataResultLessons> getLessons() {
+    public NetSingleCourseDataResultLessons[] getLessons() {
         return this.lessons;
     }
 
-    public void setLessons(ArrayList<NetSingleCourseDataResultLessons> lessons) {
+    public void setLessons(NetSingleCourseDataResultLessons[] lessons) {
         this.lessons = lessons;
     }
 

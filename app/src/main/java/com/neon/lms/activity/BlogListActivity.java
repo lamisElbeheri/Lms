@@ -29,7 +29,6 @@ import retrofit.client.Response;
 
 public class BlogListActivity extends BaseActivity implements View.OnClickListener {
 
-
     public static final String VALUE = "value";
     private BlogListModel model;
     private ActivityBloglistBinding binding;
