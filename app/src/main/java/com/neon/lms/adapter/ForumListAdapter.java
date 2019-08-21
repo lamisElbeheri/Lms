@@ -32,8 +32,6 @@ public class ForumListAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -53,8 +51,6 @@ public class ForumListAdapter extends RecyclerView.Adapter {
                 .into(h.binding.imgUser);
         h.binding.setForumModel(arrayList.get(position));
         h.binding.executePendingBindings();
-
-
     }
 
 
@@ -71,8 +67,6 @@ public class ForumListAdapter extends RecyclerView.Adapter {
             binding = DataBindingUtil.bind(itemView);
             binding.llMain.setOnClickListener(this);
             binding.delete.setOnClickListener(this);
-
-
         }
 
         @Override
@@ -85,8 +79,6 @@ public class ForumListAdapter extends RecyclerView.Adapter {
                     break;
 
             }
-
-
         }
     }
 

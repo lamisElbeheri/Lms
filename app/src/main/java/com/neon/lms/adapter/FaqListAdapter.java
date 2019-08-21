@@ -29,8 +29,6 @@ public class FaqListAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -68,12 +66,7 @@ public class FaqListAdapter extends RecyclerView.Adapter {
         public void onClick(View view) {
             switch (view.getId()) {
 
-
             }
-
-
         }
     }
-
-
 }

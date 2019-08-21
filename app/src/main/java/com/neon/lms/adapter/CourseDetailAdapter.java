@@ -30,8 +30,6 @@ public class CourseDetailAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -47,8 +45,6 @@ public class CourseDetailAdapter extends RecyclerView.Adapter {
         h.binding.title.setText(arrayList.get(position).getTitle());
         h.binding.sequnceNumber.setText(position + 1+"");
         h.binding.executePendingBindings();
-
-
     }
 
 
@@ -64,8 +60,6 @@ public class CourseDetailAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llMain.setOnClickListener(this);
-
-
         }
 
         @Override
@@ -74,12 +68,7 @@ public class CourseDetailAdapter extends RecyclerView.Adapter {
                 case R.id.llMain:
                     onItemClick.onClick(getLayoutPosition(), Constants.ROW_CLICK);
                     break;
-
             }
-
-
         }
     }
-
-
 }

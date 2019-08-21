@@ -9,14 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neon.lms.R;
-import com.neon.lms.adapter.InvoiceListAdapter;
 import com.neon.lms.adapter.WishListAdapter;
 import com.neon.lms.basecomponent.BaseFragment;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.FragmentInvoiceBinding;
 import com.neon.lms.databinding.FragmentWishlistBinding;
-import com.neon.lms.model.WishListModel;
-import com.neon.lms.model.InvoiceModel;
 import com.neon.lms.model.WishListModel;
 import com.neon.lms.model.WishModel;
 

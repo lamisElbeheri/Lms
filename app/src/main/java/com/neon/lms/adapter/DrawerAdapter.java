@@ -36,8 +36,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.context = context;
         this.drawerArrayList = drawerArrayList;
         this.itemClick = itemClick;
-
-
     }
 
     @Override
@@ -144,12 +142,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 case R.id.profileLayout:
                     itemClick.onClick(getAdapterPosition(), Constants.ROW_CLICK);
                     break;
-
-
-
             }
         }
     }
-
-
 }

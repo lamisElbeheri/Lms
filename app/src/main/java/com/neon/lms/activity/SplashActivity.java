@@ -36,6 +36,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initView() {
         callHandler(delay);
+        BaseAppClass.changeLang(SplashActivity.this, BaseAppClass.getPreferences().getUserLanguageCode());
+
     }
 
 

@@ -16,6 +16,7 @@ public class AppPreference {
     public static String noti = "noti";
     public static String isRatting = "isRatting";
     public static String tokenDate = "tokenDate";
+    public static String LANGUAGECODE = "languageCode";
 
     private static String INTRO_PREF = "Intro";
     public static String isIntroScreen = "isIntroScreen";
@@ -114,7 +115,13 @@ public class AppPreference {
     public static long getTokenDate(Context context) {
         return context.getSharedPreferences(SAVE_USER_DATA, Context.MODE_PRIVATE).getLong(tokenDate, 0);
     }
+    public void saveUserLanguageCode(int token) {
+        (context.getSharedPreferences(SAVE_USER_DATA, Context.MODE_PRIVATE)).edit().putInt(LANGUAGECODE, token).commit();
+    }
 
+    public int getUserLanguageCode() {
+        return context.getSharedPreferences(SAVE_USER_DATA, Context.MODE_PRIVATE).getInt(LANGUAGECODE, Constants.ENGLISH);
+    }
     /**
      * Clears the User's Data Stored in Preferences
      */

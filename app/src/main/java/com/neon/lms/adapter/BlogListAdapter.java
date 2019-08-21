@@ -32,8 +32,6 @@ public class BlogListAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -70,8 +68,6 @@ public class BlogListAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llGame.setOnClickListener(this);
-
-
         }
 
         @Override
@@ -82,10 +78,6 @@ public class BlogListAdapter extends RecyclerView.Adapter {
                     break;
 
             }
-
-
         }
     }
-
-
 }

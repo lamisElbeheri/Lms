@@ -127,6 +127,9 @@ public class Constants {
     public static final String CONTACT_US = "11";
 
 
+    public static final int ENGLISH = 1;
+    public static final int AREBIC = 2;
+
     public static final int CATEGORY_TYPE = 1;
     public static final int PRODUCT_TYPE = 2;
     public static final int UOM_TYPE = 3;

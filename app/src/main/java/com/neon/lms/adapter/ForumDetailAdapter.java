@@ -30,8 +30,6 @@ public class ForumDetailAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -45,8 +43,6 @@ public class ForumDetailAdapter extends RecyclerView.Adapter {
         final MyViewHolder h = ((MyViewHolder) vh);
 //        h.binding.setForumDetailModel(arrayList.get(position));
         h.binding.executePendingBindings();
-
-
     }
 
 
@@ -62,8 +58,6 @@ public class ForumDetailAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llMain.setOnClickListener(this);
-
-
         }
 
         @Override
@@ -72,12 +66,7 @@ public class ForumDetailAdapter extends RecyclerView.Adapter {
                 case R.id.llMain:
                     onItemClick.onClick(getLayoutPosition(), Constants.ROW_CLICK);
                     break;
-
             }
-
-
         }
     }
-
-
 }

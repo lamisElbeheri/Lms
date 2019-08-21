@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetSingleCourseData;
+import com.neon.lms.ResponceModel.NetSingleCourseDataResultCourse_timeline;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.CourseDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;

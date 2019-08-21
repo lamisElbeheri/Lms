@@ -66,6 +66,12 @@
                 android:id="@+id/player"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_160sdp" />
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/youtubeView"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="@dimen/_160sdp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"

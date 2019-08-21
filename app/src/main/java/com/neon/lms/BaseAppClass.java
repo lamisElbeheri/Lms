@@ -16,6 +16,7 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.AppPreference;
+import com.neon.lms.util.Constants;
 
 import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
@@ -85,14 +86,25 @@ public class BaseAppClass extends Application {
         }
     }
 
-
-    public static void changeLang(Context context, String lang) {
-        Locale myLocale = new Locale(lang);
+    public static void changeLang(Context context, int lang) {
+        Locale myLocale = new Locale(getCode(lang));
         Locale.setDefault(myLocale);
         Configuration config = new Configuration();
         config.locale = myLocale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
+
+    public static String getCode(int lang) {
+        String languageCode = null;
+        if (lang == Constants.ENGLISH)
+            languageCode = "en";
+        else if (lang == Constants.AREBIC)
+            languageCode = "ar";
+
+        return languageCode;
+
+    }
+
 
 
 }

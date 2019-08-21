@@ -32,8 +32,6 @@ public class CourseListAdapter extends RecyclerView.Adapter {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
-
-
     }
 
     @Override
@@ -52,8 +50,6 @@ public class CourseListAdapter extends RecyclerView.Adapter {
         h.binding.title.setText(arrayList.get(position).getTitle());
         h.binding.date.setText(AppConstant.getDate(arrayList.get(position).getCreated_at(), AppConstant.sdfFormateDate));
         h.binding.executePendingBindings();
-
-
     }
 
 
@@ -69,8 +65,6 @@ public class CourseListAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llGame.setOnClickListener(this);
-
-
         }
 
         @Override
@@ -81,10 +75,6 @@ public class CourseListAdapter extends RecyclerView.Adapter {
                     break;
 
             }
-
-
         }
     }
-
-
 }

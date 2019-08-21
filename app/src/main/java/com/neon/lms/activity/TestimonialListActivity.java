@@ -124,6 +124,7 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
 
 
     public void sponsorListApi() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 getTestimonialList("",
                         callback);
@@ -132,6 +133,7 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
             NetTestimonialData netTestimonialData = (NetTestimonialData) object;
             if (netTestimonialData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netTestimonialData.getResult().getData());
@@ -146,6 +148,8 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
+
 
         }
     };

@@ -227,7 +227,14 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 break;
 
             case Constants.LANGUAGE:
-                BaseAppClass.changeLang(MainActivity.this, "ar");
+                if (BaseAppClass.getPreferences().getUserLanguageCode() == Constants.ENGLISH) {
+                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.AREBIC);
+                } else {
+                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.ENGLISH);
+
+                }
+
+                BaseAppClass.changeLang(MainActivity.this, BaseAppClass.getPreferences().getUserLanguageCode());
                 recreate();
                 setSelection(position);
                 break;
