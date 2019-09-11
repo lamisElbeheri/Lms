@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,7 +19,9 @@ import android.widget.RelativeLayout;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetCurrancyData;
 import com.neon.lms.ResponceModel.NetSuccess;
+import com.neon.lms.ResponceModel.NetUserProfile;
 import com.neon.lms.adapter.DrawerAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -33,6 +36,7 @@ import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -87,6 +91,8 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
         setUpDrawer();
         openHome();
+        getUserData();
+        getCurrancyData();
 
 
     }
@@ -100,6 +106,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
             @Override
             public void onDrawerOpened(View view) {
+                updateUserImage();
             }
 
             @Override
@@ -142,17 +149,24 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     }
 
+    private void updateUserImage() {
+        if (drawerArrayList.size() > 0) {
+            drawerArrayList.set(0, new Drawer(BaseAppClass.getPreferences().getUserImage(), BaseAppClass.getPreferences().getUserName(), Constants.ACCOUNT, R.drawable.draw_contact, 0, DrawerAdapter.TYPE_HEADER, false, false));
+            binding.recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    }
 
     //set recyclerview of drawer
     private void setRecyclerView() {
         drawerArrayList = new ArrayList<>();
 
-        drawerArrayList.add(new Drawer("", "", Constants.ACCOUNT, R.drawable.draw_contact, R.drawable.draw_contact, DrawerAdapter.TYPE_HEADER, false, false));
+        drawerArrayList.add(0, new Drawer(BaseAppClass.getPreferences().getUserImage(), BaseAppClass.getPreferences().getUserName(), Constants.ACCOUNT, R.drawable.draw_contact, 0, DrawerAdapter.TYPE_HEADER, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.home), Constants.HOME, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.blog), Constants.BLOG, R.drawable.draw_blog, R.drawable.draw_blog, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.course), Constants.COURSE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.myPurchase), Constants.MYPURCHASE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
+//        drawerArrayList.add(new Drawer("", getString(R.string.cart), Constants.CART, R.drawable.ic_cart, R.drawable.ic_cart, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
@@ -216,6 +230,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 openForumList();
                 setSelection(position);
                 break;
+
 
             case Constants.CONTACT:
                 openContactUs();
@@ -298,6 +313,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         overridePendingTransition(R.anim.animation, R.anim.animation2);
 
     }
+
 
     private void openFaqList() {
         startActivity(new Intent(this, FaqListActivity.class));
@@ -508,8 +524,60 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         @Override
         public void failure(RetrofitError error) {
             dialog.hide();
+        }
+    };
+
+    public void getUserData() {
+        RetrofitClient.getInstance().getRestOkClient().
+                getProfileData("",
+                        userCallback);
+    }
+
+    private final retrofit.Callback userCallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            NetUserProfile netUserProfile = (NetUserProfile) object;
+            BaseAppClass.getPreferences().saveUserId(netUserProfile.getResult().getId() + "");
+            BaseAppClass.getPreferences().saveUserFirstName(netUserProfile.getResult().getFirst_name() + "");
+            BaseAppClass.getPreferences().saveUserLastName(netUserProfile.getResult().getLast_name() + "");
+            BaseAppClass.getPreferences().saveUserName(netUserProfile.getResult().getFull_name() + "");
+            BaseAppClass.getPreferences().savePincode(netUserProfile.getResult().getPincode() + "");
+            BaseAppClass.getPreferences().saveUserEmail(netUserProfile.getResult().getEmail() + "");
+            BaseAppClass.getPreferences().saveUserMobile(netUserProfile.getResult().getPhone() + "");
+            BaseAppClass.getPreferences().saveUserCity(netUserProfile.getResult().getCity() + "");
+            BaseAppClass.getPreferences().saveUserState(netUserProfile.getResult().getState() + "");
+            BaseAppClass.getPreferences().saveUserCountry(netUserProfile.getResult().getCountry() + "");
+            BaseAppClass.getPreferences().saveUserLine1(netUserProfile.getResult().getAddress() + "");
+            BaseAppClass.getPreferences().saveUserImage(netUserProfile.getResult().getImage() + "");
 
 
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
+        }
+    };
+
+    public void getCurrancyData() {
+        RetrofitClient.getInstance().getRestOkClient().
+                getCurrancydata("",
+                        currancyCallback);
+    }
+
+    private final retrofit.Callback currancyCallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            NetCurrancyData netUserProfile = (NetCurrancyData) object;
+            BaseAppClass.getPreferences().saveCurrancyCode(netUserProfile.getResult().getShort_code() + "");
+            BaseAppClass.getPreferences().saveCurrancy(netUserProfile.getResult().getSymbol() + "");
+
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
         }
     };
 }

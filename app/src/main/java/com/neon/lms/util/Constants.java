@@ -79,22 +79,7 @@ public class Constants {
     public static final int ROW_BTN_CLICK = 1;
     public static final int DELETE = 3;
     public static final int BACK = 4;
-    public static final int SETTING = 5;
-    public static final int PLUSH = 6;
-    public static final int MINUS = 7;
-    public static final int EDIT = 8;
-    public static final int MEASUREMENT = 10;
-    public static final int ADD_TO_CART = 11;
-    public static final int REPEAT = 12;
-    public static final int REPORT = 13;
-    public static final int PRIMARY = 14;
-    public static final int ROW_EDIT_CHANGE = 15;
-    public static final int ROW_LONG_CLICK = 16;
-    public static final int UNSELECTED = 17;
-    public static final int SELECTED = 18;
-    public static final int SPINNER_CLICK = 19;
-    public static final int UPDATE = 20;
-    public static final int CLEAR_FILTER = 21;
+    public static final int APPLY = 5;
 
     //Drawer Type
     public static final int ACCOUNT = 10;
@@ -110,6 +95,7 @@ public class Constants {
     public static final int LANGUAGE = 9;
     public static final int MYPURCHASE = 11;
     public static final int LOGOUT = 12;
+    public static final int CART = 13;
 
 
 
@@ -125,6 +111,7 @@ public class Constants {
     public static final String WHY_US = "9";
     public static final String SPONSORS = "10";
     public static final String CONTACT_US = "11";
+    public static final String MESSAGE = "12";
 
 
     public static final int ENGLISH = 1;

@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
 
-            <com.neon.lms.util.AdvancedTextView
+            <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,6 @@
                 android:layout_gravity="right"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
-                app:justifyText="true"
                 android:textStyle="bold" />
 
             <com.neon.lms.util.AdvancedTextView

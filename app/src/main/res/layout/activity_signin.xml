@@ -98,9 +98,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"
                     android:padding="@dimen/_8sdp">
 
                     <ImageView
@@ -113,12 +113,12 @@
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password_hint"
-                        android:textColor="@color/white"
-                        android:background="@null"
-                        android:inputType="textPassword"
                         android:layout_marginRight="@dimen/_8sdp"
                         android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:textSize="@dimen/_14sdp" />
 
@@ -296,6 +296,7 @@
                         android:background="@drawable/google" />
 
                     <ImageView
+                        android:id="@+id/loginTwitter"
                         android:layout_width="@dimen/_38sdp"
                         android:layout_height="@dimen/_38sdp"
                         android:layout_marginLeft="@dimen/_4sdp"

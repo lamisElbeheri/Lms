@@ -191,6 +191,4 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
 
         }
     }
-
-
 }

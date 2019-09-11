@@ -18,11 +18,13 @@ import com.neon.lms.adapter.CourseDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityCoursedetailBinding;
+import com.neon.lms.db.CartDbAdapter;
 import com.neon.lms.model.CourseDetailListModel;
 import com.neon.lms.model.CourseDetailModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +41,16 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     int freeCourse;
     String courseId;
 
+    CartDbAdapter dbAdapter;
 
     boolean isPurchase;
+    String title;
+    String img;
+    String des;
+    String  price;
+    String  courseType;
+    String cretaedAt;
+    String updatedAt;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,7 +95,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initViews() {
-
+        dbAdapter =new CartDbAdapter(CourseDetailActivity.this);
         freeCourse = getIntent().getIntExtra("isfree", 0);
         courseId = getIntent().getStringExtra("id");
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
@@ -153,18 +163,32 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 if (freeCourse == 1)
                     getFreeCourse();
                 else
-                    AddtocartApi();
+                    AddtocartLocaly();
                 break;
 
         }
     }
 
 
+
+    public void AddtocartLocaly() {
+        try {
+            dbAdapter.open();
+            dbAdapter.insUpdate(courseId,title,img,"",des,"course",
+                    price,"",cretaedAt,updatedAt);
+            dbAdapter.close();
+            Toast.makeText(CourseDetailActivity.this, "Item Add Into Cart", Toast.LENGTH_SHORT).show();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void AddtocartApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
                 addtocartApi("course",
-                        "10",
+                        courseId,
                         callback);
     }
 
@@ -233,9 +257,15 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
             if (netSingleCourseData.getStatus().equalsIgnoreCase("success")) {
                 binding.title.setText(netSingleCourseData.getResult().getCourse().getTitle());
                 binding.descriptiom.setText(netSingleCourseData.getResult().getCourse().getDescription());
-                binding.price.setText(netSingleCourseData.getResult().getCourse().getPrice().toString());
+                binding.price.setText(netSingleCourseData.getResult().getCourse().getPrice()+"");
 
                 isPurchase = netSingleCourseData.getResult().getPurchased_course();
+                title = netSingleCourseData.getResult().getCourse().getTitle();
+                img = netSingleCourseData.getResult().getCourse().getImage();
+                des = netSingleCourseData.getResult().getCourse().getDescription();
+                cretaedAt = netSingleCourseData.getResult().getCourse().getCreated_at();
+                updatedAt = netSingleCourseData.getResult().getCourse().getUpdated_at();
+                price = netSingleCourseData.getResult().getCourse().getPrice();
 
                 if (isPurchase)
                     binding.addTocart.setVisibility(View.GONE);
@@ -277,9 +307,9 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
-
-
     }
+
+
 
 
 }

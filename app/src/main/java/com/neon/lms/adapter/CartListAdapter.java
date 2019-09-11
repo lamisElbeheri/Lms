@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowCartItemBinding;
 import com.neon.lms.model.CartModel;
 import com.neon.lms.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,11 @@ public class CartListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
+        Picasso.with(context)
+                .load(arrayList.get(position).getImage())
+                .into(h.binding.cartImg);
+        h.binding.txtPrice.setText(BaseAppClass.getPreferences().getCurrancy() + " " + arrayList.get(position).getPrice());
+
         h.binding.setCartModel(arrayList.get(position));
         h.binding.executePendingBindings();
 

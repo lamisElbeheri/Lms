@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
@@ -15,6 +16,7 @@ import com.neon.lms.fragment.AccountFragment;
 import com.neon.lms.fragment.OrderListFragment;
 import com.neon.lms.fragment.WishListFragment;
 import com.neon.lms.model.AcountMainModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void setToolBar() {
-        binding.included.txtTitle.setText(getString(R.string.invoice));
+        binding.included.txtTitle.setText(getString(R.string.profile));
         binding.included.imgBack.setOnClickListener(this);
         binding.included.imgBack.setVisibility(View.VISIBLE);
     }
@@ -42,7 +44,17 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
     public void initViews() {
         setupViewPager(binding.viewpager);
         binding.tabs.setupWithViewPager(binding.viewpager);
+        setData();
 
+    }
+
+    private void setData() {
+//        Picasso.with(AccountActivity.this)
+//                .load(BaseAppClass.getPreferences().getUserImage())
+//                .placeholder(R.drawable.draw_contact)
+//                .into(binding.imgProfile);
+        binding.txtName.setText(BaseAppClass.getPreferences().getUserName());
+        binding.txtAddress.setText(BaseAppClass.getPreferences().getUserEmail());
 
     }
 
@@ -71,7 +83,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AccountFragment(), getString(R.string.mydetail));
         adapter.addFragment(new OrderListFragment(), getString(R.string.myorder));
-        adapter.addFragment(new WishListFragment(), getString(R.string.mywishlist));
+//        adapter.addFragment(new WishListFragment(), getString(R.string.mywishlist));
         viewPager.setAdapter(adapter);
     }
 

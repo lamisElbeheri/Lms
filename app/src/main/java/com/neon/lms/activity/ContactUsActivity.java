@@ -11,6 +11,8 @@ import com.neon.lms.databinding.ActivityContactusBinding;
 import com.neon.lms.model.ContactUsModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
 import com.neon.lms.util.Validator;
 
@@ -23,6 +25,7 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     public static final String TAG = "ContactUsActivity";
     private ContactUsModel model;
     private ActivityContactusBinding binding;
+    CustomProgressDialog dialog;
 
 
     @Override
@@ -43,6 +46,8 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initViews() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, ContactUsActivity.this).createProgressBar();
+
         binding.txtSubmit.setOnClickListener(this);
         binding.included.imgBack.setOnClickListener(this);
 
@@ -91,6 +96,8 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     }
 
     public void feedbackApicall() {
+        dialog.setCancelable(false);
+        dialog.show();
         RetrofitClient.getInstance().getRestOkClient().
                 getContactUs(
                         binding.edtName.getText().toString(),
@@ -104,6 +111,7 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            dialog.hide();
             NetSuccess netSuccess = (NetSuccess) object;
 
             if (netSuccess.getStatus().equalsIgnoreCase("success")) {

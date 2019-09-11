@@ -6,7 +6,7 @@ public class NetSingleCourseDataResultCourse {
     private String description;
     private String created_at;
     private String title;
-    private Object meta_keywords;
+    private String meta_keywords;
     private String course_image;
     private int category_id;
     private String updated_at;
@@ -20,10 +20,10 @@ public class NetSingleCourseDataResultCourse {
     private String start_date;
     private String image;
     private NetSingleCourseDataResultCoursePublished_lessons[] published_lessons;
-    private Object meta_title;
+    private String meta_title;
     private int published;
-    private Object deleted_at;
-    private Object meta_description;
+    private String deleted_at;
+    private String meta_description;
     private NetSingleCourseDataResultCourseCourse_timeline[] course_timeline;
     private NetSingleCourseDataResultCourseCategory category;
 
@@ -67,11 +67,11 @@ public class NetSingleCourseDataResultCourse {
         this.title = title;
     }
 
-    public Object getMeta_keywords() {
+    public String getMeta_keywords() {
         return this.meta_keywords;
     }
 
-    public void setMeta_keywords(Object meta_keywords) {
+    public void setMeta_keywords(String meta_keywords) {
         this.meta_keywords = meta_keywords;
     }
 
@@ -99,7 +99,7 @@ public class NetSingleCourseDataResultCourse {
         this.updated_at = updated_at;
     }
 
-    public String getPrice() {
+    public String  getPrice() {
         return this.price;
     }
 
@@ -179,11 +179,11 @@ public class NetSingleCourseDataResultCourse {
         this.published_lessons = published_lessons;
     }
 
-    public Object getMeta_title() {
+    public String getMeta_title() {
         return this.meta_title;
     }
 
-    public void setMeta_title(Object meta_title) {
+    public void setMeta_title(String meta_title) {
         this.meta_title = meta_title;
     }
 
@@ -195,19 +195,19 @@ public class NetSingleCourseDataResultCourse {
         this.published = published;
     }
 
-    public Object getDeleted_at() {
+    public String getDeleted_at() {
         return this.deleted_at;
     }
 
-    public void setDeleted_at(Object deleted_at) {
+    public void setDeleted_at(String deleted_at) {
         this.deleted_at = deleted_at;
     }
 
-    public Object getMeta_description() {
+    public String getMeta_description() {
         return this.meta_description;
     }
 
-    public void setMeta_description(Object meta_description) {
+    public void setMeta_description(String meta_description) {
         this.meta_description = meta_description;
     }
 

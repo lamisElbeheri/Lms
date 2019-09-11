@@ -1,5 +1,13 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">Lms</string>
+
+
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">LHsc14ugIKld1D1RYKxDT8ys1</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">CCW189NHTIZUrJzGzAwswSH1eMyqOSndf5k2tL72VSAsjc2oB6</string>
+    <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">426476001491167</string>
+    <string name="fb_login_protocol_scheme">fb426476001491167</string>
+
     <string name="loginHear">Hello! Login Hear</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
@@ -82,7 +90,7 @@
     <!--shop and cart-->
     <string name="addtocart">Add to cart</string>
     <string name="shop">Shop</string>
-    <string name="cart">cart</string>
+    <string name="cart">Cart</string>
 
     <!--Message-->
     <string name="message">Message</string>
@@ -104,6 +112,7 @@
     <!--checkout-->
 
     <string name="checkout">Checkout</string>
+    <string name="confirmOrder">Confirm Order</string>
     <string name="address">Address</string>
     <string name="shiping">Shipping</string>
     <string name="payment">Payment</string>
@@ -112,14 +121,8 @@
 
     <string name="search_no_internet_connection">No Internet Connection</string>
     <string name="somthingwrong">Somthing Wrong Please Try Again</string>
-    <string name="signcancel">Sign in cancel</string>
-
-
-
-
-
-    <string name="facebook_app_id">426476001491167</string>
-    <string name="fb_login_protocol_scheme">fb426476001491167</string>
+    <string name="checkEmail">Please Check Your Email To Reset Password</string>
+    <string name="signcancel">Sign in cancle</string>
 
     <string-array name="courseSort">
         <item>None</item>
@@ -153,7 +156,7 @@
     <string name="addName">Please Enter Name</string>
     <string name="addPhone">Please Enter Number</string>
 
-    <string name="offer">Offerr</string>
+    <string name="offer">Offer</string>
     <string name="coupenuse">Usage : Per User </string>
     <string name="minAmount">Minimum Order Amount </string>
     <string name="enterFname">Please Enter First Name</string>
@@ -173,6 +176,17 @@
 
     <string name="detail">detail</string>
     <string name="id">id</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="shipping">Shipping</string>
+    <string name="totalAmount">Total</string>
+    <string name="Tax">Tax</string>
+    <string name="enterPromo">Enter Promo Code</string>
+    <string name="promoMessage">Please Enter Promo Code</string>
+    <string name="promo_code_que">Promo Code</string>
+    <string name="apply">Apply</string>
+    <string name="profile">Profile</string>
+    <string name="offlinepayment">Offline Payment</string>
+    <string name="selectpaymant">Select Payment Method</string>
 
 
 </resources>

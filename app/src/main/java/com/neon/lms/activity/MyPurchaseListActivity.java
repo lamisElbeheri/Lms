@@ -253,9 +253,4 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
 
         }
     }
-
-
-
-
-
 }

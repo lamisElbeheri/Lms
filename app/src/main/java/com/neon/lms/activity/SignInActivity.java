@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -34,16 +35,29 @@ import com.neon.lms.callBack.TwoButtonListener;
 import com.neon.lms.databinding.ActivitySigninBinding;
 import com.neon.lms.model.SignInModel;
 import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AccessTokenTask;
 import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
 import com.neon.lms.util.Validation;
+import com.squareup.picasso.Picasso;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterAuthClient;
+import com.twitter.sdk.android.core.models.User;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit2.Call;
 
 public class SignInActivity extends BaseActivity implements SignInModel.BtnClick, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private SignInModel loginModel;
@@ -53,15 +67,22 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     private GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 1;
 
+    private static SignInActivity instance;
+
+    public static SignInActivity getInstance() {
+        return instance;
+    }
+
 
     private static final String EMAIL = "email";
     private static final String USER_POSTS = "user_posts";
     private static final String AUTH_TYPE = "rerequest";
 
     private CallbackManager mCallbackManager;
+    private TwitterAuthClient client;
 
     boolean isShow;
-    CustomProgressDialog dialog ;
+    CustomProgressDialog dialog;
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -72,6 +93,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
+
 
     }
 
@@ -88,17 +111,25 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     @Override
     public void initViews() {
-        dialog= new CustomProgressDialog(Constants.PROGRESS_IMAGE, SignInActivity.this).createProgressBar();
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, SignInActivity.this).createProgressBar();
 
         mCallbackManager = CallbackManager.Factory.create();
+        client = new TwitterAuthClient();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        String serverClientId = getResources().getString(R.string.google_server_client_id);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestId()
+                .requestIdToken(serverClientId)
+                .requestServerAuthCode(serverClientId)
                 .build();
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
 
         binding.etPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -114,6 +145,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         binding.btnSignUp.setOnClickListener(this);
         binding.forgot.setOnClickListener(this);
         binding.loginGoogle.setOnClickListener(this);
+        binding.loginTwitter.setOnClickListener(this);
         binding.demoFb.setOnClickListener(this);
 // Set the initial permissions to request from the user while logging in
         binding.loginButton.setReadPermissions(Arrays.asList(EMAIL, USER_POSTS));
@@ -124,14 +156,14 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         binding.loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                setResult(RESULT_OK);
-                finish();
+
+                AccessToken accessToken = loginResult.getAccessToken();
+                socialLogin("facebook", accessToken.getToken());
             }
 
             @Override
             public void onCancel() {
                 setResult(RESULT_CANCELED);
-                finish();
             }
 
             @Override
@@ -170,12 +202,21 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
             case R.id.btnSignUp:
                 gotSignUp();
                 break;
+            case R.id.loginTwitter:
+                customLoginTwitter();
+                break;
 
             case R.id.showPassword:
-                if (isShow)
+                if (isShow) {
+                    isShow = false;
                     binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                else
+                    binding.etPassword.setSelection(binding.etPassword.getText().length());
+
+                } else {
+                    isShow = true;
                     binding.etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    binding.etPassword.setSelection(binding.etPassword.getText().length());
+                }
                 break;
 
             case R.id.loginGoogle:
@@ -230,7 +271,14 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
             Log.e("data", data.toString());
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-            GoogleSignInAccount account = result.getSignInAccount();
+
+        } else if (requestCode == 140) {
+            Log.e("data", data.toString());
+            client.getRequestCode();
+            if (client != null)
+                client.onActivityResult(requestCode, resultCode, data);
+
+            fetchTwitterEmail(getTwitterSession());
 
         } else {
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
@@ -240,16 +288,16 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
-            gotoProfile(result.getSignInAccount().getIdToken());
+            final GoogleSignInAccount account = result.getSignInAccount();
+            new AccessTokenTask(account).execute();
+
         } else {
             Toast.makeText(getApplicationContext(), getString(R.string.signcancel), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void gotoProfile(String token) {
+    public void gotoProfile(String token) {
         socialLogin("google", token);
-        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-        startActivity(intent);
     }
 
     private void gotSignUp() {
@@ -267,14 +315,6 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString(getString(R.string.email_hint), loginModel.getEmail());
         savedInstanceState.putString(getString(R.string.password_hint), loginModel.getPass());
-    }
-
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-//        loginModel.setEmail(savedInstanceState.getString(getString(R.string.email_hint)));
-//        loginModel.setPass(savedInstanceState.getString(getString(R.string.password_hint)));
     }
 
 
@@ -332,6 +372,20 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                         token,
 
                         callback);
+    }  //     Login Api Codeall
+    public void twitterLogin(String provider, String token, String secret) {
+        dialog.setCancelable(false);
+        dialog.show();
+        RetrofitClient.getInstance().getRestOkClient().
+                twitterLogin("social",
+                        Constants.CLIENT_ID,
+                        Constants.CLIENT_SECRET,
+                        "*",
+                        provider,
+                        token,
+                        secret,
+
+                        callback);
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
@@ -374,6 +428,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
             dialog.hide();
             NetForgot netForgot = (NetForgot) object;
             if (netForgot != null) {
+                Toast.makeText(SignInActivity.this, getString(R.string.checkEmail), Toast.LENGTH_SHORT).show();
 
             } else {
                 Toast.makeText(SignInActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();
@@ -388,6 +443,71 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
         }
     };
+
+
+    /**
+     * method to do Default Twitter Login
+     */
+
+    public void customLoginTwitter() {
+        //check if user is already authenticated or not
+        if (getTwitterSession() == null) {
+
+            //if user is not authenticated start authenticating
+            client.authorize(this, new Callback<TwitterSession>() {
+                @Override
+                public void success(Result<TwitterSession> result) {
+
+                    // Do something with result, which provides a TwitterSession for making API calls
+                    TwitterSession twitterSession = result.data;
+                    fetchTwitterEmail(twitterSession);
+                }
+
+                @Override
+                public void failure(TwitterException e) {
+                    // Do something on failure
+                    Toast.makeText(SignInActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            //if user is already authenticated direct call fetch twitter email api
+            Toast.makeText(this, "User already authenticated", Toast.LENGTH_SHORT).show();
+            fetchTwitterEmail(getTwitterSession());
+        }
+    }
+
+    /**
+     * get authenticates user session
+     *
+     * @return twitter session
+     */
+    private TwitterSession getTwitterSession() {
+        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+
+        return session;
+    }
+
+    /**
+     * Before using this feature, ensure that “Request email addresses from users” is checked for your Twitter app.
+     *
+     * @param twitterSession user logged in twitter session
+     */
+    public void fetchTwitterEmail(final TwitterSession twitterSession) {
+        client.requestEmail(twitterSession, new Callback<String>() {
+            @Override
+            public void success(Result<String> result) {
+                //here it will give u only email and rest of other information u can get from TwitterSession
+                Log.e("User Id : ", twitterSession.getUserName() + "");
+                Log.e("data", "User Id : " + twitterSession.getUserId() + "\nScreen Name : " + twitterSession.getUserName() + "\nEmail Id : " + result.data);
+                twitterLogin("twitter", twitterSession.getAuthToken().token,twitterSession.getAuthToken().secret);
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                Toast.makeText(SignInActivity.this, "Failed to authenticate. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }

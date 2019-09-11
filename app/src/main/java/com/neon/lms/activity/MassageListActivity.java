@@ -200,6 +200,4 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
         }
     }
-
-
 }

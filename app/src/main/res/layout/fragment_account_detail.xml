@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -41,6 +42,7 @@
                         android:background="@drawable/acc_user" />
 
                     <EditText
+                        android:id="@+id/txtFname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -67,6 +69,7 @@
                         android:background="@drawable/acc_user" />
 
                     <EditText
+                        android:id="@+id/txtLname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -95,6 +98,7 @@
                         android:background="@drawable/acc_phone" />
 
                     <EditText
+                        android:id="@+id/txtPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -102,7 +106,6 @@
                         android:inputType="number"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-
                         android:textSize="@dimen/_12sdp" />
 
                 </LinearLayout>
@@ -122,15 +125,14 @@
                         android:background="@drawable/acc_email" />
 
                     <EditText
+                        android:id="@+id/txtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="peekandro@gmail.com"
                         android:inputType="textEmailAddress"
-
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-
                         android:textSize="@dimen/_12sdp" />
 
                 </LinearLayout>
@@ -150,11 +152,11 @@
                         android:background="@drawable/acc_home" />
 
                     <EditText
+                        android:id="@+id/line1Address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="204/C, Queen's Strret 6 , flr 4"
-                        android:inputType="textEmailAddress"
 
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
@@ -178,11 +180,12 @@
                         android:background="@drawable/acc_location" />
 
                     <EditText
+                        android:id="@+id/txtCity"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Melbourne"
-                        android:inputType="textEmailAddress"
                         android:textColor="@color/white"
 
                         android:textColorHint="@color/white"
@@ -206,11 +209,11 @@
                         android:background="@drawable/acc_state" />
 
                     <EditText
+                        android:id="@+id/txtState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Queensland"
-                        android:inputType="textEmailAddress"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
 
@@ -233,11 +236,12 @@
                         android:background="@drawable/acc_pincode" />
 
                     <EditText
+                        android:id="@+id/txtPin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="083849"
-                        android:inputType="textEmailAddress"
+                        android:inputType="number"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
 
@@ -260,11 +264,11 @@
                         android:background="@drawable/acc_country" />
 
                     <EditText
+                        android:id="@+id/txtCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Australia"
-                        android:inputType="textEmailAddress"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:textSize="@dimen/_12sdp" />

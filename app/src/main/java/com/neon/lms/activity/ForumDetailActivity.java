@@ -127,9 +127,4 @@ public class ForumDetailActivity extends BaseActivity implements View.OnClickLis
 
         }
     }
-
-
-
-
-
 }

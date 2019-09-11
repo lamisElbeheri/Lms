@@ -51,7 +51,7 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void setToolBar() {
         if (binding.included.toolbar != null) {
-            binding.included.txtTitle.setText(getString(R.string.blog));
+            binding.included.txtTitle.setText(getString(R.string.offer));
 
             binding.included.toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(binding.included.toolbar);

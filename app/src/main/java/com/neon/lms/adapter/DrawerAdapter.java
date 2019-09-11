@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.activity.AccountActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.DrawerRowBinding;
 import com.neon.lms.databinding.DrawerTitleBinding;
 import com.neon.lms.databinding.RowDrawerImageBinding;
 import com.neon.lms.model.Drawer;
 import com.neon.lms.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -67,7 +70,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (vh instanceof MyViewTitle) {
             ((MyViewTitle) vh).binding.txtName.setText(drawerArrayList.get(position).getName());
         } else if (vh instanceof MyHeaderView) {
-            ((MyHeaderView) vh).binding.imgProfile.setImageResource(drawerArrayList.get(position).getDrawableID());
+            ((MyHeaderView) vh).binding.txtName.setText(drawerArrayList.get(position).getName());
+            ((MyHeaderView) vh).binding.txtAddress.setText(BaseAppClass.getPreferences().getUserEmail());
+
+//            Picasso.with(context)
+//                    .load(BaseAppClass.getPreferences().getUserImage())
+//                    .placeholder(R.drawable.draw_contact)
+//                    .into(((MyHeaderView) vh).binding.imgProfile);
 
         }
     }

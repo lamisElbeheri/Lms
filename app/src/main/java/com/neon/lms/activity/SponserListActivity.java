@@ -199,10 +199,4 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
 
         }
     }
-
-
-
-
-
-
 }

@@ -27,7 +27,7 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class NewsListActivity extends BaseActivity implements View.OnClickListener {
+public class  NewsListActivity extends BaseActivity implements View.OnClickListener {
 
 
     public static final String VALUE = "value";
@@ -207,9 +207,4 @@ public class NewsListActivity extends BaseActivity implements View.OnClickListen
 
         }
     }
-
-
-
-
-
 }

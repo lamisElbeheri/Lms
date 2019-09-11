@@ -55,7 +55,6 @@ public class ServiceGenerator {
         okHttpClient.setReadTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(Constants.CONNECTION_TIMEOUT, TimeUnit.SECONDS);
 
-        // set endpoint url and use OkHTTP as HTTP client
         RestAdapter.Builder builder = new RestAdapter.Builder()
                 .setEndpoint(Constants.BASE_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
@@ -64,7 +63,6 @@ public class ServiceGenerator {
             builder.setRequestInterceptor(new RequestInterceptor() {
                 @Override
                 public void intercept(RequestFacade request) {
-                    // create Base64 encodet string
                     request.addHeader("Accept", "application/json");
                     request.addHeader("Authorization", "Bearer " + BaseAppClass.getPreferences().getToken());
                 }

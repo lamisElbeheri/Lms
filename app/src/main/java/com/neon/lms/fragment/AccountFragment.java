@@ -35,7 +35,6 @@ public class AccountFragment extends BaseFragment {
     private FragmentAccountDetailBinding binding;
 
 
-
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -52,7 +51,7 @@ public class AccountFragment extends BaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account_detail, container, false);
         model = new AccountDetailModel();
         binding.setAccountDetailModel(model);
-        
+
         initView();
 
 
@@ -61,12 +60,20 @@ public class AccountFragment extends BaseFragment {
     }
 
     private void initView() {
-
+        setUserData();
     }
 
-
-
-
+    private void setUserData() {
+        binding.txtFname.setText(BaseAppClass.getPreferences().getUserFirstName());
+        binding.txtLname.setText(BaseAppClass.getPreferences().getUserName());
+        binding.txtPhone.setText(BaseAppClass.getPreferences().getUserMobile());
+        binding.txtEmail.setText(BaseAppClass.getPreferences().getUserEmail());
+        binding.line1Address.setText(BaseAppClass.getPreferences().getUserLine1());
+        binding.txtCity.setText(BaseAppClass.getPreferences().getUserCity());
+        binding.txtState.setText(BaseAppClass.getPreferences().getUserState());
+        binding.txtCountry.setText(BaseAppClass.getPreferences().getUserCountry());
+        binding.txtPin.setText(BaseAppClass.getPreferences().getPincode());
+    }
 
 
 }

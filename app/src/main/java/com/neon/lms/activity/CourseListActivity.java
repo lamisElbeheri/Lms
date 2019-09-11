@@ -18,11 +18,13 @@ import com.neon.lms.adapter.CourseListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityCourselistBinding;
+import com.neon.lms.db.CartDbAdapter;
 import com.neon.lms.model.CourseListModel;
 import com.neon.lms.model.CourseModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     private CourseListModel model;
     private ActivityCourselistBinding binding;
 
+    CartDbAdapter dbAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,14 +54,22 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setCounts();
+    }
+
+    @Override
     public void setToolBar() {
         if (binding.included.toolbar != null) {
             binding.included.txtTitle.setText(getString(R.string.course));
             binding.included.toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(binding.included.toolbar);
             binding.included.imgBack.setVisibility(View.VISIBLE);
+            binding.included.frameCart.setVisibility(View.VISIBLE);
             binding.included.imgSearch.setVisibility(View.GONE);
             binding.included.imgBack.setOnClickListener(this);
+            binding.included.frameCart.setOnClickListener(this);
 
         }
     }
@@ -77,7 +88,8 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initViews() {
-        if (getIntent().getStringExtra(VALUE).equalsIgnoreCase("trending")){
+        dbAdapter = new CartDbAdapter((CourseListActivity.this));
+        if (getIntent().getStringExtra(VALUE).equalsIgnoreCase("trending")) {
             binding.llFilter.setVisibility(View.GONE);
         }
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
@@ -92,11 +104,11 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position==1)
+                if (position == 1)
                     courseApi("popular");
-                else if (position==2)
+                else if (position == 2)
                     courseApi("trending");
-                else if (position==3)
+                else if (position == 3)
                     courseApi("featured");
                 else
                     courseApi("");
@@ -113,8 +125,6 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     }
 
 
-
-
     /*
      *  initialize Reacycler view
      */
@@ -125,12 +135,11 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(CourseListActivity.this,CourseDetailActivity.class);
-                intent.putExtra("isfree",model.getArrayList().get(position).getFree());
-                intent.putExtra("id",model.getArrayList().get(position).getId()+"");
+                Intent intent = new Intent(CourseListActivity.this, CourseDetailActivity.class);
+                intent.putExtra("isfree", model.getArrayList().get(position).getFree());
+                intent.putExtra("id", model.getArrayList().get(position).getId() + "");
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
-
 
 
             }
@@ -144,7 +153,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                         + ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition())
                         >= recyclerView.getLayoutManager().getItemCount()) {
 
-                        if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
+                    if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
 
                     }
                 }
@@ -243,11 +252,39 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                 closeActivity();
                 break;
 
+            case R.id.frameCart:
+                startActivity(new Intent(this, CartListActivity.class));
+                overridePendingTransition(R.anim.animation, R.anim.animation2);
+
+
+                break;
+
         }
     }
 
+    /*set cart count*/
+    private void setCounts() {
+        int cartCount = 0;
 
+        try {
+            dbAdapter.open();
+            cartCount = dbAdapter.getCount();
+            dbAdapter.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (binding.included.layoutCartCount != null) {
+                if (cartCount == 0) {
+                    binding.included.layoutCartCount.setVisibility(View.INVISIBLE);
+                } else {
+                    binding.included.layoutCartCount.setVisibility(View.VISIBLE);
+                    binding.included.txtCartCount.setText(String.valueOf(cartCount));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
-
+    }
 }

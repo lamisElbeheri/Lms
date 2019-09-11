@@ -5,6 +5,7 @@ import com.neon.lms.ResponceModel.NetBlogData;
 import com.neon.lms.ResponceModel.NetBlogDetailData;
 import com.neon.lms.ResponceModel.NetCartList;
 import com.neon.lms.ResponceModel.NetCourseData;
+import com.neon.lms.ResponceModel.NetCurrancyData;
 import com.neon.lms.ResponceModel.NetFaqData;
 import com.neon.lms.ResponceModel.NetForgot;
 import com.neon.lms.ResponceModel.NetForumData;
@@ -20,6 +21,7 @@ import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.ResponceModel.NetTeacherData;
 import com.neon.lms.ResponceModel.NetTeacherDetailData;
 import com.neon.lms.ResponceModel.NetTestimonialData;
+import com.neon.lms.ResponceModel.NetUserProfile;
 import com.neon.lms.ResponceModel.NetWhyusData;
 import com.neon.lms.ResponceModel.TokenModel;
 import com.neon.lms.util.Constants;
@@ -50,6 +52,16 @@ public interface RestClient {
                      @Field("scope") String scope,
                      @Field("provider") String provider,
                      @Field("access_token") String access_token,
+                     Callback<TokenModel> callback);
+    @FormUrlEncoded
+    @POST("/oauth/token")
+    void twitterLogin(@Field("grant_type") String grant_type,
+                     @Field("client_id") String client_id,
+                     @Field("client_secret") String client_secret,
+                     @Field("scope") String scope,
+                     @Field("provider") String provider,
+                     @Field("access_token") String access_token,
+                      @Field("secret") String secret,
                      Callback<TokenModel> callback);
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/auth/logout")
@@ -124,6 +136,12 @@ public interface RestClient {
     void getCartList(
             @Field("type") String type,
             Callback<NetCartList> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/clear-cart")
+    void clearCart(
+            @Field("type") String type,
+            Callback<NetSuccess> callback);
 
 
     @FormUrlEncoded
@@ -245,8 +263,27 @@ public interface RestClient {
             Callback<NetSignUpData> callback);
 
     @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/my-account")
+    void getProfileData(
+            @Field("type") String type,
+            Callback<NetUserProfile> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/configs")
+    void getCurrancydata(
+            @Field("type") String type,
+            Callback<NetCurrancyData> callback);
+
+    @FormUrlEncoded
     @POST(Constants.API_VERSION + "/offers")
     void getOfferList(
+            @Field("type") String type,
+            Callback<NetOfferData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/apply-coupon")
+    void applayPromo(
             @Field("type") String type,
             Callback<NetOfferData> callback);
 

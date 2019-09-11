@@ -67,6 +67,7 @@ public class OfferListAdapter extends RecyclerView.Adapter {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
             binding.llMain.setOnClickListener(this);
+            binding.aplay.setOnClickListener(this);
 
 
         }
@@ -76,6 +77,9 @@ public class OfferListAdapter extends RecyclerView.Adapter {
             switch (view.getId()) {
                 case R.id.llMain:
                     onItemClick.onClick(getLayoutPosition(), Constants.ROW_CLICK);
+                    break;
+                case R.id.aplay:
+                    onItemClick.onClick(getLayoutPosition(), Constants.APPLY);
                     break;
 
             }

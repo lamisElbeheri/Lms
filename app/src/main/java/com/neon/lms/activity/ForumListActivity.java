@@ -108,6 +108,8 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
                         break;
                     case Constants.DELETE:
                         deleteForum(model.getArrayList().get(position).getId() + "");
+                        model.getArrayList().remove(position);
+                        binding.recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                 }
 
@@ -260,6 +262,4 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
         }
     }
-
-
 }

@@ -214,6 +214,4 @@ public class BlogListActivity extends BaseActivity implements View.OnClickListen
 
         }
     }
-
-
 }

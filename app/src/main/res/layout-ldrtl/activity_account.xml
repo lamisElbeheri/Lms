@@ -36,7 +36,7 @@
                 android:padding="@dimen/_8sdp">
 
 
-                <ImageView
+                <com.neon.lms.util.CircleImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"

@@ -32,14 +32,16 @@
             android:orientation="vertical">
 
 
-            <com.neon.lms.util.AdvancedTextView
+            <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="@dimen/_4sdp"
                 android:padding="@dimen/_6sdp"
+                android:gravity="left"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
+                android:text="@string/about"
                 app:justifyText="true"
                 android:textStyle="bold" />
 

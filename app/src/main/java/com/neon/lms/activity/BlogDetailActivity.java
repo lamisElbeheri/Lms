@@ -151,9 +151,6 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
 
                 }
                 break;
-
         }
     }
-
-
 }

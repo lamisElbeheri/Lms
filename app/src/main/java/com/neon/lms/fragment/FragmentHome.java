@@ -99,8 +99,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                                 openCourseTypeList("trending");
                                 break;
                             case Constants.FEATURED_COURSE:
-//                                openCourseTypeList("featured");
-                                openMessageListList();
+                                openCourseTypeList("featured");
                                 break;
                             case Constants.TESTIMONIAL:
                                 openTestimonialList();
@@ -112,8 +111,8 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                                 openFaqList();
                                 break;
 
-                            case Constants.BROWSE_COURSE:
-                                openInvoiceListList();
+                            case Constants.MESSAGE:
+                                openMessageListList();
                                 break;
                             case Constants.WHY_US:
                                 openWhyusList();
@@ -149,12 +148,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
-    private void openCartList() {
-        startActivity(new Intent(getContext(), CartListActivity.class));
-        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
 
-
-    }
 
     private void openTestimonialList() {
         startActivity(new Intent(getContext(), TestimonialListActivity.class));
@@ -205,7 +199,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 getString(R.string.our),
                 getString(R.string.our),
                 getString(R.string.asked),
-                getString(R.string.browse),
+                getString(R.string.message),
                 getString(R.string.why),
                 getString(R.string.our),
                 getString(R.string.contect),
@@ -219,7 +213,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                  Constants.TESTIMONIAL,
                  Constants.TEACHER,
                  Constants.FAQ_QUESTION,
-                 Constants.BROWSE_COURSE,
+                 Constants.MESSAGE,
                  Constants.WHY_US,
                  Constants.SPONSORS,
                  Constants.CONTACT_US,
@@ -231,7 +225,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 getString(R.string.testimonial),
                 getString(R.string.teacher),
                 getString(R.string.question),
-                getString(R.string.courses),
+                "",
                 getString(R.string.us),
                 getString(R.string.sponser),
                 getString(R.string.us),
@@ -245,7 +239,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
                 R.drawable.conversation,
                 R.drawable.knowledge,
                 R.drawable.information,
-                R.drawable.knowledge,
+                R.drawable.testimonial,
                 R.drawable.hand,
                 R.drawable.contact,
 

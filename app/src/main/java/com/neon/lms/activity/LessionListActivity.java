@@ -333,9 +333,5 @@ public class LessionListActivity extends YouTubeBaseActivity implements
         @Override
         public void onVideoStarted() {
         }
-
-
     };
-
-
 }
