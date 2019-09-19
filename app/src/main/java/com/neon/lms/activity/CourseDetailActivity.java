@@ -47,8 +47,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     String title;
     String img;
     String des;
-    String  price;
-    String  courseType;
+    String price;
+    String courseType;
     String cretaedAt;
     String updatedAt;
 
@@ -65,7 +65,6 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         binding.setCourseDetailListModel(model);
 
     }
-
 
 
     @Override
@@ -95,7 +94,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initViews() {
-        dbAdapter =new CartDbAdapter(CourseDetailActivity.this);
+        dbAdapter = new CartDbAdapter(CourseDetailActivity.this);
         freeCourse = getIntent().getIntExtra("isfree", 0);
         courseId = getIntent().getStringExtra("id");
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
@@ -119,10 +118,15 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(CourseDetailActivity.this, LessionListActivity.class);
-                intent.putExtra(LessionListActivity.LESSION_ID, model.getArrayList().get(position).getId() + "  ");
-                startActivity(intent);
-                overridePendingTransition(R.anim.animation, R.anim.animation2);
+                if (isPurchase) {
+                    Intent intent = new Intent(CourseDetailActivity.this, LessionListActivity.class);
+                    intent.putExtra(LessionListActivity.LESSION_ID, model.getArrayList().get(position).getId() + "  ");
+                    intent.putParcelableArrayListExtra(LessionListActivity.LESSIONTIMELINE, model.getArrayList());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.animation, R.anim.animation2);
+                } else {
+                    Toast.makeText(CourseDetailActivity.this, getString(R.string.pleaseByeCourse), Toast.LENGTH_SHORT).show();
+                }
 
 
             }
@@ -170,12 +174,11 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-
     public void AddtocartLocaly() {
         try {
             dbAdapter.open();
-            dbAdapter.insUpdate(courseId,title,img,"",des,"course",
-                    price,"",cretaedAt,updatedAt);
+            dbAdapter.insUpdate(courseId, title, img, "", des, "course",
+                    price, "", cretaedAt, updatedAt);
             dbAdapter.close();
             Toast.makeText(CourseDetailActivity.this, "Item Add Into Cart", Toast.LENGTH_SHORT).show();
 
@@ -184,6 +187,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         }
 
     }
+
     public void AddtocartApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getInstance().getRestOkClient().
@@ -257,7 +261,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
             if (netSingleCourseData.getStatus().equalsIgnoreCase("success")) {
                 binding.title.setText(netSingleCourseData.getResult().getCourse().getTitle());
                 binding.descriptiom.setText(netSingleCourseData.getResult().getCourse().getDescription());
-                binding.price.setText(netSingleCourseData.getResult().getCourse().getPrice()+"");
+                binding.price.setText(netSingleCourseData.getResult().getCourse().getPrice() + "");
 
                 isPurchase = netSingleCourseData.getResult().getPurchased_course();
                 title = netSingleCourseData.getResult().getCourse().getTitle();
@@ -308,8 +312,6 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
     }
-
-
 
 
 }

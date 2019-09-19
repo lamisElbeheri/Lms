@@ -1,3 +1,4 @@
+/*
 package com.neon.lms.adapter;
 
 import android.content.Context;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.RowMessagedetailItemBinding;
+import com.neon.lms.databinding.RowMsgdetailItemBinding;
 import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_messagedetail_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_msgdetail_item, parent, false));
     }
 
     @Override
@@ -57,7 +58,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private RowMessagedetailItemBinding binding;
+        private RowMsgdetailItemBinding binding;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -82,3 +83,4 @@ public class MessageDetailAdapter extends RecyclerView.Adapter {
 
 
 }
+*/

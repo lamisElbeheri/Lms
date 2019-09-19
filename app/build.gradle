@@ -18,10 +18,9 @@ repositories {
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.neon.lms"
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -34,11 +33,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//
+//    dexOptions {
+//        incremental = true;
+//        preDexLibraries = false
+//        javaMaxHeapSize "2g"
+//    }
     dataBinding {
         enabled = true
     }
     compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'
+            }
+        }
     }
 }
 dependencies {
@@ -66,11 +82,12 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.8.4'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.2'
 
     implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
-//    implementation 'com.stripe:stripe-android:10.4.3'
-    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+
+//    implementation 'com.stripe:stripe-android:11.1.1'
 
 
 }

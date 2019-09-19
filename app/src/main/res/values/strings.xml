@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="app_name">Lms</string>
+    <string name="app_name">Neon Lms</string>
 
 
     <string name="com.twitter.sdk.android.CONSUMER_KEY">LHsc14ugIKld1D1RYKxDT8ys1</string>
@@ -183,10 +183,12 @@
     <string name="enterPromo">Enter Promo Code</string>
     <string name="promoMessage">Please Enter Promo Code</string>
     <string name="promo_code_que">Promo Code</string>
+    <string name="validCoupon">Please input valid coupon</string>
     <string name="apply">Apply</string>
     <string name="profile">Profile</string>
     <string name="offlinepayment">Offline Payment</string>
     <string name="selectpaymant">Select Payment Method</string>
+    <string name="pleaseByeCourse">Please Buy Course</string>
 
 
 </resources>

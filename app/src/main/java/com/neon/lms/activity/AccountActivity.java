@@ -82,7 +82,7 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AccountFragment(), getString(R.string.mydetail));
-        adapter.addFragment(new OrderListFragment(), getString(R.string.myorder));
+//        adapter.addFragment(new OrderListFragment(), getString(R.string.myorder));
 //        adapter.addFragment(new WishListFragment(), getString(R.string.mywishlist));
         viewPager.setAdapter(adapter);
     }

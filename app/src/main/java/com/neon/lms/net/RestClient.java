@@ -5,6 +5,7 @@ import com.neon.lms.ResponceModel.NetBlogData;
 import com.neon.lms.ResponceModel.NetBlogDetailData;
 import com.neon.lms.ResponceModel.NetCartList;
 import com.neon.lms.ResponceModel.NetCourseData;
+import com.neon.lms.ResponceModel.NetCourseSearch;
 import com.neon.lms.ResponceModel.NetCurrancyData;
 import com.neon.lms.ResponceModel.NetFaqData;
 import com.neon.lms.ResponceModel.NetForgot;
@@ -53,20 +54,22 @@ public interface RestClient {
                      @Field("provider") String provider,
                      @Field("access_token") String access_token,
                      Callback<TokenModel> callback);
+
     @FormUrlEncoded
     @POST("/oauth/token")
     void twitterLogin(@Field("grant_type") String grant_type,
-                     @Field("client_id") String client_id,
-                     @Field("client_secret") String client_secret,
-                     @Field("scope") String scope,
-                     @Field("provider") String provider,
-                     @Field("access_token") String access_token,
+                      @Field("client_id") String client_id,
+                      @Field("client_secret") String client_secret,
+                      @Field("scope") String scope,
+                      @Field("provider") String provider,
+                      @Field("access_token") String access_token,
                       @Field("secret") String secret,
-                     Callback<TokenModel> callback);
+                      Callback<TokenModel> callback);
+
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/auth/logout")
     void logout(@Field("type") String type,
-            Callback<NetSuccess> callback);
+                Callback<NetSuccess> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/send-reset-link")
@@ -78,6 +81,7 @@ public interface RestClient {
     @POST(Constants.API_VERSION + "/courses")
     void getCourseListApi(
             @Field("type") String type,
+            @Field("page") int page,
             Callback<NetCourseData> callback);
 
     @FormUrlEncoded
@@ -85,6 +89,13 @@ public interface RestClient {
     void getSingleCourse(
             @Field("course_id") String course_id,
             Callback<NetSingleCourseData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/search")
+    void getCourseSearch(
+            @Field("q") String q,
+            @Field("type") String type,
+            Callback<NetCourseSearch> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/single-lesson")
@@ -148,11 +159,12 @@ public interface RestClient {
     @POST(Constants.API_VERSION + "/messages")
     void getMessageList(@Field("thread") String thread,
                         Callback<NetMessageData> callback);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST(Constants.API_VERSION + "/reply-message")
     void replayMassage(@Field("thread_id") String thread_id,
                        @Field("message") String message,
-                        Callback<NetSuccess> callback);
+                       Callback<NetSuccess> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/get-blog")
@@ -285,6 +297,16 @@ public interface RestClient {
     @POST(Constants.API_VERSION + "/apply-coupon")
     void applayPromo(
             @Field("type") String type,
+            Callback<NetOfferData> callback);
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/payment-status")
+    void paymentStatus(
+            @Field("status") String type,
+            @Field("payment_type") String payment_type,
+            @Field("order_id") String order_id,
+            @Field("transaction_id") String transaction_id,
+            @Field("remarks") String remarks,
             Callback<NetOfferData> callback);
 
 

@@ -41,6 +41,9 @@ public class BaseDatabaseAdapter {
     public static final String KEY_TYPE = "type";
     public static final String KEY_PRICE = "price";
     public static final String KEY_CATEGORY = "category";
+    public static final String KEY_STATUS = "status";
+    public static final String KEY_TOTAL = "total";
+    public static final String KEY_SUBTOTAL = "subtotal";
 
 
 
@@ -105,9 +108,12 @@ public class BaseDatabaseAdapter {
             strBulder.append(KEY_DESCRIPTION + " TEXT, ");
             strBulder.append(KEY_TYPE + " TEXT, ");
             strBulder.append(KEY_PRICE + " TEXT, ");
+            strBulder.append(KEY_TOTAL + " TEXT, ");
+            strBulder.append(KEY_SUBTOTAL + " TEXT, ");
             strBulder.append(KEY_CATEGORY + " TEXT, ");
             strBulder.append(KEY_CREATEDAT + " TEXT, ");
-            strBulder.append(KEY_UPDATEDAT + " TEXT ");
+            strBulder.append(KEY_UPDATEDAT + " TEXT, ");
+            strBulder.append(KEY_STATUS + " INTEGER ");
             strBulder.append(')');
             db.execSQL(strBulder.toString());
 

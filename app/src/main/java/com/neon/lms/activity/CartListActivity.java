@@ -97,7 +97,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
         binding.btnCheckout.setOnClickListener(this);
         initRecycler();
 //        clearCArtList();
-        fillArrayList();
+        fillArrayList(false);
 
     }
 
@@ -251,6 +251,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
                 closeActivity();
                 break;
 
+
             case R.id.txtApply:
                 if (binding.edtpromoCode.getText().toString().length() > 0)
                     callPromocodeApi();
@@ -265,6 +266,8 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
             case R.id.btnCheckout:
                 Intent buyIntent = new Intent(CartListActivity.this, PaymentOptionActivity.class);
                 buyIntent.putExtra("total", total);
+                if (binding.edtpromoCode.getText().toString().length() > 0)
+                    buyIntent.putExtra("coupon", binding.edtpromoCode.getText().toString().length());
                 startActivity(buyIntent);
                 break;
 
@@ -326,14 +329,21 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
-    private void fillArrayList() {
+    private void fillArrayList(boolean isTotal) {
         model.getArrayList().clear();
         try {
             dbAdapter.open();
             model.getArrayList().addAll(dbAdapter.getCartItem());
-            total =dbAdapter.getTotalPrice();
-            binding.txtTotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getTotalPrice() + "");
-            binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getTotalPrice() + "");
+            if (!isTotal) {
+                total = dbAdapter.getTotalPrice();
+                binding.txtTotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getTotalPrice() + "");
+                binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getTotalPrice() + "");
+            } else {
+                total = dbAdapter.getFinalTotal();
+                binding.txtTotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getFinalTotal() + "");
+                binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getSubTotal() + "");
+
+            }
             dbAdapter.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -358,7 +368,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onSuccess(String response) {
                 try {
-//                    fillArrayList();
+                    fillArrayList(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

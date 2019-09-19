@@ -111,7 +111,15 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);

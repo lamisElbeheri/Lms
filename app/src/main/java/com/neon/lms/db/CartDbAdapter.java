@@ -3,6 +3,7 @@ package com.neon.lms.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.neon.lms.model.CartModel;
 
@@ -35,12 +36,34 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
         cv.put(KEY_CATEGORY, category);
         cv.put(KEY_CREATEDAT, createdAt);
         cv.put(KEY_UPDATEDAT, updatedAt);
-
+        cv.put(KEY_PRICE, price);
+        cv.put(KEY_STATUS, false);
+        cv.put(KEY_TOTAL, getTotalPrice());
+        cv.put(KEY_SUBTOTAL, getSubTotal());
 
         long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
         if (rowCount == 0)
             ourDatabase.insert(TABLE_CART, null, cv);
 
+
+    }
+
+    public void update(String id, String type, String price, String total, String subTotal, boolean status) {
+        ContentValues cv;
+
+        cv = new ContentValues();
+        cv.put(KEY_ID, id);
+        cv.put(KEY_TYPE, type);
+        cv.put(KEY_PRICE, price);
+        cv.put(KEY_STATUS, status);
+        cv.put(KEY_TOTAL, total);
+        cv.put(KEY_SUBTOTAL, subTotal);
+
+
+        long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
+        Log.e("rowCount",rowCount+"");
+        if (rowCount == 0)
+            ourDatabase.insert(TABLE_CART, null, cv);
 
     }
 
@@ -79,6 +102,31 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
         totalPrice = String.valueOf(price);
         cursor.close();
         return totalPrice;
+
+    }
+
+    public String getFinalTotal() {
+        String totalPrice = null;
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_CART, null);
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() != true) {
+            totalPrice = cursor.getString(cursor.getColumnIndex(KEY_TOTAL));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return totalPrice;
+
+    }
+ public String getSubTotal() {
+        String subtotal = null;
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_CART, null);
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() != true) {
+            subtotal = cursor.getString(cursor.getColumnIndex(KEY_SUBTOTAL));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return subtotal;
 
     }
 

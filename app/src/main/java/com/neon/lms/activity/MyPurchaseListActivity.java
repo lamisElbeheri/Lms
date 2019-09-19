@@ -143,7 +143,7 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
             if (netMyPurchaseData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netMyPurchaseData.getResult().getBundles());
                 fillArrayListCourse(netMyPurchaseData.getResult().getCourses());
-
+                notyFyDat();
 
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
@@ -236,6 +236,16 @@ public class MyPurchaseListActivity extends BaseActivity implements View.OnClick
 
     }
 
+
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);

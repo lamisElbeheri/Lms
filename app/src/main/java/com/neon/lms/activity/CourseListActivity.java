@@ -38,6 +38,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     private ActivityCourselistBinding binding;
 
     CartDbAdapter dbAdapter;
+    String type = "";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,14 +105,19 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 1)
+                if (position == 1) {
+                    type = "popular";
+
                     courseApi("popular");
-                else if (position == 2)
+                } else if (position == 2) {
+                    type = "trending";
                     courseApi("trending");
-                else if (position == 3)
+                } else if (position == 3) {
+                    type = "featured";
                     courseApi("featured");
-                else
-                    courseApi("");
+                } else {
+                    courseApi(type);
+                }
 
                 // your code here
             }
@@ -154,6 +160,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                         >= recyclerView.getLayoutManager().getItemCount()) {
 
                     if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
+                        courseApi(type);
 
                     }
                 }
@@ -165,9 +172,10 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
     public void courseApi(String type) {
         binding.progressBar.setVisibility(View.VISIBLE);
-
+        model.setApiCallActive(true);
         RetrofitClient.getInstance().getRestOkClient().
                 getCourseListApi(type,
+                        model.getPage(),
                         callback);
     }
 
@@ -178,10 +186,13 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
             NetCourseData netCourseData = (NetCourseData) object;
             if (netCourseData.getStatus().equalsIgnoreCase("success")) {
+                model.setPage(model.getPage() + 1);
+                model.setApiCallActive(false);
                 fillArrayList(netCourseData.getResult().getData());
 
 
             } else {
+                model.setApiCallActive(false);
 
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
@@ -200,13 +211,8 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     /*set language list*/
 
     private void fillArrayList(List<NetCourseDataResultData> items) {
-        model.getArrayList().clear();
         binding.progressBar.setVisibility(View.GONE);
-
-
         CourseModel itemModel;
-
-
         for (int i = 0; i < items.size(); i++) {
             itemModel = new CourseModel();
             itemModel.setCategory_id(items.get(i).getCategory_id());
@@ -233,7 +239,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
 
-
+        notyFyDat();
     }
 
 
@@ -286,5 +292,16 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
             e.printStackTrace();
         }
 
+    }
+
+
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
     }
 }

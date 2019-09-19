@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="LessionModel"
-            type="com.neon.lms.model.LessionModel" />
+            name="CourseDetailModel"
+            type="com.neon.lms.model.CourseDetailModel" />
 
     </data>
 

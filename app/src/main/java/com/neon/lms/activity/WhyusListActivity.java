@@ -51,7 +51,7 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void setToolBar() {
         if (binding.included.toolbar != null) {
-            binding.included.txtTitle.setText(getString(R.string.why)+" "+getString(R.string.us));
+            binding.included.txtTitle.setText(getString(R.string.why) + " " + getString(R.string.us));
             binding.included.toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(binding.included.toolbar);
             binding.included.imgBack.setVisibility(View.VISIBLE);
@@ -133,7 +133,7 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
             NetWhyusData netWhyusData = (NetWhyusData) object;
             if (netWhyusData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netWhyusData.getResult().getData());
-
+                notyFyDat();
 
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
@@ -177,6 +177,15 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
 
     }
 
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void closeActivity() {

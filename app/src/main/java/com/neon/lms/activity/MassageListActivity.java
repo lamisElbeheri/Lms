@@ -94,11 +94,11 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(MassageListActivity.this, MessageDetailActivity.class);
-                intent.putExtra(getString(R.string.id), model.getArrayList().get(position).getPivot().getThread_id() + "");
-                intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList().get(position).getMessages());
-                startActivity(intent);
-                overridePendingTransition(R.anim.animation, R.anim.animation2);
+//                Intent intent = new Intent(MassageListActivity.this, MessageDetailActivity.class);
+//                intent.putExtra(getString(R.string.id), model.getArrayList().get(position).getPivot().getThread_id() + "");
+//                intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList().get(position).getMessages());
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.animation, R.anim.animation2);
 
 
             }

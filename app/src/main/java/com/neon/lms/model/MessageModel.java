@@ -2,22 +2,30 @@ package com.neon.lms.model;
 
 import android.databinding.BaseObservable;
 import android.os.Parcel;
-import android.os.Parcelable;
 
+import com.neon.lms.ResponceModel.NetMessageData;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
-import com.neon.lms.ResponceModel.NetMessageDataThreadsMessagesSender;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
 
 import java.util.ArrayList;
 
 
 public class MessageModel extends BaseObservable {
-
+    private ArrayList<NetMessageDataThreadsMessages> messages;
 
     public MessageModel() {
+
     }
+
+    public ArrayList<NetMessageDataThreadsMessages> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ArrayList<NetMessageDataThreadsMessages> messages) {
+        this.messages = messages;
+    }
+
     private NetMessageDataThreadsPivot pivot;
-    private ArrayList<NetMessageDataThreadsMessages> messages;
     private String id;
 
     protected MessageModel(Parcel in) {
@@ -33,13 +41,6 @@ public class MessageModel extends BaseObservable {
         this.pivot = pivot;
     }
 
-    public ArrayList<NetMessageDataThreadsMessages> getMessages() {
-        return this.messages;
-    }
-
-    public void setMessages(ArrayList<NetMessageDataThreadsMessages> messages) {
-        this.messages = messages;
-    }
 
     public String getId() {
         return this.id;

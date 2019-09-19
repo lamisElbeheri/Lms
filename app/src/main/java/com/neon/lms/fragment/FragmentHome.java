@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.neon.lms.activity.FaqListActivity;
 import com.neon.lms.activity.InvoiceActivity;
 import com.neon.lms.activity.MassageListActivity;
 import com.neon.lms.activity.NewsListActivity;
+import com.neon.lms.activity.SearchListActivity;
 import com.neon.lms.activity.ShopListActivity;
 import com.neon.lms.activity.SponserListActivity;
 import com.neon.lms.activity.TeacherListActivity;
@@ -32,7 +34,9 @@ import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.FragmentHomeBinding;
 import com.neon.lms.model.HomeListModel;
 import com.neon.lms.model.HomeModel;
+import com.neon.lms.model.SearchListModel;
 import com.neon.lms.model.ShopListModel;
+import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
@@ -68,7 +72,30 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     private void initView() {
         initRecycler();
         fillArraylist();
+
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                openSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                return false;
+            }
+        });
     }
+
+
+    private void openSearch(String search){
+        AppConstant.hideKeyboard(getContext(), binding.recyclerView);
+        startActivity(new Intent(getContext(), SearchListActivity.class)
+        .putExtra(SearchListActivity.SEARCH, search)
+        .putExtra(SearchListActivity.TYPE, "1"));
+        getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
+
+    };
 
 
     @Override
@@ -257,5 +284,8 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
     }
+
+
+
 
 }

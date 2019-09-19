@@ -47,7 +47,15 @@
 
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/noData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/noDataFound"
+            android:textSize="@dimen/_18sdp"
+            android:visibility="gone" />
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="@dimen/_50sdp"

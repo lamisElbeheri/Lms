@@ -5,7 +5,6 @@ package com.neon.lms.Payment;
  */
 public class PayPalConfig {
  
-    public static final String PAYPAL_CLIENT_ID = "Aa5qA63qbFj2DD38HRrW2GzrijbPmpvttOMcyne9FGWP_yTp9OgTXt456DSrjTlyIyUcOvD8UY2MLTj7\n" +
-            "PAYPAL_SECRET=ELpthLcR2agER0N2HYSinsZQNob7jEIUC93pWvF4B8tRjIOuvKI-bwWsjdmCCI7aIWh0wBn0r2Uex3rB";
+    public static final String PAYPAL_CLIENT_ID = "AQ7bAoX8gol5X0PIcbzL3_SlTk2X27jPd14mGbrP4yHpcEYCGDqq2HOTEEs4X7yvhoCXIsNqOTGl8TeM";
  
 }

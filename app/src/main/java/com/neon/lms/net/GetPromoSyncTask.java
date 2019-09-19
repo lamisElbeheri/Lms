@@ -3,6 +3,7 @@ package com.neon.lms.net;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.neon.lms.R;
@@ -86,12 +87,24 @@ public class GetPromoSyncTask {
                     try {
                         jsonObject = new JSONObject(data[1]);
 
-                        if (JSONData.getString(jsonObject, "code").equals("ok")) {
-                            JSONObject obj = JSONData.getJSONObject(jsonObject, "data");
+                        if (JSONData.getString(jsonObject, "status").equals("success")) {
+                            JSONObject obj = JSONData.getJSONObject(jsonObject, "result");
+                            JSONArray jsonArray =obj.getJSONArray("data");
 
                             if (dbAdapter == null)
                                 dbAdapter = new CartDbAdapter(context);
+                            for (int i = 0; i <jsonArray.length() ; i++) {
+                                JSONObject dataObj =jsonArray.getJSONObject(i);
+                                dbAdapter.update(dataObj.getString("id"),dataObj.getString("type"),
+                                        dataObj.getString("price"), obj.getString("final_total"),
+                                        obj.getString("subtotal"),dataObj.getBoolean("status"));
+
+                            }
                             dbAdapter.open();
+
+                        }
+                        else {
+                            Toast.makeText(context, context.getString(R.string.validCoupon), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (Exception e) {
@@ -99,9 +112,11 @@ public class GetPromoSyncTask {
                     }
                     return data[1];
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             return null;
         }
@@ -119,16 +134,16 @@ public class GetPromoSyncTask {
                 try {
                     jObj = new JSONObject(result);
 
-                    if (JSONData.getString(jObj, "code").equals("ok")) {
-                        apiCalled.onSuccess(JSONData.getString(jObj, "message"));
+                    if (JSONData.getString(jObj, "status").equals("success")) {
+                        apiCalled.onSuccess("");
                     } else
                         apiCalled.onError(result);
 
-                    JSONObject obj = JSONData.getJSONObject(jObj, "data");
-                    if (JSONData.getInt(obj, "count") > JSONData.getJSONArray(obj, "list").length()) {
-                        isProgress = false;
-                        startTask();
-                    }
+//                    JSONObject obj = JSONData.getJSONObject(jObj, "data");
+//                    if (JSONData.getInt(obj, "count") > JSONData.getJSONArray(obj, "list").length()) {
+//                        isProgress = false;
+//                        startTask();
+//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

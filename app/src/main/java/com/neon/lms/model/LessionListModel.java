@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class LessionListModel extends BaseObservable {
     private String noDataLable, noDataMessage, noDataButtonText;
     private ArrayList<LessionModel> arrayList;
+    private ArrayList<CourseDetailModel> courseDetailModelArrayList;
     private boolean apiCallActive = false;
     private int page, count;
     private boolean isSwipeRefress;
@@ -106,5 +107,11 @@ public class LessionListModel extends BaseObservable {
         this.searchTxt = searchTxt;
     }
 
+    public ArrayList<CourseDetailModel> getCourseDetailModelArrayList() {
+        return courseDetailModelArrayList;
+    }
 
+    public void setCourseDetailModelArrayList(ArrayList<CourseDetailModel> courseDetailModelArrayList) {
+        this.courseDetailModelArrayList = courseDetailModelArrayList;
+    }
 }

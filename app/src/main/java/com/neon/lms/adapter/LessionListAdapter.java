@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowLessionItemBinding;
-import com.neon.lms.model.LessionModel;
+import com.neon.lms.model.CourseDetailModel;
 import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 public class LessionListAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private ArrayList<LessionModel> arrayList;
+    private ArrayList<CourseDetailModel> arrayList;
     OnRecyclerItemClick onItemClick;
 
     int px4, px2;
     CardView.LayoutParams layoutParams = new CardView.LayoutParams(
             CardView.LayoutParams.MATCH_PARENT, CardView.LayoutParams.WRAP_CONTENT);
 
-    public LessionListAdapter(Context context, ArrayList<LessionModel> arrayList, OnRecyclerItemClick onItemClick) {
+    public LessionListAdapter(Context context, ArrayList<CourseDetailModel> arrayList, OnRecyclerItemClick onItemClick) {
         this.context = context;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
@@ -43,9 +43,8 @@ public class LessionListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
-//        h.binding.setLessionModel(arrayList.get(position));
-//
-//        h.binding.title.setText(arrayList.get(position).getTitle());
+        h.binding.setCourseDetailModel(arrayList.get(position));
+        h.binding.title.setText(arrayList.get(position).getTitle());
         h.binding.executePendingBindings();
 
 
@@ -54,7 +53,7 @@ public class LessionListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -134,7 +134,7 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
             NetOfferData netOfferData = (NetOfferData) object;
             if (netOfferData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netOfferData.getCoupons());
-
+                notyFyDat();
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
@@ -181,6 +181,15 @@ public class OfferListActivity extends BaseActivity implements View.OnClickListe
 
     }
 
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void closeActivity() {

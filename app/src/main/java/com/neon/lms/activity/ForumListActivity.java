@@ -152,7 +152,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
             if (forumData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(forumData.getResult().getDiscussions().getData());
 
-
+                notyFyDat();
             } else {
 
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
@@ -206,7 +206,15 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
 
     }
-
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
 
     //    Delete forum
     public void deleteForum(String id) {

@@ -1,3 +1,4 @@
+/*
 package com.neon.lms.activity;
 
 import android.databinding.DataBindingUtil;
@@ -83,9 +84,11 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     }
 
 
-    /*
+    */
+/*
      *  initialize Reacycler view
-     */
+     *//*
+
     private void initRecycler() {
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -172,3 +175,4 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
 
 
 }
+*/

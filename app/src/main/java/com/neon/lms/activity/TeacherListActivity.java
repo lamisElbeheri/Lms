@@ -137,7 +137,7 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
             if (teacherData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(teacherData.getResult().getData());
 
-
+notyFyDat();
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
@@ -176,7 +176,15 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
 
 
     }
-
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);

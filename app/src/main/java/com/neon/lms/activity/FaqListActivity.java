@@ -128,7 +128,7 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
 
             if (faqData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(faqData.getResult().getData());
-
+                notyFyDat();
 
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
@@ -173,7 +173,15 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
 
 
     }
-
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);

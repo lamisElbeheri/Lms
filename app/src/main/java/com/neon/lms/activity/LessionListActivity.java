@@ -29,6 +29,7 @@ import com.neon.lms.adapter.LessionListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityLessionlistBinding;
+import com.neon.lms.model.CourseDetailModel;
 import com.neon.lms.model.LessionListModel;
 import com.neon.lms.model.LessionModel;
 import com.neon.lms.net.RetrofitClient;
@@ -51,6 +52,7 @@ public class LessionListActivity extends YouTubeBaseActivity implements
     private ActivityLessionlistBinding binding;
     SimpleExoPlayer player;
     public static final String LESSION_ID = "lessionId";
+    public static final String LESSIONTIMELINE = "lessiontimeline";
 
     String lessionId;
     YouTubePlayer youTubePlayer;
@@ -92,9 +94,14 @@ public class LessionListActivity extends YouTubeBaseActivity implements
 
     public void initViews() {
         lessionId = getIntent().getStringExtra(LESSION_ID);
-        binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
+        binding.included.txtTitle.setText(getString(R.string.app_name));
         binding.included.imgBack.setOnClickListener(this);
-
+        ArrayList<CourseDetailModel> models = getIntent().getParcelableArrayListExtra(LESSIONTIMELINE);
+        if (models != null) {
+            model.setCourseDetailModelArrayList(models);
+        } else {
+            model.setCourseDetailModelArrayList(new ArrayList<CourseDetailModel>());
+        }
         initRecycler();
         singleLessionDetail();
         DefaultTrackSelector trackSelector = new DefaultTrackSelector();
@@ -115,7 +122,7 @@ public class LessionListActivity extends YouTubeBaseActivity implements
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new LessionListAdapter(LessionListActivity.this,
-                model.getArrayList(), new OnRecyclerItemClick() {
+                model.getCourseDetailModelArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
 
