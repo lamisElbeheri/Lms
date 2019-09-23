@@ -1,30 +1,22 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetCourseData;
-import com.neon.lms.ResponceModel.NetCourseDataResultData;
 import com.neon.lms.ResponceModel.NetCourseSearch;
 import com.neon.lms.ResponceModel.NetCourseSearchResultData;
-import com.neon.lms.adapter.CourseListAdapter;
 import com.neon.lms.adapter.SearchListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.ActivityCourselistBinding;
 import com.neon.lms.databinding.ActivitySearchlistBinding;
 import com.neon.lms.db.CartDbAdapter;
-import com.neon.lms.model.SearchListModel;
-import com.neon.lms.model.CourseModel;
 import com.neon.lms.model.SearchListModel;
 import com.neon.lms.model.SearchModel;
 import com.neon.lms.net.RetrofitClient;

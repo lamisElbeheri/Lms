@@ -1,9 +1,8 @@
 /*
-package com.neon.lms.stipePayment;
+package com.neon.lms.Payment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -11,8 +10,6 @@ import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.stripe.android.Stripe;
-import com.stripe.android.TokenCallback;
-import com.stripe.android.exception.AuthenticationException;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
 
@@ -26,6 +23,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PayActivity extends AppCompatActivity {
 
@@ -68,14 +67,10 @@ public class PayActivity extends AppCompatActivity {
 //        card.setCurrency("usd");
 //        card.setName("Theodhor Pandeli");
 //        card.setAddressZip("1000");
-        */
-/*
         card.setNumber(4242424242424242);
         card.setExpMonth(12);
         card.setExpYear(19);
         card.setCVC("123");
-        *//*
-
 
 
         stripe.createToken(card, "[YOUR_PUBLISHABLE_KEY_TEST_HERE]", new TokenCallback() {

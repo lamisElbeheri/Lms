@@ -38,8 +38,8 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
         cv.put(KEY_UPDATEDAT, updatedAt);
         cv.put(KEY_PRICE, price);
         cv.put(KEY_STATUS, false);
-        cv.put(KEY_TOTAL, getTotalPrice());
-        cv.put(KEY_SUBTOTAL, getSubTotal());
+//        cv.put(KEY_TOTAL, getTotalPrice());
+//        cv.put(KEY_SUBTOTAL, getSubTotal());
 
         long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
         if (rowCount == 0)
@@ -49,6 +49,9 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
     }
 
     public void update(String id, String type, String price, String total, String subTotal, boolean status) {
+
+        final ArrayList<String> idList = getIds(TABLE_CART, KEY_ID, null);
+
         ContentValues cv;
 
         cv = new ContentValues();
@@ -58,13 +61,17 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
         cv.put(KEY_STATUS, status);
         cv.put(KEY_TOTAL, total);
         cv.put(KEY_SUBTOTAL, subTotal);
+        if ((idList.contains(id != null ? id : ""))) {
+            cv.put(KEY_ID, id);
+            long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
 
 
-        long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
-        Log.e("rowCount",rowCount+"");
-        if (rowCount == 0)
-            ourDatabase.insert(TABLE_CART, null, cv);
+//            long rowCount = ourDatabase.update(TABLE_CART, cv, KEY_ID + " = '" + id + "'", null);
+            Log.e("rowCount", rowCount + "");
+//           if (rowCount == 0)
+//                ourDatabase.insert(TABLE_CART, null, cv);
 
+        }
     }
 
 
@@ -117,7 +124,8 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
         return totalPrice;
 
     }
- public String getSubTotal() {
+
+    public String getSubTotal() {
         String subtotal = null;
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + TABLE_CART, null);
         cursor.moveToFirst();
@@ -180,5 +188,27 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
 
         return array;
 
+    }
+
+    public ArrayList<String> getIds(String strTableName, String columnName, String whereClause) {
+        ArrayList<String> ids = new ArrayList<>();
+        String query = "Select " + columnName + " from " + strTableName;
+        if (whereClause != null)
+            query += " " + whereClause;
+
+        Cursor c = ourDatabase.rawQuery(query, null);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            while (!c.isAfterLast()) {
+
+                if (c.getString(0) != null && c.getString(0).trim().length() > 0)
+                    ids.add(c.getString(0));
+
+                c.moveToNext();
+            }
+
+        }
+        c.close();
+        return ids;
     }
 }

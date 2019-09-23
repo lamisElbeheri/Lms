@@ -1,11 +1,15 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -81,7 +85,6 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initViews() {
         dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, ForumListActivity.this).createProgressBar();
-
         binding.included.imgBack.setOnClickListener(this);
         binding.addforum.setOnClickListener(this);
         initRecycler();
@@ -103,6 +106,8 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
                 switch (type) {
                     case Constants.ROW_CLICK:
                         Intent intent = new Intent(ForumListActivity.this, ForumDetailActivity.class);
+                        intent.putExtra(ForumDetailActivity.ID, model.getArrayList().get(position).getId() + "  ");
+                        intent.putParcelableArrayListExtra(ForumDetailActivity.FORUMDATA, model.getArrayList());
                         startActivity(intent);
                         overridePendingTransition(R.anim.animation, R.anim.animation2);
                         break;
@@ -206,6 +211,7 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
 
     }
+
     private void notyFyDat() {
         if (model.getArrayList().size() > 0) {
             binding.recyclerView.setVisibility(View.VISIBLE);

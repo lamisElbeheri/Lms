@@ -1,7 +1,7 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ForumDetailListModel extends BaseObservable {
     private String noDataLable, noDataMessage, noDataButtonText;
     private ArrayList<ForumDetailModel> arrayList;
+    private ArrayList<ForumModel> forumModelArrayList;
     private boolean apiCallActive = false;
     private int page, count;
     private boolean isSwipeRefress;
@@ -106,5 +107,11 @@ public class ForumDetailListModel extends BaseObservable {
         this.searchTxt = searchTxt;
     }
 
+    public ArrayList<ForumModel> getForumModelArrayList() {
+        return forumModelArrayList;
+    }
 
+    public void setForumModelArrayList(ArrayList<ForumModel> forumModelArrayList) {
+        this.forumModelArrayList = forumModelArrayList;
+    }
 }

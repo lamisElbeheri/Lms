@@ -146,7 +146,7 @@
                     android:paddingBottom="@dimen/_4sdp">
 
 
-                    <android.support.v7.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/remamberCheck"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

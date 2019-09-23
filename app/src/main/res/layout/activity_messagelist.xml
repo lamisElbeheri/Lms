@@ -35,7 +35,7 @@
                 android:layout_marginTop="@dimen/_48sdp"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:layout_height="@dimen/_1sdp"
                     android:background="@color/hintColor" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -61,7 +61,16 @@
 
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/noData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/noDataFound"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/black"
+            android:visibility="gone" />
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="@dimen/_50sdp"

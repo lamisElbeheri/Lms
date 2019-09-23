@@ -1,6 +1,6 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 
 
 public class AccountDetailModel extends BaseObservable {

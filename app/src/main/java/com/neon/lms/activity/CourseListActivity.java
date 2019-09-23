@@ -1,11 +1,11 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -90,7 +90,8 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initViews() {
         dbAdapter = new CartDbAdapter((CourseListActivity.this));
-        if (getIntent().getStringExtra(VALUE).equalsIgnoreCase("trending")) {
+        if (getIntent().getStringExtra(VALUE).equalsIgnoreCase("trending")
+        ||getIntent().getStringExtra(VALUE).equalsIgnoreCase("featured")) {
             binding.llFilter.setVisibility(View.GONE);
         }
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
@@ -99,7 +100,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                 R.array.courseSort, R.layout.simple_spiner);
         adapter.setDropDownViewResource(R.layout.spiner_dropdown);
         binding.spinner.setAdapter(adapter);
-        courseApi("");
+        courseApi(getIntent().getStringExtra(VALUE));
         initRecycler();
 
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -107,15 +108,26 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position == 1) {
                     type = "popular";
-
+                    model.getArrayList().clear();
+                    model.setPage(1);
+                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                     courseApi("popular");
                 } else if (position == 2) {
                     type = "trending";
+                    model.getArrayList().clear();
+                    model.setPage(1);
+                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                     courseApi("trending");
                 } else if (position == 3) {
                     type = "featured";
+                    model.getArrayList().clear();
+                    model.setPage(1);
+                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                     courseApi("featured");
                 } else {
+                    model.getArrayList().clear();
+                    model.setPage(1);
+                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                     courseApi(type);
                 }
 
@@ -171,6 +183,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
 
     public void courseApi(String type) {
+
         binding.progressBar.setVisibility(View.VISIBLE);
         model.setApiCallActive(true);
         RetrofitClient.getInstance().getRestOkClient().

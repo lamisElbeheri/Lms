@@ -1,11 +1,8 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.neon.lms.ResponceModel.NetBlogDataBlogDataAuthor;
-import com.neon.lms.ResponceModel.NetBlogDataBlogDataCategory;
 
 
 public class SponserModel extends BaseObservable implements Parcelable {

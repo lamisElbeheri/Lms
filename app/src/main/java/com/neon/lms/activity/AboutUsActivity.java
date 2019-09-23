@@ -1,6 +1,6 @@
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -24,7 +24,6 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
 
     }
-
 
     @Override
     public void setModelAndBinding() {

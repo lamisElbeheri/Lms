@@ -1,9 +1,8 @@
 package com.neon.lms.model;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.support.v4.app.Fragment;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 public class InvoiceMainModel extends BaseObservable {
     private Context context;

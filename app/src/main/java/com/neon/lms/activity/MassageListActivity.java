@@ -1,11 +1,13 @@
 package com.neon.lms.activity;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 
@@ -140,7 +142,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                 for (int i = 0; i < messageData.getThreads().size(); i++) {
                     model.setThread_id(messageData.getThreads().get(i).getId());
                     fillArrayList(messageData.getThreads());
-
+                    notyFyDat();
                 }
 
 
@@ -183,6 +185,15 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void closeActivity() {

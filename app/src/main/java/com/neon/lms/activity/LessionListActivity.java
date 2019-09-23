@@ -1,11 +1,11 @@
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,11 +22,9 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSingleLession;
 import com.neon.lms.adapter.LessionListAdapter;
-import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityLessionlistBinding;
 import com.neon.lms.model.CourseDetailModel;

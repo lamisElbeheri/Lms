@@ -1,19 +1,16 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetAboutData;
 import com.neon.lms.ResponceModel.NetSignUpData;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.basecomponent.BaseActivity;
-import com.neon.lms.databinding.ActivityAboutusBinding;
 import com.neon.lms.databinding.ActivitySignupBinding;
-import com.neon.lms.model.AccountDetailModel;
 import com.neon.lms.model.AccountDetailModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.Constants;

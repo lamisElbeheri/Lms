@@ -1,17 +1,15 @@
 package com.neon.lms.fragment;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.neon.lms.R;
 import com.neon.lms.basecomponent.BaseFragment;
-import com.neon.lms.databinding.FragmentAccountDetailBinding;
 import com.neon.lms.databinding.FragmentAddressBinding;
-import com.neon.lms.model.AccountDetailModel;
 import com.neon.lms.model.AddressModel;
 
 

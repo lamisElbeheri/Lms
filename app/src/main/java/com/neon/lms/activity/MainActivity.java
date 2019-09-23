@@ -2,16 +2,19 @@ package com.neon.lms.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -36,7 +39,6 @@ import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -171,7 +173,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.language), Constants.LANGUAGE, R.drawable.contact, R.drawable.contact, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.English), Constants.LANGUAGE, R.drawable.contact, R.drawable.contact, DrawerAdapter.TYPE_EXPAND, true, false));
 
 
         binding.recyclerView.setHasFixedSize(true);
@@ -242,12 +244,15 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 break;
 
             case Constants.LANGUAGE:
-                if (BaseAppClass.getPreferences().getUserLanguageCode() == Constants.ENGLISH) {
-                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.AREBIC);
-                } else {
+                if (type == Constants.CLICK_ENGLISH)
                     BaseAppClass.getPreferences().saveUserLanguageCode(Constants.ENGLISH);
+                else if (type == Constants.CLICK_SPANISH)
+                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.SPANISH);
+                else if (type == Constants.CLICK_FRANCH)
+                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.FRANCH);
+                else if (type == Constants.CLICK_AREBIC)
+                    BaseAppClass.getPreferences().saveUserLanguageCode(Constants.AREBIC);
 
-                }
 
                 BaseAppClass.changeLang(MainActivity.this, BaseAppClass.getPreferences().getUserLanguageCode());
                 recreate();
@@ -423,6 +428,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         setTitle(title);
         binding.included.imgBack.setImageResource(isBack ? R.drawable.btn_bg : R.drawable.menu);
         binding.included.imgSearch.setVisibility(isSearch ? View.VISIBLE : View.GONE);
+        binding.included.frameCart.setVisibility(View.GONE);
 
         binding.included.linMain.post(new Runnable() {
             @Override

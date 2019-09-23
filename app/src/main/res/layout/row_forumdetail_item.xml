@@ -6,8 +6,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="ForumDetailModel"
-            type="com.neon.lms.model.ForumDetailModel" />
+            name="ForumModel"
+            type="com.neon.lms.model.ForumModel" />
 
     </data>
 
@@ -26,6 +26,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/userImage"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
 
@@ -42,6 +43,7 @@
 
 
                 <TextView
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_12sdp"
@@ -54,6 +56,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/descussion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_12sdp"

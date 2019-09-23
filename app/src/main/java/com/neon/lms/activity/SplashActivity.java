@@ -1,23 +1,15 @@
 package com.neon.lms.activity;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
-import android.widget.Toast;
 
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
-import com.neon.lms.util.AppConstant;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {

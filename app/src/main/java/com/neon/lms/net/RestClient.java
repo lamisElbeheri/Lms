@@ -302,12 +302,12 @@ public interface RestClient {
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/payment-status")
     void paymentStatus(
-            @Field("status") String type,
+            @Field("status") String status,
             @Field("payment_type") String payment_type,
             @Field("order_id") String order_id,
             @Field("transaction_id") String transaction_id,
             @Field("remarks") String remarks,
-            Callback<NetOfferData> callback);
+            Callback<NetSuccess> callback);
 
 
 }

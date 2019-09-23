@@ -1,9 +1,9 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -98,7 +98,7 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
                 Picasso.with(BlogDetailActivity.this)
                         .load(netBlogDetailData.getBlog().getImage())
                         .into(binding.blogImg);
-                binding.blogdate.setText(AppConstant.getDate(netBlogDetailData.getBlog().getCreated_at(), AppConstant.sdfFormateDate));
+                binding.blogdate.setText(AppConstant.parseDateToddMMyyyy(netBlogDetailData.getBlog().getCreated_at()));
                 binding.author.setText(netBlogDetailData.getBlog().getAuthor().getFirst_name());
                 next = String.valueOf(netBlogDetailData.getNext());
                 privious = String.valueOf(netBlogDetailData.getPrevious());

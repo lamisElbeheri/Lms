@@ -1,9 +1,9 @@
 package com.neon.lms.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.databinding.DataBindingUtil;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ public class CourseListAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<CourseModel> arrayList;
     OnRecyclerItemClick onItemClick;
+
 
     int px4, px2;
     CardView.LayoutParams layoutParams = new CardView.LayoutParams(
@@ -48,7 +49,7 @@ public class CourseListAdapter extends RecyclerView.Adapter {
                 .load(arrayList.get(position).getImage())
                 .into(h.binding.courseBg);
         h.binding.title.setText(arrayList.get(position).getTitle());
-        h.binding.date.setText(AppConstant.getDate(arrayList.get(position).getCreated_at(), AppConstant.sdfFormateDate));
+        h.binding.date.setText(AppConstant.parseDateToddMMyyyy(arrayList.get(position).getCreated_at()));
         h.binding.executePendingBindings();
     }
 

@@ -1,7 +1,7 @@
 package com.neon.lms.model;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 
 public class AcountMainModel extends BaseObservable {
     private Context context;

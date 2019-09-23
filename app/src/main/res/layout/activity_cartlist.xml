@@ -15,32 +15,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical">
 
         <include
             android:id="@+id/included"
             layout="@layout/activity_toolbar_layout" />
 
-        <LinearLayout
-            android:id="@+id/llMain"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/app_bg"
             android:orientation="vertical">
 
 
             <LinearLayout
+                android:id="@+id/llMain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/app_bg"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/llPromocode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -60,8 +60,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="left"
                                 android:layout_weight="1"
+                                android:gravity="left"
                                 android:text="@string/totalAmount"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp" />
@@ -70,8 +70,8 @@
                                 android:id="@+id/txtTotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="right"
                                 android:layout_weight="1"
+                                android:gravity="right"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_14sdp" />
 
@@ -86,8 +86,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="left"
                                 android:layout_weight="1"
+                                android:gravity="left"
                                 android:text="@string/Tax"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp" />
@@ -97,8 +97,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_6sdp"
-                                android:gravity="right"
                                 android:layout_weight="1"
+                                android:gravity="right"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_14sdp" />
 
@@ -120,8 +120,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="left"
                                 android:layout_weight="1"
+                                android:gravity="left"
                                 android:text="@string/sub_total"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp" />
@@ -130,8 +130,8 @@
                                 android:id="@+id/txtsubtotal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="right"
                                 android:layout_weight="1"
+                                android:gravity="right"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_14sdp" />
 
@@ -142,30 +142,32 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_height="wrap_content">
+                        android:gravity="center">
+
                         <EditText
                             android:id="@+id/edtpromoCode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="@string/enterPromo"
-                            android:padding="@dimen/_6sdp"
                             android:layout_marginRight="@dimen/_16sdp"
-                            android:background="@drawable/edittextborder"/>
+                            android:background="@drawable/edittextborder"
+                            android:hint="@string/enterPromo"
+                            android:padding="@dimen/_6sdp" />
 
                         <TextView
                             android:id="@+id/txtApply"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/_6sdp"
                             android:background="@drawable/normal_bg"
                             android:gravity="center|left"
-                            android:layout_marginRight="@dimen/_6sdp"
                             android:padding="@dimen/_6sdp"
                             android:text="@string/apply"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp" />
+
                         <TextView
                             android:id="@+id/txtPromoCode"
                             android:layout_width="wrap_content"
@@ -198,9 +200,25 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
-        </LinearLayout>
+            <TextView
+                android:id="@+id/noData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/noDataFound"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:visibility="gone" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+        </RelativeLayout>
 
 
     </LinearLayout>

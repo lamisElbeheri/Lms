@@ -117,6 +117,10 @@ public class BaseAppClass extends Application {
             languageCode = "en";
         else if (lang == Constants.AREBIC)
             languageCode = "ar";
+        else if (lang == Constants.SPANISH)
+            languageCode = "es";
+        else if (lang == Constants.FRANCH)
+            languageCode = "fr";
 
         return languageCode;
 

@@ -1,6 +1,6 @@
 package com.neon.lms.ResponceModel;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 
 public class NetMessageDataThreadsPivot extends BaseObservable {
     private String last_read;

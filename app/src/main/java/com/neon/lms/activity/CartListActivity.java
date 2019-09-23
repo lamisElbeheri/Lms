@@ -1,20 +1,20 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.NetCartList;
-import com.neon.lms.ResponceModel.NetCartListResultBundles;
-import com.neon.lms.ResponceModel.NetCartListResultCourses;
-import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.adapter.CartListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -22,11 +22,15 @@ import com.neon.lms.databinding.ActivityCartlistBinding;
 import com.neon.lms.db.CartDbAdapter;
 import com.neon.lms.model.CartListModel;
 import com.neon.lms.model.CartModel;
+import com.neon.lms.net.GetOrderConformationTask;
 import com.neon.lms.net.GetPromoSyncTask;
 import com.neon.lms.net.OnApiCalled;
-import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,7 +49,9 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
     CartDbAdapter dbAdapter;
     private GetPromoSyncTask getPromoSyncTask;
     String total;
+    private GetOrderConformationTask orderConformationTask;
 
+    CustomProgressDialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +95,8 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initViews() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, CartListActivity.this).createProgressBar();
+
         binding.txtPromoCode.setOnClickListener(this);
         binding.txtApply.setOnClickListener(this);
         dbAdapter = new CartDbAdapter(CartListActivity.this);
@@ -96,8 +104,7 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
         binding.included.imgBack.setOnClickListener(this);
         binding.btnCheckout.setOnClickListener(this);
         initRecycler();
-//        clearCArtList();
-        fillArrayList(false);
+        fillArrayList(false, "", "","");
 
     }
 
@@ -116,122 +123,14 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
                     case Constants.DELETE:
                         removeLocaly(model.getArrayList().get(position).getId());
                         model.getArrayList().remove(position);
+                        notyFyDat();
                         binding.recyclerView.getAdapter().notifyDataSetChanged();
-//                        removeFromCart(model.getArrayList().get(position).getId(),
-//                                model.getArrayList().get(position).isCourse());
 
                 }
 
 
             }
         }));
-
-
-    }
-
-
-    public void cartListApi() {
-        model.getArrayList().clear();
-        RetrofitClient.getInstance().getRestOkClient().
-                getCartList("",
-                        callback);
-    }
-
-    private final retrofit.Callback callback = new retrofit.Callback() {
-        @Override
-        public void success(Object object, Response response) {
-
-            NetCartList cartList = (NetCartList) object;
-            if (cartList.getStatus().equalsIgnoreCase("success")) {
-                fillBundleArrayList(cartList.getResult().getBundles());
-                fillArrayList(cartList.getResult().getCourses());
-
-
-            } else {
-//                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-
-        @Override
-        public void failure(RetrofitError error) {
-            model.setApiCallActive(false);
-
-
-        }
-    };
-
-    /*set language list*/
-
-    private void fillArrayList(List<NetCartListResultCourses> items) {
-
-        CartModel itemModel;
-
-
-        for (int i = 0; i < items.size(); i++) {
-            itemModel = new CartModel();
-            itemModel.setId(items.get(i).getId() + "");
-            itemModel.setCategory_id(items.get(i).getCategory_id());
-            itemModel.setCourse_image(items.get(i).getCourse_image());
-            itemModel.setImage(items.get(i).getImage());
-            itemModel.setTitle(items.get(i).getTitle());
-            itemModel.setDescription(items.get(i).getDescription());
-            itemModel.setFeatured(items.get(i).getFeatured());
-            itemModel.setFree(items.get(i).getFree());
-            itemModel.setMeta_description(items.get(i).getMeta_description());
-            itemModel.setMeta_keywords(items.get(i).getMeta_keywords());
-            itemModel.setMeta_title(items.get(i).getMeta_title());
-            itemModel.setPopular(items.get(i).getPopular());
-            itemModel.setPublished(items.get(i).getPublished());
-            itemModel.setPrice(items.get(i).getPrice());
-            itemModel.setUpdated_at(items.get(i).getUpdated_at());
-            itemModel.setStart_date(items.get(i).getStart_date());
-            itemModel.setCreated_at(items.get(i).getCreated_at());
-            itemModel.setCourse(true);
-
-            model.getArrayList().add(itemModel);
-
-
-        }
-        binding.recyclerView.getAdapter().notifyDataSetChanged();
-
-
-    }
-
-    private void fillBundleArrayList(List<NetCartListResultBundles> items) {
-
-
-        CartModel itemModel;
-
-
-        for (int i = 0; i < items.size(); i++) {
-            itemModel = new CartModel();
-            itemModel.setId(items.get(i).getId() + "");
-            itemModel.setCategory_id(items.get(i).getCategory_id());
-            itemModel.setUser_id(items.get(i).getUser_id());
-            itemModel.setCourse_image(items.get(i).getCourse_image());
-            itemModel.setImage(items.get(i).getImage());
-            itemModel.setTitle(items.get(i).getTitle());
-            itemModel.setDescription(items.get(i).getDescription());
-            itemModel.setFeatured(items.get(i).getFeatured());
-            itemModel.setFree(items.get(i).getFree());
-            itemModel.setMeta_description(items.get(i).getMeta_description());
-            itemModel.setMeta_keywords(items.get(i).getMeta_keywords());
-            itemModel.setMeta_title(items.get(i).getMeta_title());
-            itemModel.setPopular(items.get(i).getPopular());
-            itemModel.setPublished(items.get(i).getPublished());
-            itemModel.setPrice(items.get(i).getPrice());
-            itemModel.setUpdated_at(items.get(i).getUpdated_at());
-            itemModel.setStart_date(items.get(i).getStart_date());
-            itemModel.setCreated_at(items.get(i).getCreated_at());
-            itemModel.setCourse(false);
-
-            model.getArrayList().add(itemModel);
-
-
-        }
-        binding.recyclerView.getAdapter().notifyDataSetChanged();
 
 
     }
@@ -264,72 +163,15 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
                 break;
             case R.id.btnCheckout:
-                Intent buyIntent = new Intent(CartListActivity.this, PaymentOptionActivity.class);
-                buyIntent.putExtra("total", total);
-                if (binding.edtpromoCode.getText().toString().length() > 0)
-                    buyIntent.putExtra("coupon", binding.edtpromoCode.getText().toString().length());
-                startActivity(buyIntent);
+                callorderConformation();
+
                 break;
 
         }
     }
 
-    public void removeFromCart(String id, boolean type) {
 
-        RetrofitClient.getInstance().getRestOkClient().
-                removeCart(type ? "course" : "bundle",
-                        id,
-                        callbackRemove);
-    }
-
-    private final retrofit.Callback callbackRemove = new retrofit.Callback() {
-        @Override
-        public void success(Object object, Response response) {
-            NetSuccess netSuccess = (NetSuccess) object;
-            if (netSuccess.getStatus().equalsIgnoreCase("success")) {
-                Toast.makeText(CartListActivity.this, "Item Remove From Cart", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(CartListActivity.this, "Somthing Wrong Please Try Again", Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        }
-
-        @Override
-        public void failure(RetrofitError error) {
-
-        }
-    };
-
-    public void clearCArtList() {
-
-        RetrofitClient.getInstance().getRestOkClient().
-                clearCart("",
-                        callbackClear);
-    }
-
-    private final retrofit.Callback callbackClear = new retrofit.Callback() {
-        @Override
-        public void success(Object object, Response response) {
-            NetSuccess netSuccess = (NetSuccess) object;
-            if (netSuccess.getStatus().equalsIgnoreCase("success")) {
-                Toast.makeText(CartListActivity.this, "Cart Clear", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(CartListActivity.this, "Somthing Wrong Please Try Again", Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        }
-
-        @Override
-        public void failure(RetrofitError error) {
-
-        }
-    };
-
-    private void fillArrayList(boolean isTotal) {
+    private void fillArrayList(boolean isTotal, String responceTotal, String subTotal,String tex) {
         model.getArrayList().clear();
         try {
             dbAdapter.open();
@@ -340,19 +182,28 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
                 binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getTotalPrice() + "");
             } else {
                 total = dbAdapter.getFinalTotal();
-                binding.txtTotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getFinalTotal() + "");
-                binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + dbAdapter.getSubTotal() + "");
+                binding.txtTotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + responceTotal + "");
+                binding.txtsubtotal.setText(BaseAppClass.getPreferences().getCurrancy() + " " + subTotal + "");
+                binding.txtShipping.setText(BaseAppClass.getPreferences().getCurrancy() + " " + tex + "");
 
             }
             dbAdapter.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        notyFyDat();
         binding.recyclerView.getAdapter().notifyDataSetChanged();
 
     }
-
+    private void notyFyDat() {
+        if (model.getArrayList().size() > 0) {
+            binding.llMain.setVisibility(View.VISIBLE);
+            binding.noData.setVisibility(View.GONE);
+        } else {
+            binding.llMain.setVisibility(View.GONE);
+            binding.noData.setVisibility(View.VISIBLE);
+        }
+    }
     private void removeLocaly(String id) {
         try {
             dbAdapter.open();
@@ -364,12 +215,19 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void callPromocodeApi() {
+        dialog.setCancelable(false);
+        dialog.show();
         getPromoSyncTask = new GetPromoSyncTask(CartListActivity.this, binding.edtpromoCode.getText().toString(), true, false, new OnApiCalled() {
             @Override
             public void onSuccess(String response) {
                 try {
-                    fillArrayList(true);
-                } catch (Exception e) {
+                    dialog.hide();
+                    JSONObject jsonObject = new JSONObject(response.toString());
+                    total =jsonObject.getString("final_total");
+                    JSONObject taxObject =jsonObject.getJSONObject("tax_data");
+                    fillArrayList(true, jsonObject.getString("subtotal"), jsonObject.getString("final_total")
+                    , taxObject.getString("total_tax"));
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 model.setApiCallActive(false);
@@ -377,7 +235,40 @@ public class CartListActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onError(String strError) {
+                dialog.hide();
                 model.setApiCallActive(false);
+            }
+        });
+    }
+
+
+    private void callorderConformation() {
+        dialog.setCancelable(false);
+        dialog.show();
+        orderConformationTask = new GetOrderConformationTask(CartListActivity.this, binding.edtpromoCode.getText().toString(), true, false, new OnApiCalled() {
+            @Override
+            public void onSuccess(String response) {
+                dialog.hide();
+
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    JSONObject orderObj=jsonObject.getJSONObject("order");
+
+                    Intent buyIntent = new Intent(CartListActivity.this, PaymentOptionActivity.class);
+                    buyIntent.putExtra("total", jsonObject.getString("final_total"));
+                    buyIntent.putExtra("orderId", orderObj.getString("id"));
+                    startActivity(buyIntent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onError(String strError) {
+                dialog.hide();
             }
         });
     }

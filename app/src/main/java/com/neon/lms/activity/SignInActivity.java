@@ -1,9 +1,9 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -41,23 +41,17 @@ import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
 import com.neon.lms.util.Validation;
-import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-import com.twitter.sdk.android.core.models.User;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit2.Call;
 
 public class SignInActivity extends BaseActivity implements SignInModel.BtnClick, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private SignInModel loginModel;

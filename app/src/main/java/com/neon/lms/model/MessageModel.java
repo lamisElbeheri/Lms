@@ -1,9 +1,8 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 import android.os.Parcel;
 
-import com.neon.lms.ResponceModel.NetMessageData;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
 

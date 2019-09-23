@@ -1,11 +1,7 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
-import com.neon.lms.BaseAppClass;
-import com.neon.lms.util.Constants;
-import com.neon.lms.util.Validation;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 
 public class SignInModel extends BaseObservable {

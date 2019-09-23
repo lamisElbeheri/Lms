@@ -1,10 +1,10 @@
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import com.neon.lms.BaseAppClass;
@@ -13,10 +13,7 @@ import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
 import com.neon.lms.databinding.ActivityAccountBinding;
 import com.neon.lms.fragment.AccountFragment;
-import com.neon.lms.fragment.OrderListFragment;
-import com.neon.lms.fragment.WishListFragment;
 import com.neon.lms.model.AcountMainModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,29 +1,25 @@
 package com.neon.lms.fragment;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.appcompat.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 import com.neon.lms.R;
-import com.neon.lms.activity.CartListActivity;
 import com.neon.lms.activity.CheckoutActivity;
 import com.neon.lms.activity.ContactUsActivity;
-import com.neon.lms.activity.CourseDetailActivity;
 import com.neon.lms.activity.CourseListActivity;
 import com.neon.lms.activity.FaqListActivity;
 import com.neon.lms.activity.InvoiceActivity;
 import com.neon.lms.activity.MassageListActivity;
 import com.neon.lms.activity.NewsListActivity;
 import com.neon.lms.activity.SearchListActivity;
-import com.neon.lms.activity.ShopListActivity;
 import com.neon.lms.activity.SponserListActivity;
 import com.neon.lms.activity.TeacherListActivity;
 import com.neon.lms.activity.TestimonialListActivity;
@@ -34,8 +30,6 @@ import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.FragmentHomeBinding;
 import com.neon.lms.model.HomeListModel;
 import com.neon.lms.model.HomeModel;
-import com.neon.lms.model.SearchListModel;
-import com.neon.lms.model.ShopListModel;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 

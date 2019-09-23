@@ -1,7 +1,7 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;

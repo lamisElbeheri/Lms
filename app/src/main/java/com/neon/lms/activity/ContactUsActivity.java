@@ -1,6 +1,6 @@
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.view.View;
 import android.widget.Toast;
 

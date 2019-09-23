@@ -1,16 +1,17 @@
 package com.neon.lms.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
-import com.neon.lms.databinding.RowCourseItemBinding;
 import com.neon.lms.databinding.RowSearchItemBinding;
 import com.neon.lms.model.SearchModel;
 import com.neon.lms.util.AppConstant;
@@ -49,7 +50,7 @@ public class SearchListAdapter extends RecyclerView.Adapter {
                 .load(arrayList.get(position).getImage())
                 .into(h.binding.courseBg);
         h.binding.title.setText(arrayList.get(position).getTitle());
-        h.binding.date.setText(AppConstant.getDate(arrayList.get(position).getCreated_at(), AppConstant.sdfFormateDate));
+        h.binding.date.setText(AppConstant.parseDateToddMMyyyy(arrayList.get(position).getCreated_at()));
         h.binding.executePendingBindings();
     }
 

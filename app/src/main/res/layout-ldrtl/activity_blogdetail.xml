@@ -38,7 +38,7 @@
                 android:layout_weight="1">
 
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_130sdp"
@@ -59,7 +59,7 @@
                             android:layout_height="match_parent" />
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -65,7 +65,7 @@
                 android:id="@+id/imgUser"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:background="@drawable/app_icon_toolbar"
+                android:background="@drawable/app_icon"
                 android:padding="@dimen/_6sdp" />
 
 

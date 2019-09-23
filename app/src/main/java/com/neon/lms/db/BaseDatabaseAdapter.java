@@ -130,11 +130,10 @@ public class BaseDatabaseAdapter {
     /**
      * Clears Data from the Database(All Tables including Chat Database and Tables)
      */
-    public void clearTableData(boolean isAddress) {
+    public void clearTableData() {
         try {
             open();
             resetTable(TABLE_CART);
-
             close();
         } catch (SQLException e1) {
             e1.printStackTrace();

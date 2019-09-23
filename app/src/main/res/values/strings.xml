@@ -59,7 +59,7 @@
     <string name="featured">Featured</string>
     <string name="teacher">Teachers</string>
     <string name="testimonial">Testimonial</string>
-    <string name="question">Queston</string>
+    <string name="question">Question</string>
     <string name="our">Our</string>
     <string name="asked">Asked</string>
     <string name="browse">Browse</string>
@@ -189,6 +189,11 @@
     <string name="offlinepayment">Offline Payment</string>
     <string name="selectpaymant">Select Payment Method</string>
     <string name="pleaseByeCourse">Please Buy Course</string>
+    <string name="oderDone">Order Done</string>
+    <string name="English">English</string>
+    <string name="spanish">Spanish</string>
+    <string name="french">French</string>
+    <string name="arabic">Arabic</string>
 
 
 </resources>

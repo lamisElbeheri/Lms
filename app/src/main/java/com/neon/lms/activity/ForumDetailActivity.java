@@ -1,11 +1,11 @@
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -14,8 +14,11 @@ import com.neon.lms.adapter.ForumDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityForumdetailBinding;
+import com.neon.lms.model.CourseDetailModel;
+import com.neon.lms.model.CourseModel;
 import com.neon.lms.model.ForumDetailListModel;
 import com.neon.lms.model.ForumDetailModel;
+import com.neon.lms.model.ForumModel;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,8 @@ public class ForumDetailActivity extends BaseActivity implements View.OnClickLis
     private ForumDetailListModel model;
     private ActivityForumdetailBinding binding;
 
+    public static final String FORUMDATA = "forumData";
+    public static final String ID = "id";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +75,13 @@ public class ForumDetailActivity extends BaseActivity implements View.OnClickLis
     public void initViews() {
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
         binding.included.imgBack.setOnClickListener(this);
+
+        ArrayList<ForumModel> models = getIntent().getParcelableArrayListExtra(FORUMDATA);
+        if (models != null) {
+            model.setForumModelArrayList(models);
+        } else {
+            model.setForumModelArrayList(new ArrayList<ForumModel>());
+        }
         initRecycler();
 
     }
@@ -85,7 +97,7 @@ public class ForumDetailActivity extends BaseActivity implements View.OnClickLis
 
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         binding.recyclerView.setAdapter(new ForumDetailAdapter(ForumDetailActivity.this,
-                model.getArrayList(), new OnRecyclerItemClick() {
+                model.getForumModelArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
 

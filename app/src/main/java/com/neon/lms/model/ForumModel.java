@@ -1,6 +1,6 @@
 package com.neon.lms.model;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -34,6 +34,7 @@ public class ForumModel extends BaseObservable implements Parcelable {
     private int views;
     private String slug;
     private NetForumDataResultDiscussionsDataPosts_count[] posts_count;
+
 
     protected ForumModel(Parcel in) {
         answered = in.readInt();

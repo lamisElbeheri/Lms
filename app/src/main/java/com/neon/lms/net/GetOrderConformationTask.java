@@ -84,25 +84,6 @@ public class GetOrderConformationTask {
                     try {
                         jsonObject = new JSONObject(data[1]);
 
-                        if (JSONData.getString(jsonObject, "status").equals("success")) {
-                            JSONObject obj = JSONData.getJSONObject(jsonObject, "result");
-                            JSONArray jsonArray =obj.getJSONArray("data");
-
-                            if (dbAdapter == null)
-                                dbAdapter = new CartDbAdapter(context);
-                            for (int i = 0; i <jsonArray.length() ; i++) {
-                                JSONObject dataObj =jsonArray.getJSONObject(i);
-                                dbAdapter.update(dataObj.getString("id"),dataObj.getString("type"),
-                                        dataObj.getString("price"), obj.getString("final_total"),
-                                        obj.getString("subtotal"),dataObj.getBoolean("status"));
-
-                            }
-                            dbAdapter.open();
-
-                        }
-                        else {
-                            Toast.makeText(context, context.getString(R.string.validCoupon), Toast.LENGTH_SHORT).show();
-                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -130,17 +111,8 @@ public class GetOrderConformationTask {
                 JSONObject jObj = null;
                 try {
                     jObj = new JSONObject(result);
+                    apiCalled.onSuccess(jObj.toString());
 
-                    if (JSONData.getString(jObj, "status").equals("success")) {
-                        apiCalled.onSuccess("");
-                    } else
-                        apiCalled.onError(result);
-
-//                    JSONObject obj = JSONData.getJSONObject(jObj, "data");
-//                    if (JSONData.getInt(obj, "count") > JSONData.getJSONArray(obj, "list").length()) {
-//                        isProgress = false;
-//                        startTask();
-//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

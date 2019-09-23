@@ -1,32 +1,18 @@
 package com.neon.lms.fragment;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
-import com.neon.lms.ResponceModel.TokenModel;
-import com.neon.lms.activity.SignInActivity;
-import com.neon.lms.adapter.OrderListAdapter;
 import com.neon.lms.basecomponent.BaseFragment;
-import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.FragmentAccountDetailBinding;
-import com.neon.lms.databinding.FragmentOrderlistBinding;
 import com.neon.lms.model.AccountDetailModel;
-import com.neon.lms.model.OrderModel;
-import com.neon.lms.net.RetrofitClient;
-import com.neon.lms.util.Constants;
-
-import java.util.ArrayList;
-
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 public class AccountFragment extends BaseFragment {

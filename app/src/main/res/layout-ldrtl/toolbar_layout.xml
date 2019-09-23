@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_48sdp"
@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_4sdp"
                         android:layout_gravity="left"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -163,8 +163,8 @@
                 </LinearLayout>
             </RelativeLayout>
 
-        </android.support.v7.widget.Toolbar>
-        <android.support.v7.widget.Toolbar
+        </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarSearch"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_48sdp"
@@ -194,7 +194,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/app_icon_toolbar" />
 
-                <android.support.v7.widget.SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -205,13 +205,13 @@
                     app:theme="@style/blueThemeToolbar">
 
                     <requestFocus />
-                </android.support.v7.widget.SearchView>
+                </androidx.appcompat.widget.SearchView>
 
 
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
         <View

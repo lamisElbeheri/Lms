@@ -133,10 +133,14 @@ public class GetPromoSyncTask {
                 JSONObject jObj = null;
                 try {
                     jObj = new JSONObject(result);
-
                     if (JSONData.getString(jObj, "status").equals("success")) {
-                        apiCalled.onSuccess("");
+                        JSONObject obj = JSONData.getJSONObject(jObj, "result");
+                        apiCalled.onSuccess(obj.toString());
+
+
+
                     } else
+                        Toast.makeText(context, JSONData.getString(jObj, "message"), Toast.LENGTH_SHORT).show();
                         apiCalled.onError(result);
 
 //                    JSONObject obj = JSONData.getJSONObject(jObj, "data");

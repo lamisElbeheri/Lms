@@ -22,25 +22,26 @@
             android:id="@+id/included"
             layout="@layout/activity_toolbar_layout" />
 
-        <LinearLayout
-            android:id="@+id/llMain"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <LinearLayout
+                android:id="@+id/llMain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/app_bg"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/llPromocode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -201,9 +202,26 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/noData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/noDataFound"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:visibility="gone" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
 
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

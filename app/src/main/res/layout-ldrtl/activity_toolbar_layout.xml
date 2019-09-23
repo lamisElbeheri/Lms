@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/normal_bg">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_48sdp"
@@ -97,6 +97,49 @@
                         android:tint="@color/actionbar"
                         android:visibility="gone" />
 
+                    <FrameLayout
+                        android:id="@+id/frameCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_4sdp"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:id="@+id/addtoCart"
+                                android:layout_width="@dimen/_24sdp"
+                                android:layout_height="@dimen/_24sdp"
+                                android:layout_gravity="right|center_vertical"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:src="@drawable/ic_cart" />
+
+                            <LinearLayout
+                                android:id="@+id/layoutCartCount"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
+                                android:layout_gravity="right|top"
+                                android:layout_marginRight="@dimen/_6sdp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:background="@drawable/cart_bg_circle"
+                                android:gravity="center"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:id="@+id/txtCartCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="1"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10sdp" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </FrameLayout>
 
                     <ImageView
                         android:id="@+id/imgLock"
@@ -113,9 +156,9 @@
                 </LinearLayout>
             </RelativeLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarSearch"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_48sdp"
@@ -145,7 +188,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/app_icon_toolbar" />
 
-                <android.support.v7.widget.SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -156,12 +199,12 @@
                     app:theme="@style/blueThemeToolbar">
 
                     <requestFocus />
-                </android.support.v7.widget.SearchView>
+                </androidx.appcompat.widget.SearchView>
 
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
     </FrameLayout>
