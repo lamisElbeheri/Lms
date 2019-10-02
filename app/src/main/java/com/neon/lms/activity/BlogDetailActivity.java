@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetBlogDetailData;
@@ -82,9 +83,15 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     public void blogDetailApi() {
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getBlogDetailList(id,
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {

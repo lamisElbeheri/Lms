@@ -1,11 +1,15 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -107,8 +111,6 @@ public class LessionListActivity extends YouTubeBaseActivity implements
         binding.player.setPlayer(player);
 
 
-
-
     }
 
 
@@ -123,6 +125,12 @@ public class LessionListActivity extends YouTubeBaseActivity implements
                 model.getCourseDetailModelArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
+                Intent intent = new Intent(LessionListActivity.this, LessionListActivity.class);
+                intent.putExtra(LessionListActivity.LESSION_ID, CourseDetailActivity.model.getArrayList().get(position).getId() + "  ");
+                intent.putParcelableArrayListExtra(LessionListActivity.LESSIONTIMELINE, CourseDetailActivity.model.getArrayList());
+                startActivity(intent);
+                overridePendingTransition(R.anim.animation, R.anim.animation2);
+                finish();
 
 
             }
@@ -146,9 +154,14 @@ public class LessionListActivity extends YouTubeBaseActivity implements
     }
 
     public void singleLessionDetail() {
-        RetrofitClient.getInstance().getRestOkClient().
-                getSingleLession(lessionId,
-                        courseCallback);
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getSingleLession(lessionId,
+                            courseCallback);
+        } else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback courseCallback = new retrofit.Callback() {

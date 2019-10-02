@@ -13,6 +13,7 @@ import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.databinding.ActivitySignupBinding;
 import com.neon.lms.model.AccountDetailModel;
 import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
@@ -135,6 +136,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     public void signUpAPi() {
         dialog.setCancelable(false);
         dialog.show();
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 signUp(binding.edtFname.getText().toString(),
                         binding.edtLname.getText().toString(),
@@ -150,6 +152,11 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 //                        binding.edtcountry.getText().toString(),
 //                        ""
                         signUpcallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback signUpcallback = new retrofit.Callback() {

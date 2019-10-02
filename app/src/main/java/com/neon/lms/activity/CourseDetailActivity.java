@@ -35,7 +35,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     public static final String VALUE = "value";
-    private CourseDetailListModel model;
+    public static CourseDetailListModel model;
     private ActivityCoursedetailBinding binding;
 
     int freeCourse;
@@ -221,10 +221,16 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     };
 
     public void getFreeCourse() {
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getFreeCourse(
                         courseId,
                         freecallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback freecallback = new retrofit.Callback() {
@@ -249,9 +255,15 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     public void singleCourseDetail() {
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getSingleCourse(courseId,
                         courseCallback);
+    }
+        else {
+        Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+    }
     }
 
     private final retrofit.Callback courseCallback = new retrofit.Callback() {

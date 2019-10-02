@@ -143,9 +143,15 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     public void forumListApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
         model.getArrayList().clear();
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getForumList("",
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
@@ -226,9 +232,15 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     public void deleteForum(String id) {
         dialog.setCancelable(false);
         dialog.show();
+        if(AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 deleteForum(id,
                         deletecallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback deletecallback = new retrofit.Callback() {

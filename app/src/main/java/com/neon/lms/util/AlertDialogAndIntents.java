@@ -202,6 +202,7 @@ public class AlertDialogAndIntents {
                 getSubscribe(email,
 
                         callback);
+
     }
 
     private static final retrofit.Callback callback = new retrofit.Callback() {

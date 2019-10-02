@@ -1,8 +1,5 @@
 package com.neon.lms.util;
 
-/**
- * Created by Oktay AYAR on 5/25/16.
- */
 public class IllegalAttributeException extends RuntimeException {
   public IllegalAttributeException() {
   }

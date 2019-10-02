@@ -32,6 +32,7 @@ public class CourseDetailAdapter extends RecyclerView.Adapter {
         this.onItemClick = onItemClick;
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_coursedetail_item, parent, false));

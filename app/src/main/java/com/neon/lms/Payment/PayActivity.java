@@ -1,17 +1,25 @@
-/*
 package com.neon.lms.Payment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetSuccess;
+import com.neon.lms.activity.MainActivity;
+import com.neon.lms.activity.PaymentOptionActivity;
+import com.neon.lms.db.BaseDatabaseAdapter;
+import com.neon.lms.db.CartDbAdapter;
+import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AppConstant;
+import com.stripe.android.ApiResultCallback;
 import com.stripe.android.Stripe;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
+import com.stripe.android.view.CardMultilineWidget;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -21,18 +29,23 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class PayActivity extends AppCompatActivity {
 
     Stripe stripe;
     Integer amount;
-    String name;
+    String orderId;
     Card card;
     Token tok;
+    public static String PAY_PRICE = "plan_price";
+    public static String PAY_NAME = "plan_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,52 +53,48 @@ public class PayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay);
 
         Bundle extras = getIntent().getExtras();
-        amount = extras.getInt("plan_price");
-        name = extras.getString("plan_name");
-//        try {
-//            stripe = new Stripe("pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf");
-//        } catch (AuthenticationException e) {
-//            e.printStackTrace();
-//        }
+        amount = extras.getInt(PAY_PRICE);
+        orderId = extras.getString(PAY_NAME);
+
+        stripe = new Stripe(PayActivity.this, getString(R.string.stripePublisherKey));
+
 
     }
 
     public void submitCard(View view) {
         // TODO: replace with your own test key
-        TextView cardNumberField = (TextView) findViewById(R.id.cardNumber);
-        TextView monthField = (TextView) findViewById(R.id.month);
-        TextView yearField = (TextView) findViewById(R.id.year);
-        TextView cvcField = (TextView) findViewById(R.id.cvc);
+        CardMultilineWidget cardInputWidget = (CardMultilineWidget) findViewById(R.id.card_input_widget);
+        card = cardInputWidget.getCard();
 
-        card = new Card(
-                cardNumberField.getText().toString(),
-                Integer.valueOf(monthField.getText().toString()),
-                Integer.valueOf(yearField.getText().toString()),
-                cvcField.getText().toString()
-        );
-
+        if (card == null) {
+            Toast.makeText(this, "Invalid Card Data", Toast.LENGTH_SHORT).show();
+            return;
+        }
 //        card.setCurrency("usd");
 //        card.setName("Theodhor Pandeli");
 //        card.setAddressZip("1000");
-        card.setNumber(4242424242424242);
-        card.setExpMonth(12);
-        card.setExpYear(19);
-        card.setCVC("123");
+//        card.setNumber(4242424242424242);
+//        card.setExpMonth(12);
+//        card.setExpYear(19);
+//        card.setCVC("123");
+
+        stripe.createToken(
+                card,
+                new ApiResultCallback<Token>() {
+                    public void onSuccess(Token token) {
+                        // Send token to your own web service
+                        new StripeCharge(token.getId()).execute();
+                    }
+
+                    public void onError(Exception error) {
+                        Toast.makeText(PayActivity.this,
+                                error.getLocalizedMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
 
 
-        stripe.createToken(card, "[YOUR_PUBLISHABLE_KEY_TEST_HERE]", new TokenCallback() {
-            public void onSuccess(Token token) {
-                // TODO: Send Token information to your backend to initiate a charge
-                Toast.makeText(getApplicationContext(), "Token created: " + token.getId(), Toast.LENGTH_LONG).show();
-                tok = token;
-                new StripeCharge(token.getId()).execute();
-
-            }
-
-            public void onError(Exception error) {
-                Log.d("Stripe", error.getLocalizedMessage());
-            }
-        });
     }
 
     public class StripeCharge extends AsyncTask<String, Void, String> {
@@ -100,7 +109,7 @@ public class PayActivity extends AppCompatActivity {
             new Thread() {
                 @Override
                 public void run() {
-                    postData(name, token, "" + amount);
+                    postData(orderId, token, "" + amount);
                 }
             }.start();
             return "Done";
@@ -109,6 +118,8 @@ public class PayActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            setPaymentStatus("success", "1", orderId, "");
+
             Log.e("Result", s);
         }
     }
@@ -186,7 +197,51 @@ public class PayActivity extends AppCompatActivity {
             this.value = value;
         }
     }
+
+
+    public void setPaymentStatus(String status, String paymentType, String orderId, String transactionId) {
+        if (AppConstant.isOnline(this)){
+        RetrofitClient.getInstance().getRestOkClient().
+                paymentStatus(status,
+                        paymentType,
+                        orderId,
+                        transactionId,
+                        "",
+                        currancyCallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private final retrofit.Callback currancyCallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            NetSuccess netSuccess = (NetSuccess) object;
+
+            Toast.makeText(PayActivity.this, getString(R.string.orderDone), Toast.LENGTH_SHORT).show();
+
+            CartDbAdapter cartDbAdapter = new CartDbAdapter(PayActivity.this);
+            try {
+                cartDbAdapter.open();
+                cartDbAdapter.resetTable(BaseDatabaseAdapter.TABLE_CART);
+                cartDbAdapter.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(PayActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+        }
+    };
+
 }
 
 
-*/

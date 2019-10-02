@@ -9,6 +9,7 @@
     <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">426476001491167</string>
     <string name="fb_login_protocol_scheme">fb426476001491167</string>
+    <string name="stripePublisherKey">pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf</string>
 
     <string name="loginHear">مرحبا! تسجيل الدخول اسمع</string>
     <string name="email_hint">البريد الإلكتروني</string>
@@ -50,6 +51,7 @@
     <string name="about">معلومات عنا</string>
     <string name="login">تسجيل الدخول</string>
     <string name="feedback">ردود الفعل</string>
+    <string name="certificate">شهادة</string>
     <string name="language">لغة</string>
     <string name="faq">التعليمات</string>
 
@@ -191,11 +193,14 @@
     <string name="offlinepayment">غير متصل الدفع</string>
     <string name="selectpaymant">اختار طريقة الدفع</string>
     <string name="pleaseByeCourse">يرجى شراء بالطبع</string>
-    <string name="oderDone">تم الطلب</string>
+    <string name="orderDone">تم الطلب</string>
 
     <string name="English">English</string>
     <string name="spanish">Spanish</string>
     <string name="french">French</string>
     <string name="arabic">Arabic</string>
+
+    <string name="download">تحميل</string>
+
 
 </resources>

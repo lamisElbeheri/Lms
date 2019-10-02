@@ -12,9 +12,6 @@ import com.neon.lms.R;
 
 import java.lang.ref.SoftReference;
 
-/**
- * Created by rahul.patel on 7/17/2017.
- */
 
 public class AnimationsContainer {
     public int FPS = 30;  // animation FPS

@@ -23,9 +23,6 @@ import com.neon.lms.R;
 
 import java.text.DecimalFormat;
 
-/**
- * Created by Oktay AYAR on 5/20/16.
- */
 public class AdvancedTextView extends TextView {
     private static final String DEFAULT_EXPAND_TEXT_COLOR = "#C5C5C5";
     private static final int DEFAULT_COUNTING_INTERVAL = 3000;

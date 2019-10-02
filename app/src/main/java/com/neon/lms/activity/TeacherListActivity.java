@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetTeacherData;
@@ -125,9 +126,15 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
 
 
     public void teacherApi() {
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getTeacherListApi("popular",
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {

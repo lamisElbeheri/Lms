@@ -45,6 +45,8 @@ public class LessionListAdapter extends RecyclerView.Adapter {
         final MyViewHolder h = ((MyViewHolder) vh);
         h.binding.setCourseDetailModel(arrayList.get(position));
         h.binding.title.setText(arrayList.get(position).getTitle());
+        if (arrayList.get(position).getCompleted())
+            h.binding.complateCourse.setImageResource(R.drawable.right_green);
         h.binding.executePendingBindings();
 
 

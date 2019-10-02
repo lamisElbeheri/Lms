@@ -11,6 +11,7 @@ import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.databinding.ActivityAboutusBinding;
 import com.neon.lms.model.AbouUsModel;
 import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AppConstant;
 
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -54,9 +55,15 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
     //     Login Api Codeall
     public void aboutDataAPI() {
         binding.progressBar.setVisibility(View.VISIBLE);
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getAboutUs("about-us",
                         forgotcallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback forgotcallback = new retrofit.Callback() {

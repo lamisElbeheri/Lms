@@ -1,8 +1,5 @@
 package com.neon.lms.util;
 
-/**
- * Created by Oktay AYAR on 5/20/16.
- */
 public class IlleagalUsageException extends RuntimeException {
   public IlleagalUsageException() {
   }

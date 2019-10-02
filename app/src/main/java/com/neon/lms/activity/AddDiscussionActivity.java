@@ -11,6 +11,7 @@ import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.databinding.ActivityAddDiscussionBinding;
 import com.neon.lms.model.AddForumModel;
 import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Validation;
@@ -61,11 +62,17 @@ public class AddDiscussionActivity extends BaseActivity implements View.OnClickL
     public void addforumDiscussion() {
         dialog.setCancelable(false);
         dialog.show();
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 addDiscussion(binding.edttitle.getText().toString(),
                         binding.edtDiscussion.getText().toString(),
                         "1",
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {

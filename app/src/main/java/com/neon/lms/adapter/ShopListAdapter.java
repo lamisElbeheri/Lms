@@ -72,10 +72,7 @@ public class ShopListAdapter extends RecyclerView.Adapter {
                 case R.id.llMain:
                     onItemClick.onClick(getLayoutPosition(), Constants.ROW_CLICK);
                     break;
-
             }
-
-
         }
     }
 

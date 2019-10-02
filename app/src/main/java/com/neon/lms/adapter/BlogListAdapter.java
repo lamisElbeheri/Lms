@@ -45,7 +45,7 @@ public class BlogListAdapter extends RecyclerView.Adapter {
         final MyViewHolder h = ((MyViewHolder) vh);
         Picasso.with(context)
                 .load(arrayList.get(position).getImage())
-                .into(h.binding.img);
+                .into(h.binding.blogimage);
         h.binding.txtTitle.setText(arrayList.get(position).getTitle());
         h.binding.data.setText(AppConstant.parseDateToddMMyyyy(arrayList.get(position).getCreated_at()));
 

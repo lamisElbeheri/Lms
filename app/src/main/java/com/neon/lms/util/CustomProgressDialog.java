@@ -14,10 +14,6 @@ import android.widget.ViewSwitcher;
 
 import com.neon.lms.R;
 
-
-/**
- * Created by User on 9/8/2015.
- */
 public class CustomProgressDialog extends ProgressDialog {
     private Context mContext;
     private ImageView image1;

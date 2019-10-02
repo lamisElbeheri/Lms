@@ -8,9 +8,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * Created by rahul.patel on 11/29/2016.
- */
 public class Validation {
     private Context context;
 

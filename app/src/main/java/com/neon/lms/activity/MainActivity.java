@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.neon.lms.BaseAppClass;
@@ -170,6 +171,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
 //        drawerArrayList.add(new Drawer("", getString(R.string.cart), Constants.CART, R.drawable.ic_cart, R.drawable.ic_cart, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.certificate), Constants.CERTIFICATE, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
@@ -210,16 +212,24 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 openCourseList();
                 setSelection(position);
                 break;
+
             case Constants.BLOG:
                 openBlogList();
                 setSelection(position);
                 break;
+
             case Constants.ABOUTUS:
                 openAboutus();
                 setSelection(position);
                 break;
+
             case Constants.FAQ:
                 openFaqList();
+                setSelection(position);
+                break;
+
+            case Constants.CERTIFICATE:
+                openCertificateList();
                 setSelection(position);
                 break;
 
@@ -233,11 +243,11 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                 setSelection(position);
                 break;
 
-
             case Constants.CONTACT:
                 openContactUs();
                 setSelection(position);
                 break;
+
             case Constants.FEEDBACK:
                 openContactUs();
                 setSelection(position);
@@ -252,7 +262,6 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                     BaseAppClass.getPreferences().saveUserLanguageCode(Constants.FRANCH);
                 else if (type == Constants.CLICK_AREBIC)
                     BaseAppClass.getPreferences().saveUserLanguageCode(Constants.AREBIC);
-
 
                 BaseAppClass.changeLang(MainActivity.this, BaseAppClass.getPreferences().getUserLanguageCode());
                 recreate();
@@ -319,6 +328,11 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     }
 
+
+    private void openCertificateList() {
+        startActivity(new Intent(this, CertificateListActivity.class));
+        overridePendingTransition(R.anim.animation, R.anim.animation2);
+    }
 
     private void openFaqList() {
         startActivity(new Intent(this, FaqListActivity.class));
@@ -488,7 +502,6 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     }
 
-
     public void closeSearchView() {
         binding.included.imgClose.performClick();
     }
@@ -510,9 +523,15 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     public void logOutApi() {
         dialog.setCancelable(false);
         dialog.show();
-        RetrofitClient.getInstance().getRestOkClient().
-                logout("",
-                        callback);
+
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    logout("",
+                            callback);
+        } else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
@@ -534,9 +553,14 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     };
 
     public void getUserData() {
-        RetrofitClient.getInstance().getRestOkClient().
-                getProfileData("",
-                        userCallback);
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getProfileData("",
+                            userCallback);
+        } else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private final retrofit.Callback userCallback = new retrofit.Callback() {
@@ -566,9 +590,15 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     };
 
     public void getCurrancyData() {
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getCurrancydata("",
                         currancyCallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback currancyCallback = new retrofit.Callback() {

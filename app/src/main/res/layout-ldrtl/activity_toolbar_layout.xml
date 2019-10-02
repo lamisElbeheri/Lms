@@ -79,7 +79,7 @@
                     android:id="@+id/linMain"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/_4sdp"
                     android:gravity="center"

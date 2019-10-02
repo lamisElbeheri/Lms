@@ -69,6 +69,7 @@ public class SponserListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             switch (view.getId()) {
                 case R.id.linMain:
                     onItemClick.onClick(getAdapterPosition(), Constants.ROW_CLICK);
+                    break;
 
 
 

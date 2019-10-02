@@ -4,6 +4,7 @@ import com.neon.lms.ResponceModel.NetAboutData;
 import com.neon.lms.ResponceModel.NetBlogData;
 import com.neon.lms.ResponceModel.NetBlogDetailData;
 import com.neon.lms.ResponceModel.NetCartList;
+import com.neon.lms.ResponceModel.NetCertificatModel;
 import com.neon.lms.ResponceModel.NetCourseData;
 import com.neon.lms.ResponceModel.NetCourseSearch;
 import com.neon.lms.ResponceModel.NetCurrancyData;
@@ -298,6 +299,13 @@ public interface RestClient {
     void applayPromo(
             @Field("type") String type,
             Callback<NetOfferData> callback);
+
+
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/my-certificates")
+    void apiMyCertificate(
+            @Field("type") String type,
+            Callback<NetCertificatModel> callback);
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/payment-status")

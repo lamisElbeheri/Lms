@@ -42,18 +42,20 @@
                 <FrameLayout
                     android:id="@+id/llGame"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/courseBg"
                         android:layout_width="match_parent"
                         android:scaleType="fitXY"
+                        android:visibility="gone"
                         android:layout_height="match_parent" />
 
 
                     <ImageView
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
+                        android:visibility="gone"
                         android:layout_gravity="center" />
 
                     <LinearLayout
@@ -103,6 +105,7 @@
                                     android:background="@color/darkhintColor" />
 
                                 <TextView
+                                    android:id="@+id/category"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"

@@ -1,11 +1,7 @@
-/*
+
 package com.neon.lms.activity;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import androidx.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +13,7 @@ import com.neon.lms.adapter.MessageDetailAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityMessageDetailBinding;
+import com.neon.lms.model.MessagChatModel;
 import com.neon.lms.model.MessageModel;
 
 import com.neon.lms.net.RetrofitClient;
@@ -24,6 +21,10 @@ import com.neon.lms.util.AppConstant;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -45,7 +46,7 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_message_detail);
         model = new MessageModel();
-        model.setMessages(new ArrayList<NetMessageDataThreadsMessages>());
+        model.setMessages(new ArrayList<MessagChatModel>());
         binding.setMessageModel(model);
 
     }
@@ -71,11 +72,11 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     public void initViews() {
         threadId = getIntent().getStringExtra(getString(R.string.id));
         binding.txtSend.setOnClickListener(this);
-        ArrayList<NetMessageDataThreadsMessages> models = getIntent().getParcelableArrayListExtra(getString(R.string.detail));
+        ArrayList<MessagChatModel> models = getIntent().getParcelableArrayListExtra(getString(R.string.detail));
         if (models != null) {
             model.setMessages(models);
         } else {
-            model.setMessages(new ArrayList<NetMessageDataThreadsMessages>());
+            model.setMessages(new ArrayList<MessagChatModel>());
         }
 
         initRecycler();
@@ -84,10 +85,6 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     }
 
 
-    */
-/*
-     *  initialize Reacycler view
-     *//*
 
     private void initRecycler() {
         binding.recyclerView.setHasFixedSize(true);
@@ -152,7 +149,7 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
         public void success(Object object, Response response) {
             NetSuccess netAboutData = (NetSuccess) object;
             if (netAboutData != null) {
-                NetMessageDataThreadsMessages itemModel = new NetMessageDataThreadsMessages();
+                MessagChatModel itemModel = new MessagChatModel();
                 itemModel.setBody(binding.etChatMessage.getText().toString());
                 model.getMessages().add(itemModel);
                 binding.recyclerView.getAdapter().notifyDataSetChanged();
@@ -175,4 +172,4 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
 
 
 }
-*/
+

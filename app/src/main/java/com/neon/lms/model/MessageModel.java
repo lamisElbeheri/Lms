@@ -2,6 +2,7 @@ package com.neon.lms.model;
 
 import androidx.databinding.BaseObservable;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
@@ -9,18 +10,40 @@ import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
 import java.util.ArrayList;
 
 
-public class MessageModel extends BaseObservable {
-    private ArrayList<NetMessageDataThreadsMessages> messages;
+public class MessageModel extends BaseObservable implements Parcelable {
+    private ArrayList<MessagChatModel> messages;
 
     public MessageModel() {
 
     }
 
-    public ArrayList<NetMessageDataThreadsMessages> getMessages() {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MessageModel> CREATOR = new Creator<MessageModel>() {
+        @Override
+        public MessageModel createFromParcel(Parcel in) {
+            return new MessageModel(in);
+        }
+
+        @Override
+        public MessageModel[] newArray(int size) {
+            return new MessageModel[size];
+        }
+    };
+
+    public ArrayList<MessagChatModel> getMessages() {
         return messages;
     }
 
-    public void setMessages(ArrayList<NetMessageDataThreadsMessages> messages) {
+    public void setMessages(ArrayList<MessagChatModel> messages) {
         this.messages = messages;
     }
 

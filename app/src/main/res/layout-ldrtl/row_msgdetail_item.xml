@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="NetMessageDataThreadsMessages"
-            type="com.neon.lms.model.MessageModel" />
+            name="MessagChatModel"
+            type="com.neon.lms.model.MessagChatModel" />
 
     </data>
 

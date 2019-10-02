@@ -37,6 +37,7 @@ import com.neon.lms.model.SignInModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AccessTokenTask;
 import com.neon.lms.util.AlertDialogAndIntents;
+import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
 import com.neon.lms.util.Utility;
@@ -343,21 +344,28 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     public void loginApi() {
         dialog.setCancelable(false);
         dialog.show();
-        RetrofitClient.getInstance().getRestOkClient().
-                passwordLogin("password",
-                        Constants.CLIENT_ID,
-                        Constants.CLIENT_SECRET,
-                        binding.etEmailorMobile.getText().toString(),
-                        binding.etPassword.getText().toString(),
-                        "*",
-                        callback);
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    passwordLogin("password",
+                            Constants.CLIENT_ID,
+                            Constants.CLIENT_SECRET,
+                            binding.etEmailorMobile.getText().toString(),
+                            binding.etPassword.getText().toString(),
+                            "*",
+                            callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     //     Login Api Codeall
     public void socialLogin(String provider, String token) {
         dialog.setCancelable(false);
         dialog.show();
-        RetrofitClient.getInstance().getRestOkClient().
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
                 socialLogin("social",
                         Constants.CLIENT_ID,
                         Constants.CLIENT_SECRET,
@@ -366,11 +374,17 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                         token,
 
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }  //     Login Api Codeall
     public void twitterLogin(String provider, String token, String secret) {
         dialog.setCancelable(false);
         dialog.show();
-        RetrofitClient.getInstance().getRestOkClient().
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
                 twitterLogin("social",
                         Constants.CLIENT_ID,
                         Constants.CLIENT_SECRET,
@@ -380,6 +394,11 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                         secret,
 
                         callback);
+    }
+        else {
+        Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+    }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
@@ -411,9 +430,15 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     public void forgotApi() {
         dialog.setCancelable(false);
         dialog.show();
-        RetrofitClient.getInstance().getRestOkClient().
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
                 forgotPassword(binding.etEmailorMobile.getText().toString(),
                         forgotcallback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private final retrofit.Callback forgotcallback = new retrofit.Callback() {

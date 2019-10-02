@@ -50,6 +50,7 @@ public class NewsListAdapter extends RecyclerView.Adapter {
                 .load(arrayList.get(position).getBlog_image())
                 .into(h.binding.courseBg);
         h.binding.title.setText(arrayList.get(position).getTitle());
+        h.binding.category.setText(arrayList.get(position).getCategory().getName());
         h.binding.date.setText(AppConstant.parseDateToddMMyyyy(arrayList.get(position).getCategory().getCreated_at()));
         h.binding.executePendingBindings();
 

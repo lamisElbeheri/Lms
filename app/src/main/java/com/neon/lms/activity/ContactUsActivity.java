@@ -98,6 +98,7 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     public void feedbackApicall() {
         dialog.setCancelable(false);
         dialog.show();
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getContactUs(
                         binding.edtName.getText().toString(),
@@ -105,6 +106,11 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
                         binding.edtPhone.getText().toString(),
                         binding.edtComment.getText().toString(),
                         callback);
+        }
+        else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 

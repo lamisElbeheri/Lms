@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetFaqData;
@@ -114,10 +115,15 @@ public class FaqListActivity extends BaseActivity implements View.OnClickListene
 
     public void faqListApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
-
+if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getFaqListApi("",
                         callback);
+}
+else {
+    Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+}
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {

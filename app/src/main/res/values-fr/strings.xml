@@ -5,6 +5,8 @@
     <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">426476001491167</string>
     <string name="fb_login_protocol_scheme">fb426476001491167</string>
+    <string name="stripePublisherKey">pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf</string>
+
     <string name="loginHear">salut! Login Hear</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Mot de passe</string>
@@ -42,6 +44,7 @@
     <string name="about">À propos de nous</string>
     <string name="login">S\'identifier</string>
     <string name="feedback">Retour d\'information</string>
+    <string name="certificate">Certificat</string>
     <string name="language">La langue</string>
     <string name="faq">Questions - réponses</string>
     <!--Home Text-->
@@ -160,10 +163,13 @@
     <string name="offlinepayment">Paiement hors ligne</string>
     <string name="selectpaymant">Sélectionnez le mode de paiement</string>
     <string name="pleaseByeCourse">S\'il vous plaît acheter un cours</string>
-    <string name="oderDone">Commande effectuée</string>
+    <string name="orderDone">Commande effectuée</string>
 
     <string name="English">English</string>
     <string name="spanish">Spanish</string>
     <string name="french">French</string>
     <string name="arabic">Arabic</string>
+
+    <string name="download">Télécharger</string>
+
 </resources>

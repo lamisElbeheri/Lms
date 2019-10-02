@@ -49,7 +49,6 @@ public class TeacherListAdapter extends RecyclerView.Adapter {
                 .load(arrayList.get(position).getImage())
                 .into(h.binding.teacheImage);
         h.binding.setTeacherModel(arrayList.get(position));
-
         h.binding.executePendingBindings();
 
 

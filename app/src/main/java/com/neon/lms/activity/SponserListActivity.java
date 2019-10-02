@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSponserData;
@@ -126,10 +127,17 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
 
 
     public void sponsorListApi() {
+
         binding.progressBar.setVisibility(View.VISIBLE);
+        if (AppConstant.isOnline(this)){
         RetrofitClient.getInstance().getRestOkClient().
                 getSponserList("",
                         callback);
+    }
+        else {
+        Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+    }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
