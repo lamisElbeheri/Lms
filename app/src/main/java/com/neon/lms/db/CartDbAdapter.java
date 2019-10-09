@@ -149,8 +149,6 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 CartModel = new CartModel();
-
-
                 CartModel.setId(cursor.getString(cursor.getColumnIndex(KEY_ID)));
                 CartModel.setTitle(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
                 CartModel.setCourse_image(cursor.getString(cursor.getColumnIndex(KEY_IMGURL)));
@@ -185,9 +183,7 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
             }
             cursor.moveToNext();
         }
-
         return array;
-
     }
 
     public ArrayList<String> getIds(String strTableName, String columnName, String whereClause) {
@@ -206,7 +202,6 @@ public class CartDbAdapter extends BaseDatabaseAdapter {
 
                 c.moveToNext();
             }
-
         }
         c.close();
         return ids;

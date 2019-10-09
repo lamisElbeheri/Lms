@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="MessageModel"
-            type="com.neon.lms.model.MessageModel" />
+            name="MessageListModel"
+            type="com.neon.lms.model.MessageListModel" />
 
     </data>
 
@@ -51,15 +51,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:background="@drawable/normal_bg"
+            android:gravity="center"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:popupTheme="@style/ActionBarPopupThemeOverlay"
             app:theme="@style/ActionBarThemeOverlay">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/userContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:padding="@dimen/_4sdp">
 
                 <ImageView
@@ -68,7 +70,7 @@
                     android:layout_height="48dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/_8sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
                     android:onClick="backClicked"
                     android:padding="@dimen/_8sdp"
                     android:src="@drawable/ic_back" />
@@ -101,7 +103,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_20sdp"
                         android:textStyle="bold"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                 </FrameLayout>
 
@@ -111,8 +113,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="right|center"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_toRightOf="@+id/imgLayout"
+                    android:gravity="center|right"
                     android:maxLines="1"
                     android:padding="@dimen/_4sdp"
                     android:text="Denial Josef"
@@ -133,9 +137,10 @@
                     android:text="online"
                     android:textColor="@color/hintColor"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
-            </RelativeLayout>
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
 
@@ -173,7 +178,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:src="@drawable/ic_attach"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/etChatMessage"

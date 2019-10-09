@@ -16,12 +16,21 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.neon.lms.BaseAppClass;
+import com.neon.lms.Config;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCurrancyData;
 import com.neon.lms.ResponceModel.NetSuccess;
@@ -40,6 +49,7 @@ import com.neon.lms.util.AlertDialogAndIntents;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
 import com.neon.lms.util.CustomProgressDialog;
+import com.twitter.sdk.android.core.TwitterCore;
 
 import java.util.ArrayList;
 
@@ -62,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
 
     public static boolean isOpened = false;
     ActionBarDrawerToggle mDrawerToggle;
+    GoogleApiClient googleApiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +103,17 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         binding.included.imgClose.setOnClickListener(this);
         menuParam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestId()
+                .requestIdToken(Config.GOOGLE_SERVER_CLIENT_ID)
+                .requestServerAuthCode(Config.GOOGLE_SERVER_CLIENT_ID)
+                .build();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, null)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         setUpDrawer();
         openHome();
         getUserData();
@@ -173,7 +195,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.certificate), Constants.CERTIFICATE, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
+//        drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.English), Constants.LANGUAGE, R.drawable.contact, R.drawable.contact, DrawerAdapter.TYPE_EXPAND, true, false));
 
@@ -529,6 +551,7 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
                     logout("",
                             callback);
         } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -541,7 +564,24 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
             NetSuccess netSuccess = (NetSuccess) object;
             BaseAppClass.getPreferences().clearUserData();
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
+
+            CookieSyncManager.createInstance(MainActivity.this);
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeSessionCookie();
+            TwitterCore.getInstance().getSessionManager().clearActiveSession();
             finish();
+
+
+            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+
+                        }
+                    });
+            LoginManager.getInstance().logOut();
+            Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+
             overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
 
         }
@@ -590,12 +630,11 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
     };
 
     public void getCurrancyData() {
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getCurrancydata("",
-                        currancyCallback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getCurrancydata("",
+                            currancyCallback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.basecomponent.BaseActivity;
@@ -29,7 +30,11 @@ public class AddDiscussionActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
 
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_discussion);
@@ -70,6 +75,7 @@ public class AddDiscussionActivity extends BaseActivity implements View.OnClickL
                         callback);
         }
         else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

@@ -23,6 +23,7 @@ public class Constants {
     public static String BASE_URL = "https://sample.neonlms.com";
     public static final String API_VERSION = "/api/v1";
     public static final String DEVELOPER_KEY = "AIzaSyAsgtOvy1dr8jcVSUFqy63wB2X8KW4TFT0";
+    public static final File LmsFolder = new File(Environment.getExternalStorageDirectory() + "/" + FOLDER_NAME + "/LMS/");
 
     //Broadcast CustomConstants
     public static final int CONNECTION_TIMEOUT = 30000;

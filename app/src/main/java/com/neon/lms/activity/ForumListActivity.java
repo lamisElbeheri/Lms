@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetForumData;
 import com.neon.lms.ResponceModel.NetForumDataResultDiscussionsData;
@@ -42,9 +43,17 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
     CustomProgressDialog dialog;
 
+    int removePos;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -112,9 +121,8 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
                         overridePendingTransition(R.anim.animation, R.anim.animation2);
                         break;
                     case Constants.DELETE:
+                        removePos = position;
                         deleteForum(model.getArrayList().get(position).getId() + "");
-                        model.getArrayList().remove(position);
-                        binding.recyclerView.getAdapter().notifyDataSetChanged();
                         break;
                 }
 
@@ -143,12 +151,11 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     public void forumListApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
         model.getArrayList().clear();
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getForumList("",
-                        callback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getForumList("",
+                            callback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -232,12 +239,12 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
     public void deleteForum(String id) {
         dialog.setCancelable(false);
         dialog.show();
-        if(AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                deleteForum(id,
-                        deletecallback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    deleteForum(id,
+                            deletecallback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -251,6 +258,9 @@ public class ForumListActivity extends BaseActivity implements View.OnClickListe
 
             if (netSuccess != null) {
                 Toast.makeText(ForumListActivity.this, getString(R.string.deletSuccessFul), Toast.LENGTH_SHORT).show();
+                model.getArrayList().remove(removePos);
+                binding.recyclerView.getAdapter().notifyDataSetChanged();
+
 
             } else {
                 Toast.makeText(ForumListActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();

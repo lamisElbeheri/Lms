@@ -175,6 +175,11 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".activity.UserListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".activity.MessageDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

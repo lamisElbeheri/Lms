@@ -9,6 +9,7 @@ import com.neon.lms.R;
 import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowMsgdetailItemBinding;
 import com.neon.lms.model.MessagChatModel;
+import com.neon.lms.model.MessagChatModel;
 import com.neon.lms.util.Constants;
 
 import java.util.ArrayList;
@@ -44,7 +45,10 @@ public class MessageDetailAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
+//        for (int i = 0; i < arrayList.get(position).getMessages().size(); i++) {
         h.binding.txtMessage.setText(arrayList.get(position).getBody());
+
+//        }
         h.binding.setMessagChatModel(arrayList.get(position));
         h.binding.executePendingBindings();
 

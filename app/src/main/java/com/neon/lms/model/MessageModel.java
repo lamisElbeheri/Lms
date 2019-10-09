@@ -4,7 +4,6 @@ import androidx.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.neon.lms.ResponceModel.NetMessageDataThreadsMessages;
 import com.neon.lms.ResponceModel.NetMessageDataThreadsPivot;
 
 import java.util.ArrayList;

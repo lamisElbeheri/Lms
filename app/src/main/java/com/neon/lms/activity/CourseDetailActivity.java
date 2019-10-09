@@ -1,15 +1,20 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSingleCourseData;
 import com.neon.lms.ResponceModel.NetSingleCourseDataResultCourse_timeline;
@@ -58,6 +63,12 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
+
+    @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_coursedetail);
         model = new CourseDetailListModel();
@@ -101,11 +112,29 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         binding.included.imgBack.setOnClickListener(this);
         binding.addTocart.setOnClickListener(this);
 
+        if (freeCourse ==1)
+            binding.addTocart.setVisibility(View.GONE);
+        else
+            binding.addTocart.setVisibility(View.VISIBLE);
+
+        if (checkIfAddedTocart())
+            binding.addTocart.setText(getString(R.string.addedtocart));
         initRecycler();
         singleCourseDetail();
 
     }
 
+    private boolean checkIfAddedTocart() {
+        boolean ifExist = false;
+        try {
+            dbAdapter.open();
+            ifExist = dbAdapter.checkIsExist(courseId);
+            dbAdapter.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ifExist;
+    }
 
     /*
      *  initialize Reacycler view
@@ -180,6 +209,8 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
             dbAdapter.insUpdate(courseId, title, img, "", des, "course",
                     price, "", cretaedAt, updatedAt);
             dbAdapter.close();
+            if (checkIfAddedTocart())
+                binding.addTocart.setText(getString(R.string.addedtocart));
             Toast.makeText(CourseDetailActivity.this, "Item Add Into Cart", Toast.LENGTH_SHORT).show();
 
         } catch (SQLException e) {
@@ -221,13 +252,12 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     };
 
     public void getFreeCourse() {
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getFreeCourse(
-                        courseId,
-                        freecallback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getFreeCourse(
+                            courseId,
+                            freecallback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -255,15 +285,14 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     public void singleCourseDetail() {
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getSingleCourse(courseId,
-                        courseCallback);
-    }
-        else {
-        Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getSingleCourse(courseId,
+                            courseCallback);
+        } else {
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
-    }
+        }
     }
 
     private final retrofit.Callback courseCallback = new retrofit.Callback() {

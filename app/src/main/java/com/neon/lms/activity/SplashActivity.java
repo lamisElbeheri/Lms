@@ -3,13 +3,16 @@ package com.neon.lms.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.util.AppConstant;
 
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
@@ -32,11 +35,15 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
 
     /**
      * Check and starts Location service if not already running.
      */
-
 
 
     public void callHandler(long delay) {
@@ -56,10 +63,13 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
         if (!BaseAppClass.getPreferences().isUserLoggedIn()) {
 
-                openSignInActivity();
+            openSignInActivity();
 //                openMainActivity();
         } else {
-            openMainActivity();
+            if (AppConstant.isOnline(SplashActivity.this))
+                openMainActivity();
+            else
+                Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
 

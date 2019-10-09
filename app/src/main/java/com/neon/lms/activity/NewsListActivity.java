@@ -1,6 +1,8 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetNewsData;
 import com.neon.lms.ResponceModel.NetNewsDataResultData;
@@ -40,7 +43,11 @@ public class  NewsListActivity extends BaseActivity implements View.OnClickListe
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_newslist);
@@ -101,6 +108,11 @@ public class  NewsListActivity extends BaseActivity implements View.OnClickListe
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
+                Intent intent = new Intent(NewsListActivity.this, BlogDetailActivity.class);
+                intent.putExtra(BlogDetailActivity.BLOG_ID,model.getArrayList().get(position).getId()+"");
+                startActivity(intent);
+                overridePendingTransition(R.anim.animation, R.anim.animation2);
+
 
 
 

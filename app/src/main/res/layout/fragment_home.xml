@@ -34,7 +34,7 @@
                 android:background="@color/white"
                 android:padding="@dimen/_4sdp"
                 android:queryHint="@string/searchtext"
-                android:textColor="@color/hintColor"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp" />
 
             <androidx.cardview.widget.CardView

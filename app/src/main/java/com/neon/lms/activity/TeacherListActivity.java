@@ -1,15 +1,20 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetTeacherData;
 import com.neon.lms.ResponceModel.NetTeacherDataResultData;
@@ -39,6 +44,12 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -85,8 +96,6 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-
-
     /*
      *  initialize Reacycler view
      */
@@ -97,11 +106,10 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-                Intent intent = new Intent(TeacherListActivity.this,TeacherDetailActivity.class);
-                intent.putExtra(TeacherDetailActivity.TEACHER_ID,model.getArrayList().get(position).getId());
+                Intent intent = new Intent(TeacherListActivity.this, TeacherDetailActivity.class);
+                intent.putExtra(TeacherDetailActivity.TEACHER_ID, model.getArrayList().get(position).getId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
-
 
 
             }
@@ -115,7 +123,7 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
                         + ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition())
                         >= recyclerView.getLayoutManager().getItemCount()) {
 
-                        if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
+                    if (/*model.getCount() > model.getArrayList().size() &&*/ !model.isApiCallActive()) {
 
                     }
                 }
@@ -126,12 +134,13 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
 
 
     public void teacherApi() {
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getTeacherListApi("popular",
-                        callback);
-        }
-        else {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getTeacherListApi("popular",
+                            callback);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -140,11 +149,12 @@ public class TeacherListActivity extends BaseActivity implements View.OnClickLis
     private final retrofit.Callback callback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            binding.progressBar.setVisibility(View.GONE);
             NetTeacherData teacherData = (NetTeacherData) object;
             if (teacherData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(teacherData.getResult().getData());
 
-notyFyDat();
+                notyFyDat();
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
@@ -154,6 +164,7 @@ notyFyDat();
         @Override
         public void failure(RetrofitError error) {
             model.setApiCallActive(false);
+            binding.progressBar.setVisibility(View.GONE);
 
         }
     };
@@ -183,6 +194,7 @@ notyFyDat();
 
 
     }
+
     private void notyFyDat() {
         if (model.getArrayList().size() > 0) {
             binding.recyclerView.setVisibility(View.VISIBLE);
@@ -192,6 +204,7 @@ notyFyDat();
             binding.noData.setVisibility(View.VISIBLE);
         }
     }
+
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);
@@ -209,9 +222,6 @@ notyFyDat();
 
         }
     }
-
-
-
 
 
 }

@@ -154,6 +154,8 @@
                         android:gravity="left|center"
                         android:text="@string/remember"
                         android:textColor="@color/white"
+                        android:theme="@style/SampleTheme"
+                        android:checked="true"
                         android:textColorHint="@color/white" />
 
                     <TextView

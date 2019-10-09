@@ -1,14 +1,18 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetWhyusData;
 import com.neon.lms.ResponceModel.NetWhyusDataResultData;
@@ -38,6 +42,12 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -121,12 +131,11 @@ public class WhyusListActivity extends BaseActivity implements View.OnClickListe
 
     public void courseApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getWhyUsList("",
-                        callback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getWhyUsList("",
+                            callback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

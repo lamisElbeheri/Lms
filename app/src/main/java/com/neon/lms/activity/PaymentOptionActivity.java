@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.neon.lms.BaseAppClass;
+import com.neon.lms.Config;
 import com.neon.lms.Payment.PayActivity;
 import com.neon.lms.Payment.PayPalConfig;
 import com.neon.lms.R;
@@ -23,6 +24,8 @@ import com.neon.lms.db.CartDbAdapter;
 import com.neon.lms.model.PaymentOptionModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -48,6 +51,7 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
     PayPalPayment thingToBuy;
 
     String orderId;
+    CustomProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,11 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
 
 
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void onDestroy() {
         stopService(new Intent(this, PayPalService.class));
@@ -78,10 +86,11 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initViews() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, PaymentOptionActivity.this).createProgressBar();
         orderId = getIntent().getStringExtra("orderId");
         PayPalConfiguration config = new PayPalConfiguration()
                 .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-                .clientId(PayPalConfig.PAYPAL_CLIENT_ID)
+                .clientId(Config.PAYPAL_CLIENT_ID)
                 .merchantName("LMS")
                 .merchantPrivacyPolicyUri(
                         Uri.parse("https://www.example.com/privacy"))
@@ -131,7 +140,6 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
             case R.id.imgStripe:
 
                 Intent intent = new Intent(PaymentOptionActivity.this, PayActivity.class);
-
                 intent.putExtra(PayActivity.PAY_PRICE, paymentAmount);
                 intent.putExtra(PayActivity.PAY_NAME, orderId);
                 startActivity(intent);
@@ -198,6 +206,8 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
     }
 
     public void setPaymentStatus(String status, String paymentType, String orderId, String transactionId) {
+        dialog.setCancelable(false);
+        dialog.show();
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
                     paymentStatus(status,
@@ -207,6 +217,7 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
                             "",
                             currancyCallback);
         } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -215,6 +226,7 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
     private final retrofit.Callback currancyCallback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            dialog.hide();
             NetSuccess netSuccess = (NetSuccess) object;
 
             Toast.makeText(PaymentOptionActivity.this, getString(R.string.orderDone), Toast.LENGTH_SHORT).show();
@@ -236,6 +248,7 @@ public class PaymentOptionActivity extends BaseActivity implements View.OnClickL
 
         @Override
         public void failure(RetrofitError error) {
+            dialog.hide();
         }
     };
 

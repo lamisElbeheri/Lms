@@ -13,6 +13,7 @@ import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.RowTeacherspecialItemBinding;
 import com.neon.lms.model.TeacherSpecialModel;
 import com.neon.lms.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,11 @@ public class TeacherSpecialistAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vh, int position) {
 
         final MyViewHolder h = ((MyViewHolder) vh);
-//        h.binding.setTeacherSpecialModel(arrayList.get(position));
+        Picasso.with(context)
+                .load(arrayList.get(position).getImage())
+                .into(h.binding.homeimage);
+        h.binding.txtName.setText(arrayList.get(position).getTitle());
+        h.binding.setTeacherSpecialModel(arrayList.get(position));
         h.binding.executePendingBindings();
 
 
@@ -52,7 +57,7 @@ public class TeacherSpecialistAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

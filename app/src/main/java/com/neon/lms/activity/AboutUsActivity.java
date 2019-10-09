@@ -1,10 +1,12 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetAboutData;
 import com.neon.lms.basecomponent.BaseActivity;
@@ -27,17 +29,21 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
+
+    @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_aboutus);
         model = new AbouUsModel();
-
     }
 
     @Override
     public void setToolBar() {
         binding.included.txtTitle.setText(getString(R.string.about));
         binding.included.imgBack.setOnClickListener(this);
-
     }
 
     @Override
@@ -55,12 +61,11 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
     //     Login Api Codeall
     public void aboutDataAPI() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getAboutUs("about-us",
-                        forgotcallback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getAboutUs("about-us",
+                            forgotcallback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

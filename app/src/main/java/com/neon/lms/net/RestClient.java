@@ -250,7 +250,7 @@ public interface RestClient {
 
 
     @FormUrlEncoded
-    @POST(Constants.API_VERSION + "/signup-save")
+    @POST(Constants.API_VERSION + "/auth/signup-save")
     void signUp(
             @Field("first_name") String name,
             @Field("last_name") String last_name,

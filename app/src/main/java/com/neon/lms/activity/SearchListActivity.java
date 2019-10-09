@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCourseSearch;
 import com.neon.lms.ResponceModel.NetCourseSearchResultData;
@@ -59,6 +60,7 @@ public class SearchListActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
         setCounts();
     }
 

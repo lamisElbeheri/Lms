@@ -32,6 +32,7 @@
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginLeft="@dimen/_8sdp"
+                android:visibility="gone"
                 android:background="@drawable/course_raw"
                 android:scaleType="fitXY" />
 

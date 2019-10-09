@@ -50,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="andoerson"
+                        android:hint="@string/enterFname"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:textSize="@dimen/_12sdp" />
@@ -77,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="peek"
+                        android:hint="@string/enterLname"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
 
@@ -106,8 +106,40 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="+7 0349898434"
+                        android:hint="@string/enterNumber"
                         android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:background="@drawable/white_boarder"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/_8sdp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:layout_marginRight="@dimen/_6sdp"
+android:backgroundTint="@color/txtColorsky"
+                        android:tint="@color/txtColorsky"
+                        android:background="@drawable/lock" />
+
+                    <EditText
+                        android:id="@+id/edtpass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"
                         android:maxLength="10"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
@@ -135,7 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="peekandro@gmail.com"
+                        android:hint="@string/enteremail"
                         android:inputType="textEmailAddress"
 
                         android:textColor="@color/white"
@@ -151,6 +183,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:background="@drawable/white_boarder"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     android:padding="@dimen/_8sdp">
 
                     <ImageView
@@ -165,7 +198,6 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="204/C, Queen's Strret 6 , flr 4"
-
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
 
@@ -192,7 +224,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="Melbourne"
+                        android:hint="@string/enterCity"
                         android:textColor="@color/white"
 
                         android:textColorHint="@color/white"
@@ -202,6 +234,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -229,6 +262,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -256,6 +290,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"

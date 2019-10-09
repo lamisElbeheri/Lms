@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class MessageListModel extends BaseObservable {
     private String noDataLable, noDataMessage, noDataButtonText;
     private ArrayList<MessageModel> arrayList;
+    private ArrayList<MessagChatModel> chatModelArrayList;
+    private ArrayList<UserModel> userModelArrayList;
     private boolean apiCallActive = false;
     private int page, count;
     private boolean isSwipeRefress;
@@ -126,11 +128,27 @@ public class MessageListModel extends BaseObservable {
         this.thread_id = thread_id;
     }
 
+    public ArrayList<MessagChatModel> getChatModelArrayList() {
+        return chatModelArrayList;
+    }
+
+    public void setChatModelArrayList(ArrayList<MessagChatModel> chatModelArrayList) {
+        this.chatModelArrayList = chatModelArrayList;
+    }
+
     public String getLast_read() {
         return last_read;
     }
 
     public void setLast_read(String last_read) {
         this.last_read = last_read;
+    }
+
+    public ArrayList<UserModel> getUserModelArrayList() {
+        return userModelArrayList;
+    }
+
+    public void setUserModelArrayList(ArrayList<UserModel> userModelArrayList) {
+        this.userModelArrayList = userModelArrayList;
     }
 }

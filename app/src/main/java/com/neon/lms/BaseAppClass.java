@@ -69,7 +69,7 @@ public class BaseAppClass extends Application {
         Fabric.with(this, new Crashlytics());
         TwitterConfig twitterConfig = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig(getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_KEY), getResources().getString(R.string.com_twitter_sdk_android_CONSUMER_SECRET)))//pass the created app Consumer KEY and Secret also called API Key and Secret
+                .twitterAuthConfig(new TwitterAuthConfig(Config.CONSUMER_KEY, Config.CONSUMER_SECRET))//pass the created app Consumer KEY and Secret also called API Key and Secret
                 .debug(true)
                 .build();
         Twitter.initialize(twitterConfig);

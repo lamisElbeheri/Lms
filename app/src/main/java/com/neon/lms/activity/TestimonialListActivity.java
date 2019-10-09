@@ -1,15 +1,19 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetTestimonialData;
 import com.neon.lms.ResponceModel.NetTestimonialDataResultData;
@@ -42,6 +46,12 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
     }
 
     @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
+
+    @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_testimoniallist);
         model = new TestimonialListModel();
@@ -64,7 +74,6 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -73,11 +82,8 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
                 break;
 
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     @Override
@@ -87,20 +93,16 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
         sponsorListApi();
     }
 
-
-
-
     /*
      *  initialize Reacycler view
      */
     private void initRecycler() {
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         binding.recyclerView.setAdapter(new TestimonialListAdapter(TestimonialListActivity.this,
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
-
 
 
             }
@@ -126,12 +128,11 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
 
     public void sponsorListApi() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getTestimonialList("",
-                        callback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getTestimonialList("",
+                            callback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -145,7 +146,7 @@ public class TestimonialListActivity extends BaseActivity implements View.OnClic
             if (netTestimonialData.getStatus().equalsIgnoreCase("success")) {
                 fillArrayList(netTestimonialData.getResult().getData());
 
-notyFyDat();
+                notyFyDat();
             } else {
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
             }
@@ -184,9 +185,8 @@ notyFyDat();
 
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
-
-
     }
+
     private void notyFyDat() {
         if (model.getArrayList().size() > 0) {
             binding.recyclerView.setVisibility(View.VISIBLE);
@@ -196,6 +196,7 @@ notyFyDat();
             binding.noData.setVisibility(View.VISIBLE);
         }
     }
+
     @Override
     public void closeActivity() {
         AppConstant.hideKeyboard(this, binding.recyclerView);
@@ -213,10 +214,4 @@ notyFyDat();
 
         }
     }
-
-
-
-
-
-
 }

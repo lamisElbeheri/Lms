@@ -146,6 +146,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_margin="@dimen/_4sdp"
                         android:gravity="center">
 
                         <EditText
@@ -155,6 +156,7 @@
                             android:layout_marginRight="@dimen/_16sdp"
                             android:background="@drawable/edittextborder"
                             android:hint="@string/enterPromo"
+                            android:layout_weight="1"
                             android:padding="@dimen/_6sdp" />
 
                         <TextView
@@ -164,9 +166,10 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/_6sdp"
                             android:background="@drawable/normal_bg"
-                            android:gravity="center|left"
+                            android:gravity="center"
                             android:padding="@dimen/_6sdp"
                             android:text="@string/apply"
+                            android:layout_weight="1"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp" />
 
@@ -175,9 +178,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="center|left"
+                            android:gravity="center"
                             android:padding="@dimen/_6sdp"
                             android:text="@string/offer"
+                            android:layout_weight="1"
                             android:textColor="@color/txtColorBlue"
                             android:textSize="@dimen/_14sdp" />
                     </LinearLayout>

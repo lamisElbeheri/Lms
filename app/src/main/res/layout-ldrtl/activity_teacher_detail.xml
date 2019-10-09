@@ -45,7 +45,6 @@
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
-                        android:background="@drawable/course_raw"
                         android:scaleType="fitXY" />
 
                     <LinearLayout

@@ -1,9 +1,11 @@
 package com.neon.lms.activity;
 
 import androidx.databinding.DataBindingUtil;
+
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.basecomponent.BaseActivity;
@@ -27,6 +29,11 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     private ActivityContactusBinding binding;
     CustomProgressDialog dialog;
 
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
 
     @Override
     public void setModelAndBinding() {
@@ -98,16 +105,16 @@ public class ContactUsActivity extends BaseActivity implements View.OnClickListe
     public void feedbackApicall() {
         dialog.setCancelable(false);
         dialog.show();
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getContactUs(
-                        binding.edtName.getText().toString(),
-                        binding.edtEmail.getText().toString(),
-                        binding.edtPhone.getText().toString(),
-                        binding.edtComment.getText().toString(),
-                        callback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getContactUs(
+                            binding.edtName.getText().toString(),
+                            binding.edtEmail.getText().toString(),
+                            binding.edtPhone.getText().toString(),
+                            binding.edtComment.getText().toString(),
+                            callback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

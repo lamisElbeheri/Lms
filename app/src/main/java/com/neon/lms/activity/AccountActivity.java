@@ -29,7 +29,11 @@ public class AccountActivity extends BaseActivity implements View.OnClickListene
         binding = DataBindingUtil.setContentView(this, R.layout.activity_account);
         binding.setAcountMainModel(model);
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setToolBar() {
         binding.included.txtTitle.setText(getString(R.string.profile));

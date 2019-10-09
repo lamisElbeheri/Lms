@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCertificatModel;
 import com.neon.lms.ResponceModel.NetCertificatModelResult;
@@ -14,6 +15,7 @@ import com.neon.lms.callBack.OnRecyclerItemClick;
 import com.neon.lms.databinding.ActivityCertificatelistBinding;
 import com.neon.lms.model.CertificateListModel;
 import com.neon.lms.model.CertificateModel;
+import com.neon.lms.net.DownloadAttachmentTask;
 import com.neon.lms.net.DownloadTask;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
@@ -37,6 +39,10 @@ public class CertificateListActivity extends BaseActivity implements View.OnClic
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }  @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -94,7 +100,20 @@ public class CertificateListActivity extends BaseActivity implements View.OnClic
                 model.getArrayList(), new OnRecyclerItemClick() {
             @Override
             public void onClick(int position, int type) {
+                new DownloadAttachmentTask(CertificateListActivity.this,  position,
+                        1,
+                        model.getArrayList().get(position).getCertificate_link(),
+                        new DownloadAttachmentTask.UpdateProgress() {
+                            @Override
+                            public void onProgressUpdate(int position, int progress, boolean isError, String localPath) {
+                                if (isError)
+                                    Toast.makeText(CertificateListActivity.this, getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();
+                                else if (progress == 100) {
+                                    Toast.makeText(CertificateListActivity.this, getString(R.string.addSuccessFul), Toast.LENGTH_SHORT).show();
 
+                                }
+                            }
+                        }).execute();
                 new DownloadTask(CertificateListActivity.this, model.getArrayList().get(position).getCertificate_link());
 
             }

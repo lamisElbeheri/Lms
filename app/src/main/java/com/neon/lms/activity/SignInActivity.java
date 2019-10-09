@@ -1,9 +1,13 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -27,6 +31,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.neon.lms.BaseAppClass;
+import com.neon.lms.Config;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetForgot;
 import com.neon.lms.ResponceModel.TokenModel;
@@ -80,6 +85,12 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
     CustomProgressDialog dialog;
 
     @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
+
+    @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
@@ -106,12 +117,12 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
 
     @Override
     public void initViews() {
-        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, SignInActivity.this).createProgressBar();
+        client = new TwitterAuthClient();
+        dialog = new CustomProgressDialog(Constants.PROGRESS_TEXT, SignInActivity.this).createProgressBar();
 
         mCallbackManager = CallbackManager.Factory.create();
-        client = new TwitterAuthClient();
 
-        String serverClientId = getResources().getString(R.string.google_server_client_id);
+        String serverClientId = Config.GOOGLE_SERVER_CLIENT_ID;
 
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -198,7 +209,12 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                 gotSignUp();
                 break;
             case R.id.loginTwitter:
-                customLoginTwitter();
+
+                if (AppConstant.isOnline(SignInActivity.this)) {
+                    customLoginTwitter();
+                } else {
+                    Toast.makeText(instance, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.showPassword:
@@ -215,12 +231,22 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                 break;
 
             case R.id.loginGoogle:
-                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(intent, RC_SIGN_IN);
+
+                if (AppConstant.isOnline(SignInActivity.this)) {
+                    Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                    startActivityForResult(intent, RC_SIGN_IN);
+                } else {
+                    Toast.makeText(instance, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.demoFb:
-                binding.loginButton.performClick();
+                if (AppConstant.isOnline(SignInActivity.this)) {
+
+                    binding.loginButton.performClick();
+                } else {
+                    Toast.makeText(instance, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.forgot:
@@ -353,8 +379,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                             binding.etPassword.getText().toString(),
                             "*",
                             callback);
-        }
-        else {
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -366,39 +392,40 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         dialog.show();
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
-                socialLogin("social",
-                        Constants.CLIENT_ID,
-                        Constants.CLIENT_SECRET,
-                        "*",
-                        provider,
-                        token,
+                    socialLogin("social",
+                            Constants.CLIENT_ID,
+                            Constants.CLIENT_SECRET,
+                            "*",
+                            provider,
+                            token,
 
-                        callback);
-        }
-        else {
+                            callback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
     }  //     Login Api Codeall
+
     public void twitterLogin(String provider, String token, String secret) {
         dialog.setCancelable(false);
         dialog.show();
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
-                twitterLogin("social",
-                        Constants.CLIENT_ID,
-                        Constants.CLIENT_SECRET,
-                        "*",
-                        provider,
-                        token,
-                        secret,
+                    twitterLogin("social",
+                            Constants.CLIENT_ID,
+                            Constants.CLIENT_SECRET,
+                            "*",
+                            provider,
+                            token,
+                            secret,
 
-                        callback);
-    }
-        else {
-        Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+                            callback);
+        } else {
+            dialog.hide();
+            Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
-    }
+        }
     }
 
     private final retrofit.Callback callback = new retrofit.Callback() {
@@ -432,10 +459,10 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         dialog.show();
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
-                forgotPassword(binding.etEmailorMobile.getText().toString(),
-                        forgotcallback);
-        }
-        else {
+                    forgotPassword(binding.etEmailorMobile.getText().toString(),
+                            forgotcallback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -491,7 +518,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         } else {
             //if user is already authenticated direct call fetch twitter email api
             Toast.makeText(this, "User already authenticated", Toast.LENGTH_SHORT).show();
-            fetchTwitterEmail(getTwitterSession());
+//            fetchTwitterEmail(getTwitterSession());
         }
     }
 
@@ -518,7 +545,7 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
                 //here it will give u only email and rest of other information u can get from TwitterSession
                 Log.e("User Id : ", twitterSession.getUserName() + "");
                 Log.e("data", "User Id : " + twitterSession.getUserId() + "\nScreen Name : " + twitterSession.getUserName() + "\nEmail Id : " + result.data);
-                twitterLogin("twitter", twitterSession.getAuthToken().token,twitterSession.getAuthToken().secret);
+                twitterLogin("twitter", twitterSession.getAuthToken().token, twitterSession.getAuthToken().secret);
             }
 
             @Override

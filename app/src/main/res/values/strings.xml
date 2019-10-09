@@ -2,12 +2,8 @@
     <string name="app_name">Neon Lms</string>
 
 
-    <string name="com.twitter.sdk.android.CONSUMER_KEY">LHsc14ugIKld1D1RYKxDT8ys1</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">CCW189NHTIZUrJzGzAwswSH1eMyqOSndf5k2tL72VSAsjc2oB6</string>
-    <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">426476001491167</string>
     <string name="fb_login_protocol_scheme">fb426476001491167</string>
-    <string name="stripePublisherKey">pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf</string>
 
     <string name="loginHear">Hello! Login Hear</string>
     <string name="email_hint">Email</string>
@@ -21,7 +17,7 @@
     <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string name="largedummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
 
-<!--Login text-->
+    <!--Login text-->
     <string name="quit">Are You Sure To Quit?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -30,6 +26,7 @@
     <string name="enterpassword">Please Enter Password</string>
     <string name="validemail">Please Enter Valid Email</string>
     <string name="enteremail">Please Enter Email</string>
+    <string name="enterCity">Please Enter City</string>
 
     <string name="enter_username_mobiel_email_msg">Please enter Email</string>
     <string name="empty_msg">%1$s can\'t be empty.Please enter your %2$s.</string>
@@ -91,6 +88,7 @@
 
     <!--shop and cart-->
     <string name="addtocart">Add to cart</string>
+    <string name="addedtocart">Added to cart</string>
     <string name="shop">Shop</string>
     <string name="cart">Cart</string>
 
@@ -120,11 +118,10 @@
     <string name="payment">Payment</string>
 
 
-
     <string name="search_no_internet_connection">No Internet Connection</string>
     <string name="somthingwrong">Somthing Wrong Please Try Again</string>
     <string name="checkEmail">Please Check Your Email To Reset Password</string>
-    <string name="signcancel">Sign in cancle</string>
+    <string name="signcancel">Sign in cancel</string>
 
     <string-array name="courseSort">
         <item>None</item>
@@ -163,7 +160,7 @@
     <string name="minAmount">Minimum Order Amount </string>
     <string name="enterFname">Please Enter First Name</string>
     <string name="enterLname">Please Enter Last Name</string>
-    <string name="enterNumber">Please Enter Last Phone Number</string>
+    <string name="enterNumber">Please Enter Phone Number</string>
     <string name="signUpSuccess">SignUp Successfull. Please Login first</string>
     <string name="logout">Logout</string>
     <string name="addForum">New Discussion</string>

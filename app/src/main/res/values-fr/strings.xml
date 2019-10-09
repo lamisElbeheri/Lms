@@ -1,11 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">Neon Lms</string>
-    <string name="com.twitter.sdk.android.CONSUMER_KEY">LHsc14ugIKld1D1RYKxDT8ys1</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">CCW189NHTIZUrJzGzAwswSH1eMyqOSndf5k2tL72VSAsjc2oB6</string>
-    <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
+
     <string name="facebook_app_id">426476001491167</string>
     <string name="fb_login_protocol_scheme">fb426476001491167</string>
-    <string name="stripePublisherKey">pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf</string>
 
     <string name="loginHear">salut! Login Hear</string>
     <string name="email_hint">Email</string>
@@ -27,6 +24,8 @@
     <string name="enterpassword">Veuillez entrer le mot de passe</string>
     <string name="validemail">Veuillez entrer un email valide</string>
     <string name="enteremail">S\'il vous plaît entrer email</string>
+    <string name="enterCity">Veuillez entrer la ville</string>
+
     <string name="enter_username_mobiel_email_msg">S\'il vous plaît entrer email</string>
     <string name="empty_msg">% 1 $ s ne peut pas être vide.Veuillez entrer votre% 2 $ s.</string>
     <string name="invalid_email">Email invalide.Veuillez entrer un email valide</string>
@@ -79,6 +78,7 @@
     <string name="coursetimeline">Chronologie du cours: </string>
     <!--shop and cart-->
     <string name="addtocart">Ajouter au chariot</string>
+    <string name="addedtocart">Ajouté au panier</string>
     <string name="shop">Magasin</string>
     <string name="cart">Chariot</string>
     <!--Message-->

@@ -47,18 +47,21 @@
                 android:paddingRight="@dimen/_16sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:textColor="@color/black"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:textColorHint="@color/hintColor"
                 android:textSize="@dimen/_14sdp" />
 
             <EditText
                 android:id="@+id/edtDiscussion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/edittextborder"
                 android:hint="@string/discussion"
                 android:inputType="textEmailAddress"
-                android:minLines="3"
+                android:layout_gravity="top|left"
+                android:gravity="top|left"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:paddingLeft="@dimen/_16sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_16sdp"

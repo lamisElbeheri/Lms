@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetCourseData;
 import com.neon.lms.ResponceModel.NetCourseDataResultData;
@@ -57,7 +58,9 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void onResume() {
+
         super.onResume();
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
         setCounts();
     }
 
@@ -195,6 +198,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                         callback);
     }
         else {
+
         Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
     }

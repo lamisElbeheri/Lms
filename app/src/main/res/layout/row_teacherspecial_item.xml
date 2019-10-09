@@ -51,7 +51,6 @@
                     android:id="@+id/homeimage"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-                    android:background="@drawable/ic_photography"
                     android:padding="@dimen/_4sdp" />
 
                 <LinearLayout
@@ -60,21 +59,15 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/fName"
+                        android:id="@+id/txtName"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textSize="@dimen/_14sdp"
                         android:text="@string/teacher"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textColor="@color/black" />
 
-                    <TextView
-                        android:id="@+id/lName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
-                        android:textColor="@color/actionbar" />
 
                 </LinearLayout>
             </LinearLayout>

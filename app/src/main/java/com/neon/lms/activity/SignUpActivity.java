@@ -1,11 +1,14 @@
 package com.neon.lms.activity;
 
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSignUpData;
 import com.neon.lms.ResponceModel.NetSuccess;
@@ -39,6 +42,11 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
         model = new AccountDetailModel();
 
+    }
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -94,13 +102,13 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     private boolean validateInput() {
         if (!Validation.isStringEmpty(binding.edtFname.getText().toString())) {
             if (!Validation.isStringEmpty(binding.edtLname.getText().toString())) {
-//                if (!Validation.isStringEmpty(binding.edtPhone.getText().toString())) {
+                if (Validation.isPasswordValid(binding.edtpass.getText().toString())) {
                 if (Utility.validate(binding.edtEmail.getText().toString())) {
                     return true;
                 } else
                     Toast.makeText(this, getString(R.string.enteremail), Toast.LENGTH_SHORT).show();
-//                } else
-//                    Toast.makeText(this, getString(R.string.enterNumber), Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(this, getString(R.string.enterpassword), Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(this, getString(R.string.enterLname), Toast.LENGTH_SHORT).show();
         } else
@@ -136,24 +144,24 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     public void signUpAPi() {
         dialog.setCancelable(false);
         dialog.show();
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                signUp(binding.edtFname.getText().toString(),
-                        binding.edtLname.getText().toString(),
-                        binding.edtEmail.getText().toString(),
-                        "123456",
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    signUp(binding.edtFname.getText().toString(),
+                            binding.edtLname.getText().toString(),
+                            binding.edtEmail.getText().toString(),
+                            binding.edtpass.getText().toString(),
 //                        binding.edtPhone.getText().toString(),
 //                        "",
 //                        "",
 //                        binding.edtAdd.getText().toString(),
-                        binding.edtCity.getText().toString(),
+                            binding.edtCity.getText().toString(),
 //                        binding.edtpin.getText().toString(),
 //                        binding.edtState.getText().toString(),
 //                        binding.edtcountry.getText().toString(),
 //                        ""
-                        signUpcallback);
-        }
-        else {
+                            signUpcallback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }

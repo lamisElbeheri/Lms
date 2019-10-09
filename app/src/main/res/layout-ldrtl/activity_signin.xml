@@ -155,6 +155,7 @@
                         android:backgroundTint="@color/white"
                         android:gravity="right|center|end"
                         android:text="@string/remember"
+                        android:theme="@style/SampleTheme"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white" />
 

@@ -13,10 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetMessageData;
+import com.neon.lms.ResponceModel.NetMessageDataTeachers;
 import com.neon.lms.ResponceModel.NetMessageDataThreads;
-import com.neon.lms.ResponceModel.NetMessageDataThreadsMessagesSender;
 import com.neon.lms.adapter.MessageListAdapter;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OnRecyclerItemClick;
@@ -24,6 +25,7 @@ import com.neon.lms.databinding.ActivityMessagelistBinding;
 import com.neon.lms.model.MessagChatModel;
 import com.neon.lms.model.MessageListModel;
 import com.neon.lms.model.MessageModel;
+import com.neon.lms.model.UserModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
 
@@ -44,6 +46,10 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }@Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
     }
 
     @Override
@@ -51,6 +57,8 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         binding = DataBindingUtil.setContentView(this, R.layout.activity_messagelist);
         model = new MessageListModel();
         model.setArrayList(new ArrayList<MessageModel>());
+        model.setChatModelArrayList(new ArrayList<MessagChatModel>());
+        model.setUserModelArrayList(new ArrayList<UserModel>());
         binding.setMessageListModel(model);
 
     }
@@ -85,6 +93,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
     public void initViews() {
         binding.included.txtTitle.setText(getIntent().getStringExtra(VALUE));
         binding.included.imgBack.setOnClickListener(this);
+        binding.fab.setOnClickListener(this);
         initRecycler();
         messageListApi();
 
@@ -103,7 +112,8 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
             public void onClick(int position, int type) {
                 Intent intent = new Intent(MassageListActivity.this, MessageDetailActivity.class);
                 intent.putExtra(getString(R.string.id), model.getArrayList().get(position).getPivot().getThread_id() + "");
-                intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList());
+                intent.putExtra(MessageDetailActivity.TITLE, model.getArrayList().get(position).getMessages().get(0).getSender().getFull_name() + "");
+                intent.putParcelableArrayListExtra(getString(R.string.detail), model.getArrayList().get(position).getMessages());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 
@@ -132,12 +142,11 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         binding.progressBar.setVisibility(View.VISIBLE);
 
         model.getArrayList().clear();
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                getMessageList("",
-                        callback);
-        }
-        else {
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    getMessageList("",
+                            callback);
+        } else {
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -153,6 +162,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                 for (int i = 0; i < messageData.getThreads().size(); i++) {
                     model.setThread_id(messageData.getThreads().get(i).getId());
                     fillArrayList(messageData.getThreads());
+                    fillArrayListTeacher(messageData.getTeachers());
                     notyFyData();
                 }
 
@@ -181,6 +191,7 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         MessageModel itemModel;
 
 
+
         for (int i = 0; i < items.size(); i++) {
             itemModel = new MessageModel();
             itemModel.setId(items.get(i).getId());
@@ -197,11 +208,33 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
                 messagChatModel.setSender(items.get(i).getMessages().get(j).getSender());
                 messagChatModelArrayList.add(messagChatModel);
 
-                itemModel.setMessages(messagChatModelArrayList);
 
             }
+            itemModel.setMessages(messagChatModelArrayList);
             itemModel.setPivot(items.get(i).getPivot());
             model.getArrayList().add(itemModel);
+
+
+        }
+        binding.recyclerView.getAdapter().notifyDataSetChanged();
+
+
+    }
+    private void fillArrayListTeacher(List<NetMessageDataTeachers> items) {
+        model.getUserModelArrayList().clear();
+
+        UserModel itemModel;
+
+
+
+        for (int i = 0; i < items.size(); i++) {
+            itemModel = new UserModel();
+            itemModel.setId(items.get(i).getId());
+            itemModel.setFirst_name(items.get(i).getFirst_name());
+            itemModel.setFull_name(items.get(i).getFull_name());
+            itemModel.setImage(items.get(i).getImage());
+            itemModel.setLast_name(items.get(i).getLast_name());
+            model.getUserModelArrayList().add(itemModel);
 
 
         }
@@ -232,6 +265,13 @@ public class MassageListActivity extends BaseActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.imgBack:
                 closeActivity();
+                break;
+
+                case R.id.fab:
+                    Intent intent = new Intent(MassageListActivity.this, UserListActivity.class);
+                    intent.putParcelableArrayListExtra(getString(R.string.detail), model.getUserModelArrayList());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.animation, R.anim.animation2);
                 break;
 
         }

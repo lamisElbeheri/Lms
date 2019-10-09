@@ -7,14 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.Config;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSuccess;
 import com.neon.lms.activity.MainActivity;
-import com.neon.lms.activity.PaymentOptionActivity;
 import com.neon.lms.db.BaseDatabaseAdapter;
 import com.neon.lms.db.CartDbAdapter;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.Stripe;
 import com.stripe.android.model.Card;
@@ -46,6 +48,7 @@ public class PayActivity extends AppCompatActivity {
     Token tok;
     public static String PAY_PRICE = "plan_price";
     public static String PAY_NAME = "plan_name";
+    CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,8 @@ public class PayActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         amount = extras.getInt(PAY_PRICE);
         orderId = extras.getString(PAY_NAME);
-
-        stripe = new Stripe(PayActivity.this, getString(R.string.stripePublisherKey));
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, PayActivity.this).createProgressBar();
+        stripe = new Stripe(PayActivity.this, Config.STRIPE_PUBLISHER_KEY);
 
 
     }
@@ -200,16 +203,18 @@ public class PayActivity extends AppCompatActivity {
 
 
     public void setPaymentStatus(String status, String paymentType, String orderId, String transactionId) {
-        if (AppConstant.isOnline(this)){
-        RetrofitClient.getInstance().getRestOkClient().
-                paymentStatus(status,
-                        paymentType,
-                        orderId,
-                        transactionId,
-                        "",
-                        currancyCallback);
-        }
-        else {
+        dialog.setCancelable(false);
+        dialog.show();
+        if (AppConstant.isOnline(this)) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    paymentStatus(status,
+                            paymentType,
+                            orderId,
+                            transactionId,
+                            "",
+                            currancyCallback);
+        } else {
+            dialog.hide();
             Toast.makeText(this, getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
 
         }
@@ -218,6 +223,7 @@ public class PayActivity extends AppCompatActivity {
     private final retrofit.Callback currancyCallback = new retrofit.Callback() {
         @Override
         public void success(Object object, Response response) {
+            dialog.hide();
             NetSuccess netSuccess = (NetSuccess) object;
 
             Toast.makeText(PayActivity.this, getString(R.string.orderDone), Toast.LENGTH_SHORT).show();
@@ -239,6 +245,7 @@ public class PayActivity extends AppCompatActivity {
 
         @Override
         public void failure(RetrofitError error) {
+            dialog.hide();
         }
     };
 

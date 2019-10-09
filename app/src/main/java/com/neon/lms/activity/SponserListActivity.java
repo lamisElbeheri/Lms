@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSponserData;
 import com.neon.lms.ResponceModel.NetSponserDataResultData;
@@ -49,7 +50,11 @@ public class SponserListActivity extends BaseActivity implements View.OnClickLis
         binding.setSponserListModel(model);
 
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setToolBar() {
         if (binding.included.toolbar != null) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class NetMessageDataThreads {
     private NetMessageDataThreadsPivot pivot;
     private ArrayList<NetMessageDataThreadsMessages> messages;
-    private String id;
+    private String  id;
 
     public NetMessageDataThreadsPivot getPivot() {
         return this.pivot;

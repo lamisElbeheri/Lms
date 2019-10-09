@@ -172,7 +172,7 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
 
 
     private void openTestimonialList() {
-        startActivity(new Intent(getContext(), TestimonialListActivity.class));
+        startActivity(new Intent(getContext(),  TestimonialListActivity.class));
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
@@ -255,12 +255,11 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         int[] image = {R.drawable.newspaper,
                 R.drawable.book,
                 R.drawable.course,
-                R.drawable.testimonial,
+                R.drawable.knowledge,
                 R.drawable.professor,
                 R.drawable.conversation,
-                R.drawable.knowledge,
-                R.drawable.information,
                 R.drawable.testimonial,
+                R.drawable.information,
                 R.drawable.hand,
                 R.drawable.contact,
 

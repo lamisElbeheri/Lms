@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
@@ -25,7 +26,11 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
     private CheckoutModel model;
     private ActivityCheckoutBinding binding;
 
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setModelAndBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_checkout);

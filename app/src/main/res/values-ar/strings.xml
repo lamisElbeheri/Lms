@@ -4,12 +4,8 @@
     <string name="app_name">Neon Lms</string>
 
 
-    <string name="com.twitter.sdk.android.CONSUMER_KEY">LHsc14ugIKld1D1RYKxDT8ys1</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">CCW189NHTIZUrJzGzAwswSH1eMyqOSndf5k2tL72VSAsjc2oB6</string>
-    <string name="google_server_client_id">698156519961-27jvpjg8npldch4sb3sp5l1aqjsi71vk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">426476001491167</string>
     <string name="fb_login_protocol_scheme">fb426476001491167</string>
-    <string name="stripePublisherKey">pk_test_sREVqI5A1IYzKIKQWFuHRSy600Yyf3wWwf</string>
 
     <string name="loginHear">مرحبا! تسجيل الدخول اسمع</string>
     <string name="email_hint">البريد الإلكتروني</string>
@@ -32,6 +28,7 @@
     <string name="enterpassword">من فضلك أدخل كلمة المرور</string>
     <string name="validemail">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="enteremail">الرجاء إدخال البريد الإلكتروني</string>
+    <string name="enterCity">من فضلك ادخل المدينة</string>
 
     <string name="enter_username_mobiel_email_msg">الرجاء إدخال البريد الإلكتروني</string>
     <string name="empty_msg">لا يمكن أن يكون٪ 1 $ s فارغًا. الرجاء إدخال٪ 2 $ s.</string>
@@ -93,6 +90,7 @@
 
     <!--shop and cart-->
     <string name="addtocart">أضف إلى السلة</string>
+    <string name="addedtocart">يضاف إلى العربة</string>
     <string name="shop">متجر</string>
     <string name="cart">عربة التسوق</string>
 

@@ -3,9 +3,17 @@ package com.neon.lms.ResponceModel;
 import java.util.ArrayList;
 
 public class NetMessageData {
+    private ArrayList<NetMessageDataTeachers> teachers;
     private ArrayList<NetMessageDataThreads> threads;
-    private String thread;
     private String status;
+
+    public ArrayList<NetMessageDataTeachers> getTeachers() {
+        return this.teachers;
+    }
+
+    public void setTeachers(ArrayList<NetMessageDataTeachers> teachers) {
+        this.teachers = teachers;
+    }
 
     public ArrayList<NetMessageDataThreads> getThreads() {
         return this.threads;
@@ -13,14 +21,6 @@ public class NetMessageData {
 
     public void setThreads(ArrayList<NetMessageDataThreads> threads) {
         this.threads = threads;
-    }
-
-    public String getThread() {
-        return this.thread;
-    }
-
-    public void setThread(String thread) {
-        this.thread = thread;
     }
 
     public String getStatus() {

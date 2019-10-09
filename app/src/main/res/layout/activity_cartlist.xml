@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -144,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_margin="@dimen/_4sdp"
                         android:gravity="center">
 
                         <EditText
@@ -151,6 +151,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/_16sdp"
+                            android:layout_weight="1"
                             android:background="@drawable/edittextborder"
                             android:hint="@string/enterPromo"
                             android:padding="@dimen/_6sdp" />
@@ -161,8 +162,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/_6sdp"
+                            android:layout_weight="1"
                             android:background="@drawable/normal_bg"
-                            android:gravity="center|left"
+                            android:gravity="center"
                             android:padding="@dimen/_6sdp"
                             android:text="@string/apply"
                             android:textColor="@color/white"
@@ -173,6 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center|left"
                             android:padding="@dimen/_6sdp"
                             android:text="@string/offer"
@@ -200,23 +203,25 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/noData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/noDataFound"
-                android:layout_centerInParent="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
                 android:visibility="gone" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_gravity="center"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:visibility="gone" />
         </RelativeLayout>
 

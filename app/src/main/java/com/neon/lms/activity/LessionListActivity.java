@@ -26,6 +26,7 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSingleLession;
 import com.neon.lms.adapter.LessionListAdapter;
@@ -60,7 +61,11 @@ public class LessionListActivity extends YouTubeBaseActivity implements
     YouTubePlayer youTubePlayer;
     String youtubeurl;
 
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

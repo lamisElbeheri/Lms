@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
+import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
 import com.neon.lms.basecomponent.BaseActivity;
 import com.neon.lms.callBack.OpenFragment;
@@ -29,7 +30,11 @@ public class InvoiceActivity extends BaseActivity implements View.OnClickListene
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice);
         binding.setInvoiceModel(model);
     }
-
+    @Override
+    protected void onResume() {
+        BaseAppClass.changeLang(this, BaseAppClass.getPreferences().getUserLanguageCode());
+        super.onResume();
+    }
     @Override
     public void setToolBar() {
         binding.included.txtTitle.setText(getString(R.string.invoice));
