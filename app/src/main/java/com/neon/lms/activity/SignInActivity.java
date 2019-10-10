@@ -373,8 +373,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
                     passwordLogin("password",
-                            Constants.CLIENT_ID,
-                            Constants.CLIENT_SECRET,
+                            Config.CLIENT_ID,
+                            Config.CLIENT_SECRET,
                             binding.etEmailorMobile.getText().toString(),
                             binding.etPassword.getText().toString(),
                             "*",
@@ -393,8 +393,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
                     socialLogin("social",
-                            Constants.CLIENT_ID,
-                            Constants.CLIENT_SECRET,
+                            Config.CLIENT_ID,
+                            Config.CLIENT_SECRET,
                             "*",
                             provider,
                             token,
@@ -413,8 +413,8 @@ public class SignInActivity extends BaseActivity implements SignInModel.BtnClick
         if (AppConstant.isOnline(this)) {
             RetrofitClient.getInstance().getRestOkClient().
                     twitterLogin("social",
-                            Constants.CLIENT_ID,
-                            Constants.CLIENT_SECRET,
+                            Config.CLIENT_ID,
+                            Config.CLIENT_SECRET,
                             "*",
                             provider,
                             token,

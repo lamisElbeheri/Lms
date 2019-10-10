@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +26,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.neon.lms.BaseAppClass;
+import com.neon.lms.Config;
 import com.neon.lms.R;
 import com.neon.lms.ResponceModel.NetSingleLession;
 import com.neon.lms.adapter.LessionListAdapter;
@@ -78,7 +78,7 @@ public class LessionListActivity extends YouTubeBaseActivity implements
         try {
             // Initializing video player with developer key
             // AIzaSyAsgtOvy1dr8jcVSUFqy63wB2X8KW4TFT0
-            binding.youtubeView.initialize(Constants.DEVELOPER_KEY, LessionListActivity.this);
+            binding.youtubeView.initialize(Config.DEVELOPER_KEY, LessionListActivity.this);
         } catch (Exception e) {
 
         }
@@ -213,6 +213,9 @@ public class LessionListActivity extends YouTubeBaseActivity implements
                         });
                     }
                 } else {
+                    binding.youtubeView.setVisibility(View.GONE);
+                    binding.player.setVisibility(View.GONE);
+
 //                Toast.makeText(LanguageActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
                 }
             }

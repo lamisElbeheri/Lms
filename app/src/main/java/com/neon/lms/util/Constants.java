@@ -20,15 +20,13 @@ public class Constants {
     //--------------------------------Common CustomConstants----------------------------------------------
     public static final String FOLDER_NAME = "Lms";
 
-    public static String BASE_URL = "https://sample.neonlms.com";
+    public static final String BASE_URL = "https://sample.neonlms.com";
     public static final String API_VERSION = "/api/v1";
-    public static final String DEVELOPER_KEY = "AIzaSyAsgtOvy1dr8jcVSUFqy63wB2X8KW4TFT0";
+
     public static final File LmsFolder = new File(Environment.getExternalStorageDirectory() + "/" + FOLDER_NAME + "/LMS/");
 
     //Broadcast CustomConstants
     public static final int CONNECTION_TIMEOUT = 30000;
-    public static final String CLIENT_SECRET = "o03D6ITBzOgk9TK0j4sUTsmEDPgQLnFEVs1ZZOgZ";
-    public static final String CLIENT_ID = "4";
 
     public static final int PROGRESS_IMAGE = 1;
     public static final int PROGRESS_TEXT = 2;
@@ -101,10 +99,6 @@ public class Constants {
         } else
             return null;
     }
-
-
-    public static final int VT_MONEY_CLICK = 1;
-
 
 
 }

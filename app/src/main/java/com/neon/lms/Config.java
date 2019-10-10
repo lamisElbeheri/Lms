@@ -1,7 +1,15 @@
 package com.neon.lms;
 
-public class Config {
+import android.os.Environment;
 
+import java.io.File;
+
+public class Config {
+    /*Google Signin Secret*/
+    public static final String CLIENT_SECRET = "o03D6ITBzOgk9TK0j4sUTsmEDPgQLnFEVs1ZZOgZ";
+    public static final String CLIENT_ID = "4";
+    /*For Youtube Video play*/
+    public static final String DEVELOPER_KEY = "AIzaSyAsgtOvy1dr8jcVSUFqy63wB2X8KW4TFT0";
 
     public static final String CONSUMER_KEY = "LHsc14ugIKld1D1RYKxDT8ys1";
     public static final String CONSUMER_SECRET = "CCW189NHTIZUrJzGzAwswSH1eMyqOSndf5k2tL72VSAsjc2oB6";
