@@ -56,13 +56,20 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/_12sdp"
                     android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/hintColor"
+                        android:background="@drawable/loading"/>
+
 
                     <ImageView
-                        android:layout_width="347dp"
-                        android:layout_height="149dp"
-                        android:background="@drawable/home_rough" />
+                        android:id="@+id/slider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -71,7 +78,7 @@
                         android:background="@color/transperent"
                         android:padding="@dimen/_6sdp"
                         android:gravity="right"
-                        android:text="@string/dummyText"
+                        android:text="@string/homepagetext"
                         android:textSize="@dimen/_14sdp" />
 
                 </FrameLayout>

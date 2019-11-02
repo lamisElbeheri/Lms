@@ -108,7 +108,7 @@ public class BlogDetailActivity extends BaseActivity implements View.OnClickList
                 binding.blogTitle.setText(netBlogDetailData.getBlog().getTitle());
                 binding.blogDes.setText(netBlogDetailData.getBlog().getContent());
                 Picasso.with(BlogDetailActivity.this)
-                        .load(netBlogDetailData.getBlog().getImage())
+                        .load(netBlogDetailData.getBlog().getBlog_image())
                         .into(binding.blogImg);
                 binding.blogdate.setText(AppConstant.parseDateToddMMyyyy(netBlogDetailData.getBlog().getCreated_at()));
                 binding.author.setText(netBlogDetailData.getBlog().getAuthor().getFirst_name());

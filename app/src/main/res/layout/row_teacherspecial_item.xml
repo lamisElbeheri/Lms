@@ -49,8 +49,8 @@
 
                 <ImageView
                     android:id="@+id/homeimage"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:padding="@dimen/_4sdp" />
 
                 <LinearLayout

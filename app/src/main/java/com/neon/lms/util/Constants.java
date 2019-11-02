@@ -7,13 +7,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 
-import com.neon.lms.BaseAppClass;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 public class Constants {
 
@@ -22,6 +16,7 @@ public class Constants {
 
     public static final String BASE_URL = "https://sample.neonlms.com";
     public static final String API_VERSION = "/api/v1";
+    public static final String HOME_IMAGE_URL = "/storage/uploads/placeholder-3.jpg";
 
     public static final File LmsFolder = new File(Environment.getExternalStorageDirectory() + "/" + FOLDER_NAME + "/LMS/");
 

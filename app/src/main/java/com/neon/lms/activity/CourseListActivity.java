@@ -161,6 +161,7 @@ public class CourseListActivity extends BaseActivity implements View.OnClickList
                 Intent intent = new Intent(CourseListActivity.this, CourseDetailActivity.class);
                 intent.putExtra("isfree", model.getArrayList().get(position).getFree());
                 intent.putExtra("id", model.getArrayList().get(position).getId() + "");
+                intent.putExtra(CourseDetailActivity.COURSE_IMAGE, model.getArrayList().get(position).getImage());
                 startActivity(intent);
                 overridePendingTransition(R.anim.animation, R.anim.animation2);
 

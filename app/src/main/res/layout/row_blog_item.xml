@@ -42,16 +42,17 @@
                 <FrameLayout
                     android:id="@+id/llGame"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
-                    android:background="@drawable/course_raw">
+                    android:layout_height="@dimen/_150sdp">
                     <ImageView
                         android:id="@+id/blogimage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center" />
+                        android:scaleType="centerCrop"/>
                     <ImageView
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/loading"
+                        android:backgroundTint="@color/hintColor"
                         android:layout_gravity="center" />
 
                     <LinearLayout

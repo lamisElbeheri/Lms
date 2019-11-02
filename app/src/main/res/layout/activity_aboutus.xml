@@ -39,6 +39,7 @@
                 android:lineSpacingExtra="@dimen/_4sdp"
                 android:padding="@dimen/_6sdp"
                 android:gravity="left"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:text="@string/about"

@@ -15,6 +15,7 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="noAccount">ليس لديك حساب؟</string>
     <string name="signUp"><u>سجل</u></string>
+    <string name="homepagetext">حل مبتكر للتعليم</string>
     <string name="loginwith">تسجيل الدخول مع</string>
     <string name="dummyText">أبجد هوز هو مجرد دمية النص لصناعة الطباعة والتنضيد.</string>
     <string name="largedummyText">أبجد هوز هو مجرد دمية النص لصناعة الطباعة والتنضيد. لقد كان Lorem Ipsum هو النص الوهمي القياسي الخاص بالصناعة منذ القرن الخامس عشر الميلادي ، عندما أخذت طابعة غير معروفة لوحًا من الورق وتدافعت عليه لصنع كتاب عينات من الأنواع.</string>
@@ -165,6 +166,8 @@
     <string name="enterLname">الرجاء إدخال اسم العائلة</string>
     <string name="enterNumber">الرجاء إدخال رقم الهاتف الأخير</string>
     <string name="signUpSuccess">تسجيل الدخول نجاح. الرجاء تسجيل الدخول أولا</string>
+    <string name="updateData">تحديث نجاح.</string>
+
     <string name="logout">تسجيل خروج</string>
     <string name="addForum">مناقشة جديدة</string>
     <string name="add">إضافة</string>

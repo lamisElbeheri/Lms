@@ -1,11 +1,15 @@
 package com.neon.lms.fragment;
 
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.appcompat.widget.SearchView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +36,7 @@ import com.neon.lms.model.HomeListModel;
 import com.neon.lms.model.HomeModel;
 import com.neon.lms.util.AppConstant;
 import com.neon.lms.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -39,7 +44,6 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     public static final String TAG = "Shop";
     public HomeListModel model;
     private FragmentHomeBinding binding;
-
 
 
     @Override
@@ -66,6 +70,9 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     private void initView() {
         initRecycler();
         fillArraylist();
+        Picasso.with(getContext())
+                .load(Constants.BASE_URL + Constants.HOME_IMAGE_URL)
+                .into(binding.slider1);
 
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -82,14 +89,16 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     }
 
 
-    private void openSearch(String search){
+    private void openSearch(String search) {
         AppConstant.hideKeyboard(getContext(), binding.recyclerView);
         startActivity(new Intent(getContext(), SearchListActivity.class)
-        .putExtra(SearchListActivity.SEARCH, search)
-        .putExtra(SearchListActivity.TYPE, "1"));
+                .putExtra(SearchListActivity.SEARCH, search)
+                .putExtra(SearchListActivity.TYPE, "1"));
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
 
-    };
+    }
+
+    ;
 
 
     @Override
@@ -170,9 +179,8 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
     }
 
 
-
     private void openTestimonialList() {
-        startActivity(new Intent(getContext(),  TestimonialListActivity.class));
+        startActivity(new Intent(getContext(), TestimonialListActivity.class));
         getActivity().overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
@@ -227,18 +235,18 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
 
         };
 
-        String[]  id ={
-                 Constants.NEWS,
-                 Constants.TRANDING_COURSE,
-                 Constants.FEATURED_COURSE,
-                 Constants.TESTIMONIAL,
-                 Constants.TEACHER,
-                 Constants.FAQ_QUESTION,
-                 Constants.MESSAGE,
-                 Constants.WHY_US,
-                 Constants.SPONSORS,
-                 Constants.CONTACT_US,
-         };
+        String[] id = {
+                Constants.NEWS,
+                Constants.TRANDING_COURSE,
+                Constants.FEATURED_COURSE,
+                Constants.TESTIMONIAL,
+                Constants.TEACHER,
+                Constants.FAQ_QUESTION,
+                Constants.MESSAGE,
+                Constants.WHY_US,
+                Constants.SPONSORS,
+                Constants.CONTACT_US,
+        };
 
         String[] lname = {getString(R.string.news),
                 getString(R.string.courses),
@@ -277,8 +285,6 @@ public class FragmentHome extends BaseFragment implements View.OnClickListener {
         }
         binding.recyclerView.getAdapter().notifyDataSetChanged();
     }
-
-
 
 
 }

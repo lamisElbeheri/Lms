@@ -13,6 +13,7 @@
     <string name="noAccount">¿No tienes cuenta? </string>
     <string name="signUp"><u>Regístrate</u></string>
     <string name="loginwith">Inicia con</string>
+    <string name="homepagetext">Solución inventiva para la educación</string>
     <string name="dummyText">Lorem Ipsum es simplemente un texto ficticio de la industria de impresión y composición tipográfica.</string>
     <string name="largedummyText">Lorem Ipsum es simplemente un texto ficticio de la industria de impresión y composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde el año 1500, cuando una impresora desconocida tomó una galera de tipo y la mezcló para hacer un libro de muestras.</string>
     <!--Login text-->
@@ -140,6 +141,8 @@
     <string name="enterLname">Por favor, introduzca el apellido</string>
     <string name="enterNumber">Por favor, introduzca el último número de teléfono</string>
     <string name="signUpSuccess">Registrarse con éxito. Por favor ingresa primero</string>
+    <string name="updateData">Actualización exitosa.</string>
+
     <string name="logout">Cerrar sesión</string>
     <string name="addForum">Nueva discusión</string>
     <string name="add">Añadir</string>

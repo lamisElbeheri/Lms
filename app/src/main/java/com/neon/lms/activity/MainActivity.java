@@ -188,12 +188,12 @@ public class MainActivity extends BaseActivity implements MainActivityModel.Bott
         drawerArrayList.add(0, new Drawer(BaseAppClass.getPreferences().getUserImage(), BaseAppClass.getPreferences().getUserName(), Constants.ACCOUNT, R.drawable.draw_contact, 0, DrawerAdapter.TYPE_HEADER, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.home), Constants.HOME, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, false, false));
         drawerArrayList.add(new Drawer("", getString(R.string.blog), Constants.BLOG, R.drawable.draw_blog, R.drawable.draw_blog, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.course), Constants.COURSE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.myPurchase), Constants.MYPURCHASE, R.drawable.draw_home, R.drawable.draw_home, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.course), Constants.COURSE, R.drawable.draw_course, R.drawable.draw_course, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.myPurchase), Constants.MYPURCHASE, R.drawable.draw_purchase, R.drawable.draw_purchase, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.forums), Constants.FORUMS, R.drawable.draw_comment, R.drawable.draw_comment, DrawerAdapter.TYPE_ITEM, true, false));
 //        drawerArrayList.add(new Drawer("", getString(R.string.cart), Constants.CART, R.drawable.ic_cart, R.drawable.ic_cart, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.contactUs), Constants.CONTACT, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
-        drawerArrayList.add(new Drawer("", getString(R.string.certificate), Constants.CERTIFICATE, R.drawable.draw_phone, R.drawable.draw_phone, DrawerAdapter.TYPE_ITEM, true, false));
+        drawerArrayList.add(new Drawer("", getString(R.string.certificate), Constants.CERTIFICATE, R.drawable.certificate, R.drawable.certificate, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.about), Constants.ABOUTUS, R.drawable.draw_info, R.drawable.draw_info, DrawerAdapter.TYPE_ITEM, true, false));
 //        drawerArrayList.add(new Drawer("", getString(R.string.feedback), Constants.FEEDBACK, R.drawable.draw_feedback, R.drawable.draw_feedback, DrawerAdapter.TYPE_ITEM, true, false));
         drawerArrayList.add(new Drawer("", getString(R.string.logout), Constants.LOGOUT, R.drawable.lock, R.drawable.lock, DrawerAdapter.TYPE_ITEM, false, false));

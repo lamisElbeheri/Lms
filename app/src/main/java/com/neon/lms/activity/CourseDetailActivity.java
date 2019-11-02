@@ -28,6 +28,7 @@ import com.neon.lms.model.CourseDetailListModel;
 import com.neon.lms.model.CourseDetailModel;
 import com.neon.lms.net.RetrofitClient;
 import com.neon.lms.util.AppConstant;
+import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     public static final String VALUE = "value";
+    public static final String COURSE_IMAGE = "image";
     public static CourseDetailListModel model;
     private ActivityCoursedetailBinding binding;
 
@@ -121,6 +123,9 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
             binding.addTocart.setText(getString(R.string.addedtocart));
         initRecycler();
         singleCourseDetail();
+        Picasso.with(CourseDetailActivity.this)
+                .load(getIntent().getStringExtra(COURSE_IMAGE))
+                .into(binding.courseBg);
 
     }
 

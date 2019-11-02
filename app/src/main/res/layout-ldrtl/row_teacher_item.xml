@@ -30,8 +30,7 @@
                 android:id="@+id/teacheImage"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:scaleType="fitXY" />
+                android:layout_marginLeft="@dimen/_10sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

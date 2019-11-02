@@ -268,6 +268,24 @@ public interface RestClient {
 //            @Field("avatar_location") String avatar_location,
             Callback<NetSuccess> callback);
 
+    @FormUrlEncoded
+    @POST(Constants.API_VERSION + "/update-account")
+    void updateData(
+            @Field("first_name") String name,
+            @Field("last_name") String last_name,
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("city") String city,
+            @Field("phone") String phone,
+            @Field("gender") String gender,
+            @Field("address") String address,
+            @Field("pincode") String pincode,
+            @Field("state") String state,
+            @Field("country") String country,
+            @Field("avatar_type") String avatar_type,
+            @Field("avatar_location") String avatar_location,
+            Callback<NetSuccess> callback);
+
 
     @FormUrlEncoded
     @POST(Constants.API_VERSION + "/signup-form")

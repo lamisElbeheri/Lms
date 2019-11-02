@@ -1,24 +1,40 @@
 package com.neon.lms.fragment;
 
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.neon.lms.BaseAppClass;
 import com.neon.lms.R;
+import com.neon.lms.ResponceModel.NetSuccess;
+import com.neon.lms.activity.SignInActivity;
+import com.neon.lms.activity.SignUpActivity;
 import com.neon.lms.basecomponent.BaseFragment;
 import com.neon.lms.databinding.FragmentAccountDetailBinding;
 import com.neon.lms.model.AccountDetailModel;
+import com.neon.lms.net.RetrofitClient;
+import com.neon.lms.util.AppConstant;
+import com.neon.lms.util.Constants;
+import com.neon.lms.util.CustomProgressDialog;
+import com.neon.lms.util.Utility;
+import com.neon.lms.util.Validation;
 
 
-public class AccountFragment extends BaseFragment {
+public class AccountFragment extends BaseFragment implements View.OnClickListener {
     public static final String TAG = "Home";
     private AccountDetailModel model;
     private FragmentAccountDetailBinding binding;
+    CustomProgressDialog dialog;
 
 
     public AccountFragment() {
@@ -46,13 +62,22 @@ public class AccountFragment extends BaseFragment {
     }
 
     private void initView() {
+        dialog = new CustomProgressDialog(Constants.PROGRESS_IMAGE, getContext()).createProgressBar();
+
         setUserData();
+        binding.btnSave.setOnClickListener(this);
     }
 
     private void setUserData() {
+
         binding.txtFname.setText(BaseAppClass.getPreferences().getUserFirstName());
         binding.txtLname.setText(BaseAppClass.getPreferences().getUserName());
-        binding.txtPhone.setText(BaseAppClass.getPreferences().getUserMobile());
+        if (BaseAppClass.getPreferences().getUserMobile().equalsIgnoreCase(""))
+            binding.txtPhone.setText("");
+        else
+            binding.txtPhone.setText(BaseAppClass.getPreferences().getUserMobile());
+
+
         binding.txtEmail.setText(BaseAppClass.getPreferences().getUserEmail());
         binding.line1Address.setText(BaseAppClass.getPreferences().getUserLine1());
         binding.txtCity.setText(BaseAppClass.getPreferences().getUserCity());
@@ -62,5 +87,82 @@ public class AccountFragment extends BaseFragment {
     }
 
 
+    private boolean validateInput() {
+        if (!Validation.isStringEmpty(binding.txtFname.getText().toString())) {
+            if (!Validation.isStringEmpty(binding.txtLname.getText().toString())) {
+                if (Utility.validate(binding.txtEmail.getText().toString())) {
+                    return true;
+                } else
+                    Toast.makeText(getContext(), getString(R.string.enteremail), Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getContext(), getString(R.string.enterLname), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getContext(), getString(R.string.enterFname), Toast.LENGTH_SHORT).show();
+
+
+        return false;
+
+    }
+
+
+    //     Login Api Codeall
+    public void signUpAPi() {
+        dialog.setCancelable(false);
+        dialog.show();
+        if (AppConstant.isOnline(getContext())) {
+            RetrofitClient.getInstance().getRestOkClient().
+                    updateData(binding.txtFname.getText().toString(),
+                            binding.txtLname.getText().toString(),
+                            binding.txtEmail.getText().toString(),
+                            "",
+                            binding.txtCity.getText().toString(),
+                            binding.txtPhone.getText().toString(),
+                            "",
+                            "",
+                            binding.txtPin.getText().toString(),
+                            binding.txtState.getText().toString(),
+                            binding.txtCountry.getText().toString(),
+                            "",
+                            "",
+                            signUpcallback);
+        } else {
+            dialog.hide();
+            Toast.makeText(getContext(), getString(R.string.search_no_internet_connection), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private final retrofit.Callback signUpcallback = new retrofit.Callback() {
+        @Override
+        public void success(Object object, Response response) {
+            dialog.hide();
+            NetSuccess NetSuccess = (NetSuccess) object;
+            if (NetSuccess != null) {
+                Toast.makeText(getContext(), getString(R.string.updateData), Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(getContext(), getString(R.string.somthingwrong), Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            dialog.hide();
+            Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnSave:
+                if (validateInput())
+                    signUpAPi();
+                break;
+        }
+
+    }
 }
 

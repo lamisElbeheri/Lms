@@ -14,6 +14,7 @@
     <string name="noAccount">Don\'t have account ? </string>
     <string name="signUp"><u>Sign Up</u></string>
     <string name="loginwith">Login With</string>
+    <string name="homepagetext">Inventive Solution for Education</string>
     <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string name="largedummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
 
@@ -162,6 +163,7 @@
     <string name="enterLname">Please Enter Last Name</string>
     <string name="enterNumber">Please Enter Phone Number</string>
     <string name="signUpSuccess">SignUp Successfull. Please Login first</string>
+    <string name="updateData">Update Successfull.</string>
     <string name="logout">Logout</string>
     <string name="addForum">New Discussion</string>
     <string name="add">Add</string>

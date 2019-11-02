@@ -13,6 +13,8 @@
     <string name="noAccount">Vous n\'avez pas de compte?</string>
     <string name="signUp"><u>S\'inscrire</u></string>
     <string name="loginwith">Connectez-vous avec</string>
+    <string name="homepagetext">Solution inventive pour l\'éducation</string>
+
     <string name="dummyText">Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.</string>
     <string name="largedummyText">Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition. Lorem Ipsum est le texte factice standard de l’industrie depuis les années 1500, quand un imprimeur inconnu a pris une galère de type et l’a brouillé pour en faire un cahier type.</string>
     <!--Login text-->
@@ -139,6 +141,8 @@
     <string name="enterLname">S\'il vous plaît entrer le nom</string>
     <string name="enterNumber">S\'il vous plaît entrer le dernier numéro de téléphone</string>
     <string name="signUpSuccess">Inscription réussie. S\'il vous plait Connectez-vous d\'abord</string>
+    <string name="updateData">Mise à jour réussie.</string>
+
     <string name="logout">Se déconnecter</string>
     <string name="addForum">Nouvelle discussion</string>
     <string name="add">Ajouter</string>

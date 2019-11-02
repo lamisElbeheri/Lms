@@ -100,9 +100,10 @@
                     android:background="@color/white">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_70sdp"
+                        android:layout_width="@dimen/_160sdp"
+                        android:layout_height="@dimen/_60sdp"
                         android:layout_margin="@dimen/_6sdp"
+                        android:layout_gravity="center"
                         android:background="@drawable/stripe" />
                 </FrameLayout>
 
@@ -114,9 +115,10 @@
                     android:background="@color/white">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_70sdp"
+                        android:layout_width="@dimen/_160sdp"
+                        android:layout_height="@dimen/_60sdp"
                         android:layout_margin="@dimen/_6sdp"
+                        android:layout_gravity="center"
                         android:background="@drawable/paypal" />
                 </FrameLayout>
 
@@ -127,15 +129,13 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/white">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_70sdp"
+
+                    <ImageView
+                        android:layout_width="@dimen/_160sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_gravity="center"
                         android:layout_margin="@dimen/_6sdp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_26sdp"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:text="@string/offlinepayment"/>
+                        android:background="@drawable/offlinepayment" />
                 </FrameLayout>
 
 

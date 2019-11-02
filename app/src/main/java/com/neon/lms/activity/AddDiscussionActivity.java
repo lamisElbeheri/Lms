@@ -44,7 +44,7 @@ public class AddDiscussionActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void setToolBar() {
-        binding.included.txtTitle.setText(getString(R.string.about));
+        binding.included.txtTitle.setText(getString(R.string.forums));
         binding.included.imgBack.setOnClickListener(this);
 
     }
